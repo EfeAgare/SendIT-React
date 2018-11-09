@@ -1,0 +1,29 @@
+{
+    "root": true,
+    "extends": "airbnb-base",
+    "env": {
+        "node": true,
+        "es6": true,
+        "mocha": true
+      },
+    "rules": {
+        
+        "max-len": ["error", { "code": 80 }],
+        "valid-jsdoc": ["error", {
+        "requireReturn": true,
+        "requireReturnType": true,
+        "requireParamDescription": false,
+        "requireReturnDescription": true,
+        "no-console": "off"
+      }],
+      "require-jsdoc": ["error", {
+          "require": {
+              "FunctionDeclaration": true,
+              "MethodDefinition": true,
+              "ClassDeclaration": true,
+              "ArrowFunctionExpression": true, 
+              "FunctionExpression": true
+          }
+      }]
+    }
+}
