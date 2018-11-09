@@ -2,9 +2,6 @@ language: node_js
 node_js:
  - "stable"
 
- env:
-  global:
-    - CC_TEST_REPORTER_ID= a8b0cc4505e473c4cb29f7ef0e287c41d431c5805ba1f5183b2c9f29afdab118
 
 install: 
   - npm install
@@ -12,5 +9,5 @@ install:
 script: npm test
 
 after_success:
-  - npm run coverage
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - coverage
+  
