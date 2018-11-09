@@ -1,0 +1,45 @@
+{
+  "name": "sendit",
+  "version": "1.0.0",
+  "description": "SendIT is a courier service that helps users deliver parcels to different destinations.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./server/src/tests/ --compilers js:@babel/register --require @babel/polyfill --exit",
+    "devstart": "nodemon server/src/index.js --exec babel-node",
+    "build": "babel ./server/src -d ./server/dist",
+    "heroku-postbuild": "npm run build",
+    "start": "node server/dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EfeAgare/SendIT.git"
+  },
+  "author": "Agare Efe Knowledge",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EfeAgare/SendIT/issues"
+  },
+  "homepage": "https://github.com/EfeAgare/SendIT#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "express": "^4.16.4",
+    "express-validator": "^5.3.0",
+    "moment": "^2.22.2",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.5",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.1.5",
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-mocha": "^5.2.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.6"
+  }
+}
