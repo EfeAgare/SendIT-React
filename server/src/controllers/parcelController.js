@@ -1,4 +1,5 @@
 import parcels from '../models/parcels';
+import moment from 'moment'
 
 /**
  * This class handles Parcels Order controllers
