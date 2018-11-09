@@ -16,6 +16,7 @@ app.use(expressvalidator());
 
 
 app.use('/api/v1/', parcelRoute);
+app.use('/api/v1/', userRoute);
 
 
 app.use((req, res, next) => {
