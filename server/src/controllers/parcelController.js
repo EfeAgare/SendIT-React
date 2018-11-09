@@ -47,10 +47,7 @@ class ParcelController {
         }
     }
 
-    
-
-
-  
+      
 }
 
 export default ParcelController;
