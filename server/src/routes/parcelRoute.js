@@ -10,3 +10,6 @@ parseRoute.route('/parcels')
 parseRoute.route('/parcels/:parcelId')
 .get(parcelController.getAParcels);
 export default parseRoute;
+
+parseRoute.route('/parcels/:parcelId/cancel')
+.put(parcelController.cancelParcel);
