@@ -8,6 +8,6 @@ install:
 script: npm test
 
 after_success:
-  -  coverage
+  -  npm run coverage
   
 
