@@ -7,7 +7,7 @@
     "test": "nyc mocha ./server/src/tests/ --compilers js:@babel/register --require @babel/polyfill --exit",
     "devstart": "nodemon server/src/index.js --exec babel-node",
     "build": "babel ./server/src -d ./server/dist",
-    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls && nyc report --reporter=lcov",
+    "coverage": "nyc report --reporter=text-lcov | coveralls && nyc report --reporter=lcov",
     "heroku-postbuild": "npm run build",
     "start": "node server/dist/index.js"
   },
