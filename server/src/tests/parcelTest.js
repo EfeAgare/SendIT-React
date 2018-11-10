@@ -40,7 +40,7 @@ describe('/POST', () => {
           },
           email:"hrtiuo@yahoo.com",
           phoneNumber:"09070911674",
-          status:"in transit"
+        status:"in transit"
       })
       .end((err, res) => {
         console.log(res.body)
