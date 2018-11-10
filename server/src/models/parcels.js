@@ -24,7 +24,7 @@ const parcels = [
         id: 1,
         deliveryAddress: {
             firstName: 'Churchill',
-            lastName: 'Paul',
+            lastName: 'Agare',
             streetAddress: '10 ake street',
             addressCity: 'Mariga',
             addressState: 'Niger'
@@ -37,21 +37,21 @@ const parcels = [
             name: 'Xtouch E',
             description: 'Xtouch white internal memory 8gb ',
         },
-        email: "hrtiuo@yahoo.com",
-        phoneNumber: "09070911674",
+        email: "hr@yahoo.com",
+        phoneNumber: "09084943978",
         status: 'Delivered'
     },
     {
         id: 2,
         deliveryAddress: {
-            firstName: 'Churchill',
+            firstName: 'Regina',
             lastName: 'Paul',
             streetAddress: '10 ake street',
             addressCity: 'Mariga',
             addressState: 'Niger'
         },
         expectedArrival: {
-            from: '2018-11-14 2:48 PM',
+            from: '2018-10-14 2:48 PM',
             to: '2018-11-17 2:48 PM',
 
         },
@@ -59,8 +59,8 @@ const parcels = [
             name: 'Tecno W3',
             description: 'Tecno W3 internal memory 8gb ',
         },
-        email: "hrtiuo@yahoo.com",
-        phoneNumber: "09070911674",
+        email: "hrefe@yahoo.com",
+        phoneNumber: "08052465959",
         status: 'Awaiting Pickup'
     }
 ]
