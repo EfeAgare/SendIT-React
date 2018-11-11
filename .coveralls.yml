@@ -1,3 +1,1 @@
-service_name: travis-ci
-repo_token: 7prz8F3ll7NwjkAVrXP8foNT4ohp7A6bF
-gem 'coveralls', require: false
+repo_token: czw4sk7q3FPdVkPssVbQhmwnBPE8kur3b
