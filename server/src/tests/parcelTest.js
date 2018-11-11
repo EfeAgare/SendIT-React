@@ -40,7 +40,7 @@ describe('/POST', () => {
           },
           email:"hrtiuo@yahoo.com",
           phoneNumber:"09070911674",
-        status:"in transit"
+          status:"Transit"
       })
       .end((err, res) => {
         console.log(res.body)
@@ -74,7 +74,7 @@ describe('/PUT', () => {
         },
          email:"hrtiuo@yahoo.com",
         phoneNumber:"09070911674",
-        status:"cancel"
+        status:"cancelled"
         
       })
       .end((err, res) => {

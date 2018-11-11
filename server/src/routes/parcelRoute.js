@@ -1,15 +1,20 @@
 import express from 'express';
-import parcelController from '../controllers/parcelController'
+import parcelController from '../controllers/parcelController';
+import checkParcelValidation from '../middlewares/checkParcelValidation';
+import idValidation from '../middlewares/idValidation';
 
-const parseRoute = express();
+const parcelRoute = express();
 
-parseRoute.route('/parcels')
+parcelRoute.route('/parcels')
 .get(parcelController.getAllParcels)
-.post(parcelController.addParcels);
+.post(checkParcelValidation.createParcelValidation,
+     parcelController.addParcels);
 
-parseRoute.route('/parcels/:parcelId')
-.get(parcelController.getAParcels);
-export default parseRoute;
+parcelRoute.route('/parcels/:parcelId')
+.get(idValidation.parcelId, parcelController.getAParcels);
 
-parseRoute.route('/parcels/:parcelId/cancel')
-.put(parcelController.cancelParcel);
+parcelRoute.route('/parcels/:parcelId/cancel')
+.put(idValidation.parcelId, parcelController.cancelParcel);
+
+export default parcelRoute;
+
