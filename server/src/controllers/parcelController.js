@@ -25,8 +25,8 @@ class ParcelController {
 
     static getAParcels(req, res) {
         const order = parcels.filter(parcel => parcel.id === parseInt(req.params.parcelId));
-        console.log(req.params.parcelId)
-        if (order[0]) {
+        console.log(order, '====')
+        if (order) {
             res.status(200).json({
                 success: 'true',
                 message: 'Parcel retrieved successfully',
@@ -61,22 +61,19 @@ class ParcelController {
      * * @returns {object} success or failure
      */
     static cancelParcel(req, res, next) {
-        const order = parcels.filter(parcel => parcel.id === parseInt(req.params.parcelId));
+        let order = parcels.filter(parcel => parcel.id === parseInt(req.params.parcelId));
+        
         if (!order[0]) {
             res.status(404).json({
                 message: 'Parcel not Found'
             })
-        } else if (order[0].status === 'delivered' || order[0].status === 'cancelled') {
-            return res.status(404).json({
-                message: 'Parcel cannot be cancelled'
-            })
-        } else {
-            order[0].status= 'cancelled';
-            parcels.splice(order[0].id, 1, order);
+        } 
+         else {
+            const cancelledOrder = { ...order[0],  status: 'cancelled'  }
             return res.status(200).json({
                 success: 'true',
                 message: 'Parcel Order cancelled successfully',
-                data: order[0]
+                data: cancelledOrder
             });   
         }
     }

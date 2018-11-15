@@ -1,306 +1,110 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title> SendIT | Delivering Your Parcel</title>
-        <link rel="stylesheet" type="text/css" media="screen" href="./css/style.css">
-        <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Overlock&amp;subset=latin-ext" rel="stylesheet">
-    </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> SendIT | Delivering Your Parcel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/allparcel.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Overlock&amp;subset=latin-ext" rel="stylesheet">
+</head>
 
-    <body>
-        <div class="header-clear">
-            <header>
-                <a href="index.html" class="logo"> SendIT </a>
-                <div class="header-right">
-                    <a href="index.html" class="active">HOME</a>
-                    <a href="signin.html">LOGIN</a>
-                    <a href="signup.html">SIGN UP</a>
-                    <a href="order.html"> ORDER PARCEL</a>
-                </div>
-            </header>
+<body>
+  <div class="header-clear">
+    <header>
+      <a href="index.html" class="logo"> SendIT</a>
+      <div class="header-right">
+        <a href="index.html" class="active">HOME</a>
+        <a href="profile.html">PROFILE</a>
+        <a href="index.html">SIGN OUT</a>
+        <a href="order.html"> ORDER PARCEL</a>
+        <div class="navbar">
+          <div class="dropdown">
+            <img class="imageprofie" src="./Images/man.png">
+            <button class="dropbtn">
+                                <i class="fa fa-caret-down"></i>
+                            </button>
+            <div class="dropdown-content">
+              <a href="profile.html">Profile</a>
+              <a href="#">Sign out</a>
+            </div>
+          </div>
         </div>
-        <div class="wrapper">
-            <h1>Parcel Delivery Order</h1>
-            <span id="sort-by">Sort By: </span>
-            <select name="dropdown" id="dropdown">
+    </header>
+    </div>
+    <div class="wrapper">
+      <h1>All Parcel Delivery Order</h1>
+      <span id="sort-by">Sort By: </span>
+      <select name="dropdown" id="dropdown">
                 <option value="" selected>status</option>
                 <option value="Delivered">Delivered</option>
                 <option value="In Transit">In Transit</option>
                 <option value="Waiting-Pickup">Waiting Pickup</option>
             </select>
-            <div class="table">
-                <div class="row header">
-                    <div class="cell">
-                        Date
-                    </div>
-                    <div class="cell">
-                        OrderId
-                    </div>
-                    <div class="cell">
-                        Customer
-                    </div>
-                    <div class="cell">
-                        State
-                    </div>
-                    <div class="cell">
-                        City
-                    </div>
-                    <div class="cell">
-                        Quantity
-                    </div>
-                    <div class="cell">
-                        Status
-                    </div>
-                    <div class="cell">
-                        Unit Price
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="cell">
-                        02/11/2018
-                    </div>
-                    <div class="cell">
-                        235
-                    </div>
-                    <div class="cell">
-                        Luke Peters
-                    </div>
-                    <div class="cell">
-                        Ondo
-                    </div>
-                    <div class="cell">
-                        Akure
-                    </div>
-                    <div class="cell">
-                        5
-                    </div>
-                    <div class="cell">
-                        Delivered
-                    </div>
-                    <div class="cell">
-                        ₦ 2000
-                    </div>
-                </div>
+      <div class="container">
+        <ul class="responsive-table">
+          <li class="table-header">
+            <div class="col col-1">ORDER Date</div>
+            <div class="col col-2">Order Id</div>
+            <div class="col col-3">Customer Name</div>
+            <div class="col col-4">Location</div>
+            <div class="col col-5">Destination</div>
+            <div class="col col-6">Delivery date</div>
+            <div class="col col-7">email</div>
+            <div class="col col-8">Price(₦)</div>
+            <div class="col col-9">Status</div>
+          </li>
+          <li class="table-row">
+            <div class="col col-1" data-label="Date">231</div>
+            <div class="col col-2" data-label="OrderId">42235</div>
+            <div class="col col-3" data-label="Customer Name">John Doe</div>
+            <div class="col col-4" data-label="Pickup"> Lagos </div>
+            <div class="col col-5" data-label="Dest"> Lagos </div>
+            <div class="col col-6" data-label="DeliveryDate"> 23-2-2019</div>
+            <div class="col col-7" data-label="email"> Lagos@yahoo.com </div>
+            <div class="col col-8" data-label="Price">2000</div>
+            <div class="col col-9" data-label="Status">Transit <i class="fa fa-trash" id="close"></i></div>
 
-                <div class="row">
-                    <div class="cell">
-                        20/11/2018
-                    </div>
-                    <div class="cell">
-                        251
-                    </div>
-                    <div class="cell">
-                        Success Shaw
-                    </div>
-                    <div class="cell">
-                        Delta
-                    </div>
-                    <div class="cell">
-                        Warri
-                    </div>
-                    <div class="cell">
-                        5
-                    </div>
-                    <div class="cell">
-                        Waiting Pickup
-                    </div>
-                    <div class="cell">
-                        ₦ 2000
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="cell">
-                        02/11/2018
-                    </div>
-                    <div class="cell">
-                        111
-                    </div>
-                    <div class="cell">
-                        Akula James
-                    </div>
-                    <div class="cell">
-                        Ondo
-                    </div>
-                    <div class="cell">
-                        Akure
-                    </div>
-                    <div class="cell">
-                        5
-                    </div>
-                    <div class="cell">
-                        Waiting Pickup
-                    </div>
-                    <div class="cell">
-                        ₦ 2000
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="cell">
-                        09/11/2018
-                    </div>
-                    <div class="cell">
-                        102
-                    </div>
-                    <div class="cell">
-                        Ben Bruce
-                    </div>
-                    <div class="cell">
-                        Delta
-                    </div>
-                    <div class="cell">
-                        Ughelli
-                    </div>
-                    <div class="cell">
-                        5
-                    </div>
-                    <div class="cell">
-                        Waiting Pickup
-                    </div>
-                    <div class="cell">
-                        ₦ 2000
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="cell">
-                        10/11/2018
-                    </div>
-                    <div class="cell">
-                        106
-                    </div>
-                    <div class="cell">
-                        Olamide Churchill
-                    </div>
-                    <div class="cell">
-                        Lagos
-                    </div>
-                    <div class="cell">
-                        Oshodi
-                    </div>
-                    <div class="cell">
-                        34
-                    </div>
-                    <div class="cell">
-                        In Transit
-                    </div>
-                    <div class="cell">
-                        ₦ 500
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="cell">
-                        09/11/2018
-                    </div>
-                    <div class="cell">
-                        109
-                    </div>
-                    <div class="cell">
-                        Phillip Somefun
-                    </div>
-                    <div class="cell">
-                        PortHarcourt
-                    </div>
-                    <div class="cell">
-                        Uniport
-                    </div>
-                    <div class="cell">
-                        5
-                    </div>
-                    <div class="cell">
-                        Delivered
-                    </div>
-                    <div class="cell">
-                        ₦ 2000
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="cell">
-                        09/11/2018
-                    </div>
-                    <div class="cell">
-                        105
-                    </div>
-                    <div class="cell">
-                        Goodnews Cherry
-                    </div>
-                    <div class="cell">
-                        Bayelsa
-                    </div>
-                    <div class="cell">
-                        Yenagoa
-                    </div>
-                    <div class="cell">
-                        5
-                    </div>
-                    <div class="cell">
-                        Delivered
-                    </div>
-                    <div class="cell">
-                        ₦ 2000
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="cell">
-                        09/11/2018
-                    </div>
-                    <div class="cell">
-                        25
-                    </div>
-                    <div class="cell">
-                        Efe Tega
-                    </div>
-                    <div class="cell">
-                        Niger
-                    </div>
-                    <div class="cell">
-                        Kuntagora
-                    </div>
-                    <div class="cell">
-                        5
-                    </div>
-                    <div class="cell">
-                        In Transit
-                    </div>
-                    <div class="cell">
-                        ₦ 2000
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="cell">
-                        09/11/2018
-                    </div>
-                    <div class="cell">
-                        250
-                    </div>
-                    <div class="cell">
-                        Regina Adams
-                    </div>
-                    <div class="cell">
-                        Niger
-                    </div>
-                    <div class="cell">
-                        Minna
-                    </div>
-                    <div class="cell">
-                        5
-                    </div>
-                    <div class="cell">
-                        In Transit
-                    </div>
-                    <div class="cell">
-                        ₦ 200
-                    </div>
-                </div>
-            </div>
-    </body>
+          </li>
+          <li class="table-row">
+            <div class="col col-1" data-label="Date">235</div>
+            <div class="col col-2" data-label="OrderId">42235</div>
+            <div class="col col-3" data-label="Customer Name">John Doe</div>
+            <div class="col col-4" data-label="Pickup"> Lagos </div>
+            <div class="col col-5" data-label="Dest"> Lagos </div>
+            <div class="col col-6" data-label="DeliveryDate"> 23-2-2019</div>
+            <div class="col col-7" data-label="email"> Lagos@yahoo.com </div>
+            <div class="col col-8" data-label="Price">2000</div>
+            <div class="col col-9" data-label="Status">Transit <i class="fa fa-trash" id="close"></i></div>
+          </li>
+          <li class="table-row">
+            <div class="col col-1" data-label="Date">23-11-2018</div>
+            <div class="col col-2" data-label="OrderId">42235</div>
+            <div class="col col-3" data-label="Customer Name">John Doe</div>
+            <div class="col col-4" data-label="Pickup"> Lagos </div>
+            <div class="col col-5" data-label="Dest"> Lagos </div>
+            <div class="col col-6" data-label="DeliveryDate"> 23-2-2019</div>
+            <div class="col col-7" data-label="email"> Lagos@yahoo.com </div>
+            <div class="col col-8" data-label="Price">2000</div>
+            <div class="col col-9" data-label="Status">Transit <i class="fa fa-trash" id="close"></i></div>
+          </li>
+          <li class="table-row">
+            <div class="col col-1" data-label="Date">23-12-2018</div>
+            <div class="col col-2" data-label="OrderId">42235</div>
+            <div class="col col-3" data-label="Customer Name">John Doe</div>
+            <div class="col col-4" data-label="Pickup"> Lagos </div>
+            <div class="col col-5" data-label="Dest"> Lagos </div>
+            <div class="col col-6" data-label="DeliveryDate"> 23-2-2019</div>
+            <div class="col col-7" data-label="email"> Lagos@yahoo.com </div>
+            <div class="col col-8" data-label="Price">2000</div>
+            <div class="col col-9" data-label="Status">Transit <i class="fa fa-trash" id="close"></i></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+</body>
 
 </html>

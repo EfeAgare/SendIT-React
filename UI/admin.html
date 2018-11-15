@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> SendIT | Delivering Your Parcel</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/style.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/allparcel.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/order.css">
+  <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Overlock&amp;subset=latin-ext" rel="stylesheet">
+</head>
+
+<body>
+  <div class="header-clear">
+    <header>
+      <a href="index.html" class="logo"> SendIT </a>
+      <div class="header-right">
+        <a href="index.html" class="active">HOME</a>
+        <a href="signin.html">LOGIN</a>
+        <a href="signup.html">SIGN UP</a>
+        <a href="order.html"> ORDER PARCEL</a>
+      </div>
+    </header>
+  </div>
+  <div id="content">
+    <aside>
+      <div class="aside">
+
+        <img src="./Images/man.png" alt="Avatar" class="man-image">
+        <p class="my"> Admin</p>
+        <p class="myname">Admin ame</p>
+
+      </div>
+    </aside>
+    <main>
+      <div class="wrapper">
+        <h1>Parcel Delivery Admin</h1>
+
+        <ul class="responsive-table">
+          <li class="table-header">
+            <div class="col col-1">ORDER Date</div>
+            <div class="col col-2">Order Id</div>
+            <div class="col col-3">Customer Name</div>
+            <div class="col col-4">Location</div>
+            <div class="col col-5">Destination</div>
+            <div class="col col-6">Delivery date</div>
+            <div class="col col-7">email</div>
+            <div class="col col-8">Price(₦)</div>
+            <div class="col col-9">Status</div>
+          </li>
+          <li class="table-row">
+            <div class="col col-1" data-label="Date">231</div>
+            <div class="col col-2" data-label="OrderId">42235</div>
+            <div class="col col-3" data-label="Customer Name">John Doe</div>
+            <div class="col col-4" data-label="Pickup"> Lagos </div>
+            <div class="col col-5" data-label="Dest"> Lagos </div>
+            <div class="col col-6" data-label="DeliveryDate"> 23-2-2019</div>
+            <div class="col col-7" data-label="email"> Lagos@yahoo.com </div>
+            <div class="col col-8" data-label="Price"> 2000</div>
+            <div class="col col-9 dot-3" data-label="Status">Transit
+              <div class="dropdown">
+                <div class="dropdown-content">
+                  <h5>Change Parcel</h5>
+                  <hr>
+                  <button id="location">Location</button>
+                  <div id="myModal" class="modal">
+                    <div class="modal-content">
+                      <span class="close">&times;</span>
+                      <p>Previous Location: </p>
+                      <p id="previous-location"> LAGOS -- Ojota </p>
+                      <p>Change Location: </p> <input type="text" name="location" id="current-location" class="input-box">
+                      <input type="button" value="Submit" class="submit-btn">
+                    </div>
+                  </div>
+                  <button id="status">Status</button>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="table-row">
+            <div class="col col-1" data-label="Date">235</div>
+            <div class="col col-2" data-label="OrderId">42235</div>
+            <div class="col col-3" data-label="Customer Name">John Doe</div>
+            <div class="col col-4" data-label="Pickup"> Lagos </div>
+            <div class="col col-5" data-label="Dest"> Lagos </div>
+            <div class="col col-6" data-label="DeliveryDate"> 23-2-2019</div>
+            <div class="col col-7" data-label="email"> Lagos@yahoo.com </div>
+            <div class="col col-8" data-label="Price">2000</div>
+            <div class="col col-9 dot-3" data-label="Status">Transit
+              <div class="dropdown">
+                <div class="dropdown-content">
+                  <h5>Change Parcel</h5>
+                  <hr>
+                  <button id="location">Location</button>
+                  <div id="myModal" class="modal">
+                    <div class="modal-content">
+                      <span class="close">&times;</span>
+                      <p>Previous Location: </p>
+                      <p id="previous-location"> LAGOS -- Ojota </p>
+                      <p>Change Location: </p> <input type="text" name="location" id="current-location" class="input-box">
+                      <input type="button" value="Submit" class="submit-btn">
+                    </div>
+                  </div>
+                  <button id="status">Status</button>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="table-row">
+            <div class="col col-1" data-label="Date">23-11-2018</div>
+            <div class="col col-2" data-label="OrderId">42235</div>
+            <div class="col col-3" data-label="Customer Name">John Doe</div>
+            <div class="col col-4" data-label="Pickup"> Lagos </div>
+            <div class="col col-5" data-label="Dest"> Lagos </div>
+            <div class="col col-6" data-label="DeliveryDate"> 23-2-2019</div>
+            <div class="col col-7" data-label="email"> Lagos@yahoo.com </div>
+            <div class="col col-8" data-label="Price"> 200</div>
+            <div class="col col-9 dot-3" data-label="Status">Transit
+              <div class="dropdown">
+                <div class="dropdown-content">
+                  <h5>Change Parcel</h5>
+                  <hr>
+                  <button id="location">Location</button>
+                  <div id="myModal" class="modal">
+                    <div class="modal-content">
+                      <span class="close">&times;</span>
+                      <p>Previous Location: </p>
+                      <p id="previous-location"> LAGOS -- Ojota </p>
+                      <p>Change Location: </p> <input type="text" name="location" id="current-location" class="input-box">
+                      <input type="button" value="Submit" class="submit-btn">
+                    </div>
+                  </div>
+                  <button id="status">Status</button>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="table-row">
+            <div class="col col-1" data-label="Date">23-12-2018</div>
+            <div class="col col-2" data-label="OrderId">42235</div>
+            <div class="col col-3" data-label="Customer Name">John Doe</div>
+            <div class="col col-4" data-label="Pickup"> Lagos </div>
+            <div class="col col-5" data-label="Dest"> Lagos </div>
+            <div class="col col-6" data-label="DeliveryDate"> 23-2-2019</div>
+            <div class="col col-7" data-label="email"> Lagos@yahoo.com </div>
+            <div class="col col-8" data-label="Price">2000</div>
+            <div class="col col-9 dot-3" data-label="Status">Transit
+              <div class="dropdown">
+                <div class="dropdown-content">
+                  <h5>Change Parcel</h5>
+                  <hr>
+                  <button id="location">Location</button>
+                  <div id="myModal" class="modal">
+                    <div class="modal-content">
+                      <span class="close">&times;</span>
+                      <p>Previous Location: </p>
+                      <p id="previous-location"> LAGOS -- Ojota </p>
+                      <p>Change Location: </p> <input type="text" name="location" id="current-location" class="input-box">
+                      <input type="button" value="Submit" class="submit-btn">
+                    </div>
+                  </div>
+                  <button id="status">Status</button>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </main>
+  </div>
+  <footer>
+    <p class="foot">&copy;SendIT.com</p>
+  </footer>
+  <script src="./changelocation.js"></script>
+</body>
+
+</html>
