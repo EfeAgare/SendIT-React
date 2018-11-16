@@ -28,7 +28,6 @@ class ParcelController {
 
     static getAParcels(req, res) {
         const order = parcels.filter(parcel => parcel.id === parseInt(req.params.parcelId));
-        console.log(req.params.parcelId)
         if (order) {
             res.status(200).json({
                 success: 'true',
