@@ -1,60 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>SendIT | Delivering Your Parcel</title>
-        <link rel="stylesheet" type="text/css" media="screen" href="./css/style.css">
-        <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Overlock&amp;subset=latin-ext" rel="stylesheet">
-    </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SendIT | Delivering Your Parcel</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/style.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/order.css">
+  <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Overlock&amp;subset=latin-ext" rel="stylesheet">
+</head>
 
-    <body>
-        <div class="header-clear">
-            <header>
-                <a href="index.html" class="logo"> SendIT</a>
-                <div class="header-right">
-                    <a href="index.html">HOME</a>
-                    <a href="signin.html">LOGIN</a>
-                    <a href="signup.html">SIGN UP</a>
-                    <a href="order.html" class="active"> ORDER PARCEL</a>
-                </div>
-            </header>
-        </div>
-        <div class="input-section">
-            <p class="text-center">Place Your Order</p>
-            <form class="form-box">
-                <label for="name"></label>
-                <div class="input-row">
-                    <input type="text" id="name" name="order" class="input-box" placeholder="Name">
-                </div>
-                <label for="state"></label>
-                <div class="input-row">
-                    <input type="text" id="state" name="order" class="input-box" placeholder="your state">
-                </div>
-                <label for="city"></label>
-                <div class="input-row">
-                    <input type="text" id="city" name="order" class="input-box" placeholder="your city">
-                </div>
-                <label for="destination"></label>
-                <div class="input-row">
-                    <input type="text" id="destination" name="order" class="input-box" placeholder="destination">
-                </div>
-                <label for="destination-city"></label>
-                <div class="input-row">
-                    <input type="text" id="destination-city" name="order" class="input-box" placeholder="city destination">
-                </div>
-                <div class="input-row">
-                    <input type="text" id="postcode" name="order" class="input-box" placeholder="postcode">
-                </div>
-                <div class="input-row">
-                    <input type="text" value=" ₦ 2000" name="order" class="input-box" >
-                </div>
-                <a href="allparcel.html" class="submit-btn">Place Order</a>
-            </form>
-        </div>
-        <p id="account">  Terms and Conditions Apply  &copy; SendIT </p>
-        </p>
-    </body>
+<body>
+  <div class="header-clear">
+    <header>
+      <a href="index.html" class="logo"> SendIT</a>
+      <div class="header-right">
+        <a href="index.html">HOME</a>
+        <a href="profile.html">Profile</a>
+        <a href="index.html">Sign Out</a>
+        <a href="order.html" class="active"> ORDER PARCEL</a>
+      </div>
+    </header>
+  </div>
+  <div id="content">
+    <aside>
+      <div class="aside">
+        <a href="profile.html"> Profile</a>
+        <a href="order.html">Quick quote</a>
+        <a href="allparcel.html">Parcel details</a>
+        <a href="allparcel.html"> View Parcels</a>
+
+      </div>
+    </aside>
+    <main>
+
+      <div class="order-section">
+        <fieldset>
+          <legend> Delivery Details</legend>
+          <div class="order-section-half">
+            First Name: <input type="text" name="" id="customer-name" class="customer-input">
+          </div>
+          <div class="order-section-half">
+            Last Name :
+            <input type="text" name="" id="customer-name" class="customer-input">
+          </div>
+          <div class="order-section-half">
+            State :
+            <input type="text" name="" id="customer-name" class="customer-input">
+          </div>
+          <div class="order-section-half">
+            Local Government:
+            <input type="text" name="" id="customer-name" class="customer-input">
+          </div>
+
+          <div class="order-section-half">
+            Street Address
+            <input type="text" name="" id="customer-name" class="customer-input">
+          </div>
+          <div class="order-section-half">
+            Email:
+            <input type="text" name="" id="customer-name" class="customer-input">
+          </div>
+
+          <div class="order-section-half">
+            Phone Number
+            <input type="text" name="" id="customer-name" class="customer-input">
+          </div>
+          <div class="order-section-half">
+            Delivery Time
+            <input type="datetime-local" name="" id="" class="customer-input">
+          </div>
+
+        </fieldset>
+        <fieldset>
+          <legend> Pick Up Location</legend>
+
+          <div class="order-section-half">
+            State :
+            <input type="text" name="" id="customer-name" class="customer-input">
+          </div>
+          <div class="order-section-half">
+            Local Government:
+            <input type="text" name="" id="customer-name" class="customer-input">
+          </div>
+
+          <div class="order-section-half">
+            Street Address
+            <input type="text" name="" id="customer-name" class="customer-input">
+          </div>
+
+          <div class="order-section-half">
+            Phone Number
+            <input type="text" name="" id="customer-name" class="customer-input">
+          </div>
+
+        </fieldset>
+        <fieldset>
+          <legend> Item Description</legend>
+          <div class="order-section-half">
+            Item Name: <input type="text" name="" id="customer-name" class="customer-input">
+          </div>
+          <div class="order-section-half">
+            Item Description :
+            <textarea name="Description" id="" cols="30" rows="10"></textarea>
+          </div>
+
+        </fieldset>
+        <button id="order-submit-btn" type="submit">Submit</button>
+      </div>
+
+    </main>
+  </div>
+  <footer>
+    <p class="foot">&copy;SendIT.com</p>
+  </footer>
+</body>
+
 </html>
