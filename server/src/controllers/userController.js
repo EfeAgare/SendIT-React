@@ -8,10 +8,10 @@ import parcels from '../models/parcels';
 class UserController {
     /**
      * This Method fetch the a Parcel order belonging to a User
-     * @param {object} req 
-     * @param {object} res 
+     * @param {object} req - client request object
+     * @param {object} res -server response object
      * @param {object} next
-     * @returns {object} request 
+     * @returns {object} success or failure
      */
 
     static getUserParcel(req, res, next) {
@@ -21,12 +21,12 @@ class UserController {
             return res.status(200).json({
                 success: 'true',
                 message: 'Parcel retrieved successfully',
-                usersData: userData,
-                parcelData: userParcel
+                userData: userParcel,
+                
             })
         } else {
             return res.status(404).json({
-                message: 'Not found'
+                message: 'User not found'
             })
         }
     }

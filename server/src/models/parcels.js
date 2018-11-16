@@ -8,8 +8,7 @@ const parcels = [
             addressState: 'Delta'
         },
         expectedArrival:{
-            from: '2018-11-14 2:48 PM',
-            to: '2018-11-17 2:48 PM',
+            time: '2018-11-14 2:48 PM',
         },
         itemShipped:{
             name: 'Dell Inspiron n411z',
