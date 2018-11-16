@@ -4,7 +4,6 @@ import idValidation from '../middlewares/idValidation';
 
 const parseRoute = express();
 
-
 parseRoute.route('/users/:userId/parcels')
 .get(idValidation.userId ,userController.getUserParcel);
 

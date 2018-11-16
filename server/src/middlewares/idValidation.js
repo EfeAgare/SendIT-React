@@ -12,7 +12,7 @@ class IdValidation {
      * @param {route} next route
      */
     static parcelId(req, res, next) {
-        req.check('parcelId', ' Id must be an Integer').isInt();
+        req.check('parcelId', ' Enter the valid Parcel ID').isInt();
         const errors = req.validationErrors();
         if (errors) {
             return res.status(404).json({
@@ -22,7 +22,7 @@ class IdValidation {
         next();
     }
     static userId(req, res, next) {
-        req.check('userId', ' Id must be an Integer').isInt();
+        req.check('userId', ' Enter the correct User ID').isInt();
         const errors = req.validationErrors();
         if (errors) {
             return res.status(404).json({
