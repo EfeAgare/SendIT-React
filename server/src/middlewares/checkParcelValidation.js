@@ -1,21 +1,12 @@
-/**
- * This class is use for Parcels validation
- */
-class CheckValidation {
 
-    /**
-     * 
-     * @param {object} req - client request object
-     * @param {object} res - server request object
-     * @param {function} next - move to the next handler
-     */
+class CheckValidation {
     static createParcelValidation (req, res, next) {
         req.check('deliveryAddress.firstName').isLength({ min: 2 }).trim()
         .withMessage('First name must be specified.').isAlphanumeric()
-        .withMessage('First name has non-alphanumeric characters.');
+        .withMessage('First name musthave non-alphanumeric characters.');
         req.check('deliveryAddress.lastName').isLength({ min: 2 }).trim()
-        .withMessage('Last Name must be specified.').isAlphanumeric()
-        .withMessage('Last Name has non-alphanumeric characters.');
+        .withMessage('Last name must be specified.').isAlphanumeric()
+        .withMessage('Last name must have non-alphanumeric characters.');
         req.check('deliveryAddress.streetAddress', ' deliveryAddress cannot be  empty')
         .not().isEmpty();
         req.check('deliveryAddress.addressCity', 'deliveryAddress cannot be empty')
@@ -33,7 +24,7 @@ class CheckValidation {
         .isMobilePhone('en-NG');
         const errors = req.validationErrors();
         if (errors) {
-            return res.status(404).json({errors: errors });} next();
+            return res.status(404).json({errors: errors});}next();
     }
 }
 export default CheckValidation;

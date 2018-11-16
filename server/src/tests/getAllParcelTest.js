@@ -10,7 +10,7 @@ describe('/GET', () => {
       .get('/api/v1/parcels')
       .end((err, res) => {
         assert.equal(res.status, 200);
-        assert.typeOf(res.body, 'array', 'we have an array');
+        assert.typeOf(res.body, 'object');
         done();
       });
   });

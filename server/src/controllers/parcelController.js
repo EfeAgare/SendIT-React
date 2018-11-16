@@ -28,7 +28,7 @@ class ParcelController {
 
     static getAParcels(req, res) {
         const order = parcels.filter(parcel => parcel.id === parseInt(req.params.parcelId));
-        if (order) {
+        if (order[0]) {
             res.status(200).json({
                 success: 'true',
                 message: 'Parcel retrieved successfully',
@@ -66,11 +66,11 @@ class ParcelController {
         const order = parcels.filter(parcel => parcel.id === parseInt(req.params.parcelId));
         if (!order[0]) {
             res.status(404).json({
-                message: 'Parcel not Found'
+                message: 'Parcel does not exist'
             })
         } else if (order[0].status === 'delivered' || order[0].status === 'cancelled') {
             return res.status(404).json({
-                message: 'Parcel cannot be cancelled'
+                message: 'Parcel cannot be cancelled any longer'
             })
         } else {
             order[0].status= 'cancelled';

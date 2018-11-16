@@ -17,7 +17,7 @@ app.use('/api/v1/', parcelRoute);
 app.use('/api/v1/', userRoute);
 
 app.use((req, res, next) => {
-    const error = new Error('We can\'t find the Page You are Looking for')
+    const error = new Error('We can\'t find the page you are looking for')
     error.status = 404;
     next(error);  
 });

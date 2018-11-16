@@ -1,11 +1,11 @@
 const users = [
     {
-        id: 0,
         firstName: 'Success',
         lastName: 'Shaw',
         streetAddress: '9 izomo street',
         addressCity: 'Warri',
-        addressState: 'Delta'
+        addressState: 'Delta',
+        id: 0
     }
 ];
 export default users;
