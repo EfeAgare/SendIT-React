@@ -24,7 +24,7 @@ class CheckValidation {
         .isMobilePhone('en-NG');
         const errors = req.validationErrors();
         if (errors) {
-            return res.status(404).json({errors: errors.msg});}next();
+            return res.status(404).json({errors: errors[0].msg});}next();
     }
 }
 export default CheckValidation;

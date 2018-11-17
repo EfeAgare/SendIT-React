@@ -9,7 +9,7 @@ parseRoute.route('/users/:userId/parcels')
 .get(idValidation.userId ,userController.getUserParcel);
 
 parseRoute.route('/users/:userId/:parcelId')
-.get(userController.getAUserParcel);
+.get(idValidation.userId, idValidation.parcelId, userController.getAUserParcel);
 
 export default parseRoute;
 
