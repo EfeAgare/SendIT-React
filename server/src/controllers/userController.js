@@ -21,8 +21,7 @@ class UserController {
             return res.status(200).json({
                 success: 'true',
                 message: 'Parcel retrieved successfully',
-                userData: userParcel,
-                
+                userData: userParcel
             })
         } else {
             return res.status(404).json({
@@ -44,7 +43,6 @@ class UserController {
         } else {
             return res.status(404).json({message: 'Parcel not Found'})
         }
-
     }
 }
 export default UserController;
