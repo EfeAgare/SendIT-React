@@ -15,8 +15,8 @@ class IdValidation {
         req.check('parcelId', ' Parcel Id Not consistent').isInt();
         const errors = req.validationErrors();
         if (errors) {
-            return res.status(404).json({
-                errors: errors
+            return res.status(400).json({
+                errors: errors[0].msg,
             });
         }next();
     }
@@ -24,8 +24,8 @@ class IdValidation {
         req.check('userId', ' User Id not correctly specifed').isInt();
         const errors = req.validationErrors();
         if (errors) {
-            return res.status(404).json({
-                errors: errors
+            return res.status(400).json({
+                errors: errors[0].msg,
             });
         }next();
     }

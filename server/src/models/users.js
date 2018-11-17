@@ -5,7 +5,7 @@ const users = [
         streetAddress: '9 izomo street',
         addressCity: 'Warri',
         addressState: 'Delta',
-        id: 0
+        uid: 0
     }
 ];
 export default users;
