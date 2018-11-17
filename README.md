@@ -23,7 +23,7 @@ SendIT is a courier service that helps users deliver parcels to different destin
   * Eslint
   
 ## Installation
-  Ensure you have the technologies installed then you can clone this repository in your local machine. Afterwards, run <code> npm install </code>  and run  <code> npm run devstart </code>  for a quick start. Or you may build first, using <code> npm run build </code> then run <code> npm start </code>.
+  Ensure you have the technologies installed then you can clone this repository with the URL from the <code> clone or download button on this page </code> using <code> git clone *cloned url copied* </code> in your local machine. Afterwards, run <code> npm install </code>  and run  <code> npm run devstart </code>  for a quick start. Or you may build first, using <code> npm run build </code> then run <code> npm start </code>.
 If you only want to access the completed work, you will find the link to the hosted work at the bottom of this readme, you don't have to clone this repository!
 
 ## Test
