@@ -22,9 +22,9 @@ const parcels = [
     },
     {
         deliveryAddress: {
-            firstName: 'Success',
-            lastName: 'Shaw',
-            streetAddress: '9 izomo street',
+            firstName: 'agareSuccess',
+            lastName: 'haw',
+            streetAddress: '349 enerhren junction',
             addressCity: 'Warri',
             addressState: 'Delta'
         },
@@ -43,9 +43,9 @@ const parcels = [
     },
     {
         deliveryAddress: {
-            firstName: 'Success',
-            lastName: 'Shaw',
-            streetAddress: '9 izomo street',
+            firstName: 'sunday',
+            lastName: 'tosin',
+            streetAddress: '89 azumma lodge',
             addressCity: 'Warri',
             addressState: 'Delta'
         },
