@@ -32,15 +32,10 @@ class UserController {
     }
 
     static getAUserParcel (req, res, next){
-        //userId
         const userData = users.filter(user => user.uid === parseInt(req.params.userId));
-        //userid in parcel
         const userParcel =  parcels.filter(parcel => parcel.uid === parseInt(req.params.userId));
-        // id number in user parcel
         const order = parcels.filter(parcel => parcel.id === parseInt(req.params.parcelId));
-        console.log(order)
         if (order[0]) {
-            console.log(userData[0])
             res.status(200).json({
                 success: 'true',
                 message: 'Parcel retrieved successfully',
