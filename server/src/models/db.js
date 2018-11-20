@@ -1,5 +1,4 @@
 import { Client } from 'pg';
-import Helpers from '../controllers/helper';
 
 
 const connectionString = 'postgres://postgres:@localhost:5433/sendit';
@@ -34,7 +33,7 @@ const createParcelTable =
     status varchar(20),
     userId INT NOT NULL,
     FOREIGN KEY (userId) REFERENCES users(id) ); `
-const makeQuery = (query, values) => {
+const makeQuery = (query) => {
   const client = new Client(connectionString);
   client.connect();
   client.query(query)
@@ -50,7 +49,3 @@ const makeQuery = (query, values) => {
 
 
 makeQuery(`DROP TABLE IF EXISTS parcels; DROP TABLE IF EXISTS users;${createUserTable}${createParcelTable}`);
-
-
-
-                
