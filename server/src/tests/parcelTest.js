@@ -1,11 +1,10 @@
 import chai, { assert } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../index';
-import parcels from '../models/parcels';
 
 
 chai.use(chaiHttp);
-describe('/GET/:parcelId', () => {
+describe('/GET/parcels', () => {
   it('Should Fetch a specific parcel delivery order', (done) => {
     chai.request(app)
       .get('/api/v1/parcels/0/')
