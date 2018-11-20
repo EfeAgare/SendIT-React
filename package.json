@@ -9,6 +9,8 @@
     "build": "babel ./server/src -d ./server/dist",
     "coverage": "nyc report --reporter=text-lcov | coveralls && nyc report --reporter=lcov",
     "heroku-postbuild": "npm run build",
+    "migrate": "babel-node ./server/src/models/db.js",
+    "seed": "babel-node ./server/src/models/seed.js",
     "start": "node server/dist/index.js"
   },
   "repository": {
@@ -22,14 +24,18 @@
   },
   "homepage": "https://github.com/EfeAgare/SendIT#readme",
   "dependencies": {
+    "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
+    "dotenv": "^6.1.0",
     "express": "^4.16.4",
     "express-validator": "^5.3.0",
+    "jsonwebtoken": "^8.4.0",
     "moment": "^2.22.2",
     "morgan": "^1.9.1",
-    "multer": "^1.4.1"
+    "multer": "^1.4.1",
+    "pg": "^7.6.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
