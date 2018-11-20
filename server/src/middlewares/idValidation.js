@@ -12,7 +12,7 @@ class IdValidation {
      * @param {route} next route
      */
     static parcelId(req, res, next) {
-        req.check('parcelId', ' Parcel Id Not consistent').trim().isInt();
+        req.check('parcelId', ' Parcel Id Not consistent').isInt();
         const errors = req.validationErrors();
         if (errors) {
             return res.status(400).json({
@@ -21,7 +21,7 @@ class IdValidation {
         }next();
     }
     static userId(req, res, next) {
-        req.check('userId', ' User Id not correctly specifed').trim().isInt();
+        req.check('userId', ' User Id not correctly specifed').isInt();
         const errors = req.validationErrors();
         if (errors) {
             return res.status(400).json({
