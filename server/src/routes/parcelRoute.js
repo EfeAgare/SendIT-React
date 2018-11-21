@@ -8,6 +8,8 @@ const parcelRoute = express();
 
 parcelRoute.route('/parcels')
 .get( Auth.verifyToken, parcelController.getAllParcels)
+.post(Auth.verifyToken, checkParcelValidation.createParcelValidation,
+     parcelController.addParcels);
 
 export default parcelRoute;
 
