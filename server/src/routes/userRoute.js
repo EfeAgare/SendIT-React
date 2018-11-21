@@ -10,6 +10,9 @@ const parseRoute = express();
 parseRoute.route('/auth/signup')
 .post(userValidation.signUp, userController.userSignUp)
 
+parseRoute.route('/auth/login')
+.post(userValidation.login, userController.login)
+
 
 export default parseRoute;
 
