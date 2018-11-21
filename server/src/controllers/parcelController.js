@@ -16,7 +16,6 @@ class ParcelController {
      * @returns {array} success or failure 
      */
     static getAllParcels(req, res) {
-        console.log(req.user);
         const text = `SELECT * FROM parcels`;
         const getuser = `SELECT role FROM users WHERE role =$1 `;
         const client = new Client(connectionString);
@@ -79,7 +78,6 @@ class ParcelController {
             req.body.itemWeight,req.body.itemQuantity, req.user.id, 'awaiting'];
         const client = new Client(connectionString);
         client.connect();
-        console.log(req.user)
         client.query(getuser, [req.user.role])
         .then ((result) => {
             if (result.rows[0].role === 'user'){
@@ -164,8 +162,7 @@ class ParcelController {
     static cancelParcel(req, res) {
         const text = 'SELECT status FROM parcels WHERE id = $1';
         const textUpdate = `UPDATE parcels SET status = $1 WHERE id = $2 returning *`;
-         const getUser = 'SELECT role FROM users WHERE role = $1';
-         console.log(parseInt(req.params.parcelId,10))
+        const getUser = 'SELECT role FROM users WHERE role = $1';
         const client = new Client(connectionString);
         client.connect();
         client.query(getUser, [req.user.role])
@@ -205,7 +202,7 @@ class ParcelController {
 
     
     /**
-     * This method changes the destination of a parcel order in the list of Parcels orders
+     * This method changes the present location of a parcel order in the list of Parcels orders
      * @param {object} req - User request object
      * @param {object} res - User response object
      * * @returns {object} success or failure
@@ -253,13 +250,13 @@ class ParcelController {
         }).catch((err) => {res.status(500).json({ error: err.message});})
     }
 
-      /**
-     * This method changes the status of a parcel order by the Admin
+    /**
+     * This method changes the status of a parcel delivery order by the Admin
      * @param {object} req - User request object
      * @param {object} res - User response object
      * * @returns {object} success or failure
      */
-    
+
     static changeStatus(req, res) {
         const text = 'SELECT status FROM parcels WHERE id = $1';
         const textUpdate = `UPDATE parcels SET status = $1
@@ -301,6 +298,63 @@ class ParcelController {
                                 }).catch((err) => { res.status(500).json({ error: err.message});})
                     }
                                }).catch((err) => {res.status(500).json({ error: err.message});})
+            }
+        }).catch((err) => {res.status(500).json({ error: err.message});})
+    }
+                        
+ 
+     /**
+     * This method changes the destination of a parcel order by users
+     * @param {object} req - User request object
+     * @param {object} res - User response object
+     * * @returns {object} success or failure
+     */
+    static destination(req, res) {
+        const text = `SELECT  deliveryAddress, deliveryLGA, deliveryState,
+        deliveryStreet, status FROM parcels WHERE id = $1;`
+        const textUpdate = `UPDATE parcels SET deliveryAddress = $1, deliveryLGA = $2, deliveryState =$3,
+        deliveryStreet = $4, status =$5  WHERE userId= $6 returning *`;
+         const getUser = 'SELECT role FROM users WHERE role = $1'
+        const client = new Client(connectionString);
+        client.connect();
+        client.query(getUser, [req.user.role])
+            .then((result) => {
+                if (result.rows[0].role === 'user'){
+                    const client = new Client(connectionString);
+                    client.connect();
+                    client.query(text, [parseInt(req.params.parcelId,10)])
+                    .then ((result) => {
+                        if (!result.rows[0]) {
+                            res.status(404).json({
+                                message: "No valid entry found for provided ID"
+                            });
+                        } else if (result.rows[0].status === 'delivered') {
+                            res.status(400).json({
+                                message: "Parcel Destination can no longer be Changed"
+                            });
+                        } else {
+                            const values = [
+                                 req.body.deliveryAddress,
+                                 req.body.deliveryLGA ,
+                                 req.body.deliveryState,
+                                 req.body.deliveryStreet,
+                                 'awaiting',
+                                 req.user.id
+                            ];
+                            const client = new Client(connectionString);
+                            client.connect();
+                            client.query(textUpdate, values)
+                                .then((result) => {
+                                    console.log(result.rows[0])
+                                    res.status(201).json({
+                                        success: 'true',
+                                        message: 'Parcel destination changed successfully',
+                                        data: result.rows[0]
+                                    });
+                                   
+                                }).catch((err) => { res.status(500).json({ error: err.message});})
+                    }
+                }).catch((err) => {res.status(500).json({ error: err.message});})
             }
         }).catch((err) => {res.status(500).json({ error: err.message});})
     }
