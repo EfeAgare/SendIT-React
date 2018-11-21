@@ -53,6 +53,60 @@ class ParcelController {
             })
     }
 
+    /**
+     * This method create a new parcel order to the list of Parcels orders
+     * @param {object} req - User request object
+     * @param {object} res - server response Object
+     * @returns {object} success or failure
+     */
+    static addParcels(req, res) {
+        const getuser = `SELECT role FROM users WHERE role = $1 `;
+        const text = `INSERT INTO parcels(
+                firstName, lastName, deliveryAddress, deliveryLGA, deliveryState, 
+                deliveryStreet, deliveryEmail,  deliveryPNumber, deliveryTime, 
+                pickUpState, pickUpLGA , pickUpStreet, pickUpPhoneNumber, currentLocation,
+                itemName,itemDescription,itemWeight,
+                itemQuantity,userId, status)
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10, $11, 
+                    $12, $13, $14, $15, $16,$17,$18,$19, $20) 
+                RETURNING *`
+        const values = [
+            req.body.firstName, req.body.lastName,req.body.deliveryAddress,
+            req.body.deliveryLGA,req.body.deliveryState,req.body.deliveryStreet,
+            req.body.deliveryEmail,req.body.deliveryPNumber,req.body.deliveryTime,
+            req.body.pickUpState,req.body.pickUpLGA,req.body.pickUpStreet,
+            req.body.pickUpPhoneNumber, req.body.currentLocation, req.body.itemName,req.body.itemDescription,
+            req.body.itemWeight,req.body.itemQuantity, req.user.id, 'awaiting'];
+        const client = new Client(connectionString);
+        client.connect();
+        console.log(req.user)
+        client.query(getuser, [req.user.role])
+        .then ((result) => {
+            if (result.rows[0].role === 'user'){
+                const client = new Client(connectionString);
+                client.connect();
+                client.query({text: text, values: values})
+                .then((result) => {
+                res.status(201).json({
+                    message: 'Parcels created successfully',
+                    data: result.rows[0]
+                });
+                client.end()
+            })
+            .catch((err) => {
+                console.log(err)
+                client.end()
+            });
+            }else{
+                res.status(400).json({
+                    message: 'Can\t create parcel'
+                }) }
+        }) .catch((err) => {
+            console.log(err)
+            client.end()})
+        
+    }
+
     
 
 }
