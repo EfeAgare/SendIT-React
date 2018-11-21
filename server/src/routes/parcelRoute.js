@@ -14,5 +14,8 @@ parcelRoute.route('/parcels')
 parcelRoute.route('/parcels/:parcelId')
 .get(Auth.verifyToken, idValidation.parcelId, parcelController.getAParcels);
 
+parcelRoute.route('/parcels/:parcelId/cancel')
+.put(Auth.verifyToken, idValidation.parcelId, parcelController.cancelParcel);
+
 export default parcelRoute;
 
