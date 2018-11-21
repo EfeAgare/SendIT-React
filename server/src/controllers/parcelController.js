@@ -16,7 +16,6 @@ class ParcelController {
      * @returns {array} success or failure 
      */
     static getAllParcels(req, res) {
-        console.log(req.user);
         const text = `SELECT * FROM parcels`;
         const getuser = `SELECT role FROM users WHERE role =$1 `;
         const client = new Client(connectionString);
@@ -79,7 +78,6 @@ class ParcelController {
             req.body.itemWeight,req.body.itemQuantity, req.user.id, 'awaiting'];
         const client = new Client(connectionString);
         client.connect();
-        console.log(req.user)
         client.query(getuser, [req.user.role])
         .then ((result) => {
             if (result.rows[0].role === 'user'){
@@ -164,8 +162,7 @@ class ParcelController {
     static cancelParcel(req, res) {
         const text = 'SELECT status FROM parcels WHERE id = $1';
         const textUpdate = `UPDATE parcels SET status = $1 WHERE id = $2 returning *`;
-         const getUser = 'SELECT role FROM users WHERE role = $1';
-         console.log(parseInt(req.params.parcelId,10))
+        const getUser = 'SELECT role FROM users WHERE role = $1';
         const client = new Client(connectionString);
         client.connect();
         client.query(getUser, [req.user.role])
@@ -253,14 +250,65 @@ class ParcelController {
         }).catch((err) => {res.status(500).json({ error: err.message});})
     }
 
-      /**
-     * This method changes the destination of a parcel order by a user
+    /**
+     * This method changes the status of a parcel delivery order by the Admin
      * @param {object} req - User request object
      * @param {object} res - User response object
      * * @returns {object} success or failure
      */
 
-
+    static changeStatus(req, res) {
+        const text = 'SELECT status FROM parcels WHERE id = $1';
+        const textUpdate = `UPDATE parcels SET status = $1
+         WHERE id = $2 returning *`;
+         const getUser = 'SELECT role FROM users WHERE role = $1'
+        const client = new Client(connectionString);
+        client.connect();
+        client.query(getUser, req.user.id)
+            .then((result) => {
+                if (result.rows.role === 'admin'){
+                    const client = new Client(connectionString);
+                    client.connect();
+                    client.query(text, req.user.id)
+                    .then ((result) => {
+                        if (!result.rows[0]) {
+                            res.status(404).json({
+                                message: "No valid entry found for provided ID"
+                            });
+                        } else if (result.rows[0].status === 'delivered' || result.rows[0].status === 'cancelled') {
+                            res.status(400).json({
+                                message: "Parcel No longer valid to be cancelled"
+                            });
+                        } else {
+                            const values = [
+                                req.body.status,
+                                req.user.id
+                            ];
+                            const client = new Client(connectionString);
+                            client.connect();
+                            client.query(textUpdate, values)
+                                .then((result1) => {
+                                    console.log(result1.rows[0])
+                                    res.status(201).json({
+                                        success: 'true',
+                                        message: 'Parcel status changed successfully',
+                                        data: result1.rows[0]
+                                    });
+                                   
+                                }).catch((err) => { res.status(500).json({ error: err.message});})
+                    }
+                               }).catch((err) => {res.status(500).json({ error: err.message});})
+            }
+        }).catch((err) => {res.status(500).json({ error: err.message});})
+    }
+                        
+ 
+     /**
+     * This method changes the destination of a parcel order by users
+     * @param {object} req - User request object
+     * @param {object} res - User response object
+     * * @returns {object} success or failure
+     */
     static destination(req, res) {
         const text = `SELECT  deliveryAddress, deliveryLGA, deliveryState,
         deliveryStreet, status FROM parcels WHERE id = $1;`
@@ -268,11 +316,9 @@ class ParcelController {
         deliveryStreet = $4, status =$5  WHERE userId= $6 returning *`;
          const getUser = 'SELECT role FROM users WHERE role = $1'
         const client = new Client(connectionString);
-        console.log(req.user.role)
         client.connect();
         client.query(getUser, [req.user.role])
             .then((result) => {
-                console.log(result.rows[0].role)
                 if (result.rows[0].role === 'user'){
                     const client = new Client(connectionString);
                     client.connect();
@@ -312,7 +358,6 @@ class ParcelController {
             }
         }).catch((err) => {res.status(500).json({ error: err.message});})
     }
-
 }
 
 export default ParcelController;
