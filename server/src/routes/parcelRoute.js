@@ -17,6 +17,9 @@ parcelRoute.route('/parcels/:parcelId')
 parcelRoute.route('/parcels/:parcelId/cancel')
 .put(Auth.verifyToken, idValidation.parcelId, parcelController.cancelParcel);
 
+parcelRoute.route('/parcels/:parcelId/status')
+.put(Auth.verifyToken, idValidation.parcelId, parcelController.changeStatus);
+
 parcelRoute.route('/parcels/:parcelId/presentLocation')
 .put(Auth.verifyToken, idValidation.parcelId, parcelController.presentLocation);
 
