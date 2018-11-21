@@ -131,6 +131,54 @@ class UserController {
             }
         }).catch((err) => {  res.status(404).json({ message: 'Parcels not Found'})})
      }
+
+     /**
+     * This Method fetch  a Parcel order belonging to a User
+     * @param {object} req - client request object
+     * @param {object} res -server response object
+     * @returns {object} success or failure
+     */
+    static getAUserParcel(req, res) {
+        const text = 'SELECT * FROM parcels WHERE id= $1 AND userid = $2';
+        const getuser = `SELECT id, role FROM users WHERE id= $1 AND role =$2 `;
+        console.log(parseInt(req.params.userId, 10))
+        const client = new Client(connectionString);
+        client.connect();
+        client.query(getuser, [req.user.id, req.user.role])
+        .then((result) => {
+            if (result.rows[0].role === 'user'){
+               const client = new Client(connectionString);
+               client.connect();
+               client.query(text, [parseInt(req.params.parcelId, 10),req.user.id])
+                .then((result) => {
+                    if (result.rows[0]) {
+                            res.status(200).json({
+                                success: 'true',
+                                message: 'Parcel retrieved successfully',
+                                data: result.rows[0]
+                            });
+                       
+                        }else {
+                        res.status(404).json({
+                            message: "No valid entry found for provided ID"
+                        });
+                    }
+                    client.end()
+                }).catch((err) => {
+                    res.status(500).json({
+                        error: err.message
+                    });
+                    client.end()
+                });
+            }else{
+                res.status(403).json({message: 'FORBIDDEN'})
+            }
+        }).catch((err) => {
+            res.status(500).json({
+                error: err.message}); client.end()
+        });
+       
+    }
     
     
 }
