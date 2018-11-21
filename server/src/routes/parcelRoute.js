@@ -11,5 +11,8 @@ parcelRoute.route('/parcels')
 .post(Auth.verifyToken, checkParcelValidation.createParcelValidation,
      parcelController.addParcels);
 
+parcelRoute.route('/parcels/:parcelId')
+.get(Auth.verifyToken, idValidation.parcelId, parcelController.getAParcels);
+
 export default parcelRoute;
 

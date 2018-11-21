@@ -108,6 +108,52 @@ class ParcelController {
     }
 
     
+    /**
+     * This method gets a particular Parcels on request for Admin
+     * @param {object} req - User request object
+     * @param {object} res - Server response Object
+     * @returns {object} success or failure
+     */
+    static getAParcels(req, res) {
+        const text = 'SELECT * FROM parcels WHERE id = $1 ';
+        const getuser = `SELECT role FROM users WHERE role =$1 `;
+        const client = new Client(connectionString);
+        client.connect();
+        client.query(getuser, [req.user.role])
+        .then((result) => {
+            if (result.rows[0].role === 'admin'){
+               const client = new Client(connectionString);
+               client.connect();
+               client.query(text, [parseInt(req.params.parcelId, 10)])
+                .then((result) => {
+                    if (result.rows[0]) {
+                            res.status(200).json({
+                                success: 'true',
+                                message: 'Parcel retrieved successfully',
+                                data: result.rows[0]
+                            });
+                       
+                        }else {
+                        res.status(404).json({
+                            message: "No valid entry found for provided ID"
+                        });
+                    }
+                    client.end()
+                }).catch((err) => {
+                    res.status(500).json({
+                        error: err.message
+                    });
+                    client.end()
+                });
+            }else{
+                res.status(403).json({message: 'FORBIDDEN'})
+            }
+        }).catch((err) => {
+            res.status(500).json({
+                error: err.message}); client.end()
+        });
+       
+    }    
 
 }
 
