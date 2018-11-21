@@ -9,5 +9,8 @@ const parcelRoute = express();
 parcelRoute.route('/parcels')
 .get( Auth.verifyToken, parcelController.getAllParcels)
 
+parcelRoute.route('/parcels/:parcelId')
+.get(Auth.verifyToken, idValidation.parcelId, parcelController.getAParcels);
+
 export default parcelRoute;
 
