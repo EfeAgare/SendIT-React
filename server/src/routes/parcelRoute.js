@@ -20,8 +20,5 @@ parcelRoute.route('/parcels/:parcelId/cancel')
 parcelRoute.route('/parcels/:parcelId/presentLocation')
 .put(Auth.verifyToken, idValidation.parcelId, parcelController.presentLocation);
 
-parcelRoute.route('/parcels/:parcelId/destination')
-.put(Auth.verifyToken, idValidation.parcelId, parcelController.destination);
-
 export default parcelRoute;
 
