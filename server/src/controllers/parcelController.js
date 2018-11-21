@@ -203,6 +203,56 @@ class ParcelController {
         }).catch((err) => {res.status(500).json({ error: err.message});})
     }
 
+    
+    /**
+     * This method changes the destination of a parcel order in the list of Parcels orders
+     * @param {object} req - User request object
+     * @param {object} res - User response object
+     * * @returns {object} success or failure
+     */
+
+    static presentLocation(req, res) {
+        const text = 'SELECT currentLocation FROM parcels WHERE id = $1';
+        const textUpdate = `UPDATE parcels SET presentLocation = $1
+         WHERE id = $2 returning *`;
+         const getUser = 'SELECT role FROM users WHERE role = $1'
+        const client = new Client(connectionString);
+        client.connect();
+        client.query(getUser, req.user.id)
+            .then((result) => {
+                if (result.rows.role === 'admin'){
+                    const client = new Client(connectionString);
+                    client.connect();
+                    client.query(text, req.user.id)
+                    .then ((result) => {
+                        if (!result.rows[0]) {
+                            res.status(404).json({
+                                message: "No valid entry found for provided ID"
+                            });
+                        } 
+                        else {
+                            const values = [
+                                req.body.presentLocation,
+                                req.user.id
+                            ];
+                            const client = new Client(connectionString);
+                            client.connect();
+                            client.query(textUpdate, values)
+                                .then((result1) => {
+                                    console.log(result1.rows[0])
+                                    res.status(201).json({
+                                        success: 'true',
+                                        message: 'Parcel Location Updated successfully',
+                                        data: result1.rows[0]
+                                    });
+                                   
+                                }).catch((err) => { res.status(500).json({ error: err.message});})
+                    }
+                               }).catch((err) => {res.status(500).json({ error: err.message});})
+            }
+        }).catch((err) => {res.status(500).json({ error: err.message});})
+    }
+
 }
 
 export default ParcelController;
