@@ -155,6 +155,54 @@ class ParcelController {
        
     }    
 
+    /**
+     * This method cancel a previous parcel order in the list of Parcels orders
+     * @param {object} req - User request object
+     * @param {object} res - User response object
+     * * @returns {object} success or failure
+     */
+    static cancelParcel(req, res) {
+        const text = 'SELECT status FROM parcels WHERE id = $1';
+        const textUpdate = `UPDATE parcels SET status = $1 WHERE id = $2 returning *`;
+         const getUser = 'SELECT role FROM users WHERE role = $1';
+         console.log(parseInt(req.params.parcelId,10))
+        const client = new Client(connectionString);
+        client.connect();
+        client.query(getUser, [req.user.role])
+            .then((result) => {
+                if (result.rows[0].role === 'user'){
+                    const client = new Client(connectionString);
+                    client.connect();
+                    client.query(text, [parseInt(req.params.parcelId,10)])
+                    .then ((result) => {
+                        if (!result.rows[0]) {
+                            res.status(404).json({
+                                message: "Parcel Not found "
+                            });
+                        } else if (result.rows[0].status === 'delivered' || result.rows[0].status === 'cancelled') {
+                            res.status(400).json({
+                                message: "Parcel No longer valid to be cancelled"
+                            });
+                        } else {
+                            const values = ['cancelled',parseInt(req.params.parcelId,10)];
+                            const client = new Client(connectionString);
+                            client.connect();
+                            client.query(textUpdate, values)
+                                .then((result) => {
+                                    console.log(result.rows)
+                                    res.status(200).json({
+                                        success: 'true',
+                                        message: 'Parcel cancelled successfully',
+                                        data: result.rows[0]
+                                    });
+                                   
+                                }).catch((err) => { res.status(500).json({ error: err.message});})
+                    }
+                               }).catch((err) => {res.status(500).json({ error: err.message});})
+            }
+        }).catch((err) => {res.status(500).json({ error: err.message});})
+    }
+
 }
 
 export default ParcelController;
