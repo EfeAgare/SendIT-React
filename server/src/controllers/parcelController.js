@@ -203,6 +203,14 @@ class ParcelController {
         }).catch((err) => {res.status(500).json({ error: err.message});})
     }
 
+    
+    /**
+     * This method changes the destination of a parcel order in the list of Parcels orders
+     * @param {object} req - User request object
+     * @param {object} res - User response object
+     * * @returns {object} success or failure
+     */
+
     static presentLocation(req, res) {
         const text = 'SELECT currentLocation FROM parcels WHERE id = $1';
         const textUpdate = `UPDATE parcels SET presentLocation = $1
