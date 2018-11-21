@@ -16,5 +16,9 @@ parseRoute.route('/auth/login')
 parseRoute.route('/users/:userId/parcels')
 .get(Auth.verifyToken, idValidation.userId ,userController.getUserParcels);
 
+parseRoute.route('/users/:userId/:parcelId')
+.get(Auth.verifyToken, idValidation.userId, idValidation.parcelId,
+     userController.getAUserParcel);
+
 export default parseRoute;
 
