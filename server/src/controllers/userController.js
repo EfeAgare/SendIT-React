@@ -92,7 +92,46 @@ class UserController {
             client.end();
           });
 
-        }     
+        }
+
+        
+    /**
+     * This method gets all user Parcels
+     * @param {array} req - user request array
+     * @param {array} res - Server response array
+     * @returns {array} success or failure 
+     */
+    static getUserParcels(req, res) {
+        const text = `SELECT * FROM parcels WHERE userid = $1`;
+        const getuser = `SELECT role FROM users WHERE role =$1 `;
+        const client = new Client(connectionString);
+        client.connect();
+        client.query(getuser, [req.user.role])
+        .then((result) => {
+            if (result.rows[0].role === 'user'){  
+                const client = new Client(connectionString);
+                client.connect();                
+                 client.query(text,[req.user.id])
+                 .then((result) => {
+                     res.status(200).json({
+                    success: 'true',
+                    message: 'Parcels retrieved successfully',
+                    data: result.rows
+                    });
+                client.end()
+            }).catch((err) => {
+                res.status(404).json({
+                    message: 'Parcels not Found'
+                })
+                client.end()
+            });
+
+            }else{
+                res.status(403).json({message: 'FORBIDDEN'})
+            }
+        }).catch((err) => {  res.status(404).json({ message: 'Parcels not Found'})})
+     }
+    
     
 }
 
