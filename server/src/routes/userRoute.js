@@ -13,6 +13,8 @@ parseRoute.route('/auth/signup')
 parseRoute.route('/auth/login')
 .post(userValidation.login, userController.login)
 
+parseRoute.route('/users/:userId/parcels')
+.get(Auth.verifyToken, idValidation.userId ,userController.getUserParcels);
 
 export default parseRoute;
 
