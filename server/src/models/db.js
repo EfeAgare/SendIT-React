@@ -1,7 +1,7 @@
 import { Client } from 'pg';
+import 'dotenv/config';
+import { connectionString } from '../config/config';
 
-
-const connectionString = 'postgres://postgres:@localhost:5433/sendit';
 
 const createUserTable = `CREATE TABLE users (
     id SERIAL PRIMARY KEY,

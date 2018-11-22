@@ -22,24 +22,24 @@ describe('/POST', () => {
     chai.request(app)
       .post('/api/v1/parcels/')
       .send({
-        deliveryAddress:{
-            firstName: 'Success',
-            lastName:'Shaw',
-            streetAddress:'9 izomo street',
-            addressCity:'Warri',
-            addressState:'Delta'
-        },
-        expectedArrival:{
-          from:'2011-11-11 14:48',
-          to:'2011-11-18 14:48',
-        },
-        itemShipped:{
-            name:'Dell Inspiron n411z',
-            description:'Dell mini 4gb ram black',
-          },
-          email:"hrtiuo@yahoo.com",
-          phoneNumber:"09070911674",
-          status:"Transit"
+          "firstName" : "knowledge",
+            "lastName":"kyky" , 
+            "deliveryAddress":"thkjkhvbnjmjhjckvb",
+            "deliveryLGA" :"xcfvujhbkn" ,
+            "deliveryState" :"fffdxcvjb",
+            "deliveryStreet":"ezxctvbnkjmk", 
+            "deliveryEmail" :"ert@gmail.com",
+            "deliveryPNumber":"08053456789",
+            "deliveryTime":"2011-10-10 18:40",
+            "pickUpState":"hfvjbynkm",
+            "pickUpLGA":"htcfjvbn",
+            "pickUpStreet":"gzrgxcfgvjb",
+            "pickUpPhoneNumber":"09070911675",
+            "currentLocation":"Lagos",
+            "itemDescription":"fdd hgjb",
+            "itemName":"dell",
+            "itemWeight":"56",
+            "itemQuantity":"4"
       })
       .end((err, res) => {
         console.log(res.body)
@@ -53,28 +53,28 @@ describe('/POST', () => {
 describe('/PUT', () => {
   it('Should Cancel a parcel delivery order', (done) => {
     chai.request(app)
-      .put('/api/v1/parcels/0/cancel')
+      .put('/api/v1/parcels/1/cancel')
       .send({
-        deliveryAddress:{
-            firstName: 'Success',
-            lastName:'Shaw',
-            streetAddress:'9 izomo street',
-            addressCity:'Warri',
-            addressState:'Delta'
-        },
-        expectedArrival:{
-          from:'2011-10-10 14:48',
-          to:'2011-10-20 14:48',
-        },
-        itemShipped:{
-            name:'Dell Inspiron n411z',
-            description:'Dell mini 4gb ram black',
-            
-        },
-         email:"hrtiuo@yahoo.com",
-        phoneNumber:"09070911674",
-        status:"cancelled"
-        
+
+            "firstName" : "knowledge",
+            "lastName":"kyky" , 
+            "deliveryAddress":"thkjkhvbnjmjhjckvb",
+            "deliveryLGA" :"xcfvujhbkn" ,
+            "deliveryState" :"fffdxcvjb",
+            "deliveryStreet":"ezxctvbnkjmk", 
+            "deliveryEmail" :"ert@gmail.com",
+            "deliveryPNumber":"08053456789",
+            "deliveryTime":"2011-10-10 18:40",
+            "pickUpState":"hfvjbynkm",
+            "pickUpLGA":"htcfjvbn",
+            "pickUpStreet":"gzrgxcfgvjb",
+            "pickUpPhoneNumber":"09070911675",
+            "currentLocation":"Lagos",
+            "itemDescription":"fdd hgjb",
+            "itemName":"dell",
+            "itemWeight":"56",
+            "itemQuantity":"4",
+            status:"cancelled"        
       })
       .end((err, res) => {
         console.log(res.body)

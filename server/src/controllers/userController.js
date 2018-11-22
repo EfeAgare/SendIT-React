@@ -1,8 +1,6 @@
 import {Client} from 'pg';
 import Helpers from './helper';
-
-
-const connectionString = 'postgres://postgres:@localhost:5433/sendit';
+import { connectionString } from '../config/config'
 
 
 /**
