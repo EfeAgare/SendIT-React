@@ -59,21 +59,15 @@ class ParcelController {
     static addParcels(req, res) {
         const getuser = `SELECT role FROM users WHERE role = $1 `;
         const text = `INSERT INTO parcels(
-                firstName, lastName, deliveryAddress, deliveryLGA, deliveryState, 
-                deliveryStreet, deliveryEmail,  deliveryPNumber, deliveryTime, 
-                pickUpState, pickUpLGA , pickUpStreet, pickUpPhoneNumber, currentLocation,
-                itemName,itemDescription,itemWeight,
-                itemQuantity,userId, status)
-                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10, $11, 
-                    $12, $13, $14, $15, $16,$17,$18,$19, $20) 
+                name, deliveryAddress, deliveryPNumber,pickUpAddress,itemDescription,
+                itemWeight, itemQuantity,userId, status)
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10) 
                 RETURNING *`
         const values = [
-            req.body.firstName, req.body.lastName,req.body.deliveryAddress,
-            req.body.deliveryLGA,req.body.deliveryState,req.body.deliveryStreet,
-            req.body.deliveryEmail,req.body.deliveryPNumber,req.body.deliveryTime,
-            req.body.pickUpState,req.body.pickUpLGA,req.body.pickUpStreet,
-            req.body.pickUpPhoneNumber, req.body.currentLocation, req.body.itemName,req.body.itemDescription,
-            req.body.itemWeight,req.body.itemQuantity, req.user.id, 'awaiting'];
+            req.body.name,req.body.deliveryAddress,
+            req.body.deliveryPNumber,req.body.pickUpAddress,
+            req.body.pickUpPhoneNumber, req.body.itemDescription,
+            req.body.itemWeight,req.body.itemQuantity, req.user.id,'awaiting'];
         const client = new Client(connectionString);
         client.connect();
         client.query(getuser, [req.user.role])
@@ -308,10 +302,8 @@ class ParcelController {
      * * @returns {object} success or failure
      */
     static destination(req, res) {
-        const text = `SELECT  deliveryAddress, deliveryLGA, deliveryState,
-        deliveryStreet, status FROM parcels WHERE id = $1;`
-        const textUpdate = `UPDATE parcels SET deliveryAddress = $1, deliveryLGA = $2, deliveryState =$3,
-        deliveryStreet = $4, status =$5  WHERE userId= $6 returning *`;
+        const text = `SELECT  deliveryAddress, status FROM parcels WHERE id = $1;`
+        const textUpdate = `UPDATE parcels SET deliveryAddress = $1, status =$2  WHERE userId= $3 returning *`;
          const getUser = 'SELECT role FROM users WHERE role = $1'
         const client = new Client(connectionString);
         client.connect();
@@ -333,9 +325,6 @@ class ParcelController {
                         } else {
                             const values = [
                                  req.body.deliveryAddress,
-                                 req.body.deliveryLGA ,
-                                 req.body.deliveryState,
-                                 req.body.deliveryStreet,
                                  'awaiting',
                                  req.user.id
                             ];

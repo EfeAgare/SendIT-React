@@ -65,6 +65,7 @@ describe('/GET/users/:userId/:parcelId', () => {
       .get('/api/v1/users/1/1')
       .set('x-access-token',token)
       .end((err, res) => {
+        token = res.body.token
         assert.equal(res.status, 200);
         assert.typeOf(res.body, 'object');
         done();

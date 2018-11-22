@@ -43,7 +43,6 @@ class UserController {
                             const token = Helpers.generateToken(result.rows[0].id, result.rows[0].role);
                             res.status(201).json({
                                 message: 'user created successfully',
-                                token: token,
                                 data: [result.rows[0].username,
                                  result.rows[0].email,
                                   result.rows[0].role ]
