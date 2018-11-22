@@ -3,4 +3,3 @@ server/dist
 coverage/
 .nyc_output/
 .env
-server/src/tests

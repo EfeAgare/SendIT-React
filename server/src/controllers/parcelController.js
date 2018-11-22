@@ -1,7 +1,5 @@
 import { Client} from 'pg';
-
-const connectionString = 'postgres://postgres:@localhost:5433/sendit';
-
+import { connectionString } from '../config/config'
 
 /**
  * This class handles Parcels Order controllers
