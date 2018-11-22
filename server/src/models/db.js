@@ -38,11 +38,11 @@ const makeQuery = (query) => {
   client.connect();
   client.query(query)
     .then((res) => {
-      console.log(res)
+      
         client.end()
     })
     .catch((err) => {
-        console.log(err)
+        
         client.end()}
     );
 };

@@ -16,7 +16,7 @@ class UserController {
      */
 
     static userSignUp(req, res) {
-        const text = 'SELECT email FROM users WHERE email = $1';
+        const text = 'SELECT  FROM users WHERE email = $1';
         const hashPassword = Helpers.hashPassword(req.body.password);
         const textConfirm = `INSERT INTO users(username, email, password, role)
         VALUES($1, $2, $3, $4)  returning *`;
@@ -26,6 +26,7 @@ class UserController {
             hashPassword,
             'user'
         ];
+
         const client = new Client(connectionString);
         client.connect();
         client.query(text, [req.body.email])
@@ -78,9 +79,9 @@ class UserController {
                 return res.status(400).send({ 
                     message: 'Invalid Password' });
               }
-              console.log(result.rows[0].role);
+              
               const token = Helpers.generateToken(result.rows[0].id, result.rows[0].role);
-              return res.status(200).json({
+              return res.status(201).json({
                 message: 'Login successful',
                 data: [result.rows[0].username, result.rows[0].email, result.rows[0].role ],
                 token:  token });

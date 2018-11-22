@@ -4,11 +4,11 @@
   "description": "SendIT is a courier service that helps users deliver parcels to different destinations.",
   "main": "index.js",
   "scripts": {
-    "test": "set NODE_ENV=test&&npm run migrate&& nyc mocha ./server/src/tests/ --compilers js:@babel/register --require @babel/polyfill --exit",
+    "test": "set NODE_ENV=test&&npm run migrate&& nyc mocha ./server/src/tests/ --compilers js:@babel/register --require @babel/polyfill --timeout 15000 --exit",
     "devstart": "nodemon server/src/index.js --exec babel-node",
     "build": "babel ./server/src -d ./server/dist",
     "coverage": "nyc report --reporter=text-lcov | coveralls && nyc report --reporter=lcov",
-    "heroku-postbuild": "npm run build && npm run migrate",
+    "heroku-postbuild": "npm run build && npm run migrate && npm run seed",
     "migrate": "babel-node ./server/src/models/db.js",
     "seed": "babel-node ./server/src/models/seed.js",
     "start": "node server/dist/index.js"
@@ -50,6 +50,7 @@
     "mocha": "^5.2.0",
     "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.18.6",
-    "nyc": "^13.1.0"
+    "nyc": "^13.1.0",
+    "supertest": "^3.3.0"
   }
 }
