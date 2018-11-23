@@ -59,15 +59,15 @@ class ParcelController {
     static addParcels(req, res) {
         const getuser = `SELECT role FROM users WHERE role = $1 `;
         const text = `INSERT INTO parcels(
-                name, deliveryAddress, deliveryPNumber,pickUpAddress,itemDescription,
+                name, deliveryAddress, deliveryPNumber,pickUpAddress,currentLocation, itemDescription,
                 itemWeight, itemQuantity,userId, status)
                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10) 
                 RETURNING *`
         const values = [
             req.body.name,req.body.deliveryAddress,
-            req.body.deliveryPNumber,req.body.pickUpAddress,
-            req.body.pickUpPhoneNumber, req.body.itemDescription,
-            req.body.itemWeight,req.body.itemQuantity, req.user.id,'awaiting'];
+            req.body.deliveryPNumber,req.body.pickUpAddress,req.body.pickUpAddress,
+            req.body.itemDescription, req.body.itemWeight,req.body.itemQuantity,
+            req.user.id,'awaiting'];
         const client = new Client(connectionString);
         client.connect();
         client.query(getuser, [req.user.role])

@@ -43,9 +43,12 @@ class UserController {
                             const token = Helpers.generateToken(result.rows[0].id, result.rows[0].role);
                             res.status(201).json({
                                 message: 'user created successfully',
-                                data: [result.rows[0].username,
-                                 result.rows[0].email,
-                                  result.rows[0].role ]
+                                data: {
+                                    username:result.rows[0].username,
+                                    email:result.rows[0].email,
+                                    role: result.rows[0].role,
+                                    token:token 
+                                }
                             });
                             client.end()
                         })
@@ -72,7 +75,7 @@ class UserController {
         client.query(text, [req.body.email])
         .then((result) => {
             if (!result.rows[0]) {
-             return res.status(401).json({ message: 'No account with this email address' });
+             return res.status(404).json({ message: 'No account with this email address' });
             }
             if(!Helpers.comparePassword(result.rows[0].password, req.body.password)) {
                 return res.status(400).send({ 
@@ -80,7 +83,7 @@ class UserController {
               }
               
               const token = Helpers.generateToken(result.rows[0].id, result.rows[0].role);
-              return res.status(201).json({
+              return res.status(200).json({
                 message: 'Login successful',
                 data: [result.rows[0].username, result.rows[0].email, result.rows[0].role ],
                 token:  token });
