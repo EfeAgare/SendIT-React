@@ -16,7 +16,7 @@ class UserController {
      */
 
     static userSignUp(req, res) {
-        const text = 'SELECT  FROM users WHERE email = $1';
+        const text = 'SELECT * FROM users WHERE email = $1';
         const hashPassword = Helpers.hashPassword(req.body.password);
         const textConfirm = `INSERT INTO users(username, email, password, role)
         VALUES($1, $2, $3, $4)  returning *`;
@@ -43,17 +43,19 @@ class UserController {
                             const token = Helpers.generateToken(result.rows[0].id, result.rows[0].role);
                             res.status(201).json({
                                 message: 'user created successfully',
-                                token: token,
-                                data: [result.rows[0].username,
-                                 result.rows[0].email,
-                                  result.rows[0].role ]
+                                data: {
+                                    username:result.rows[0].username,
+                                    email:result.rows[0].email,
+                                    role: result.rows[0].role,
+                                    token:token 
+                                }
                             });
                             client.end()
                         })
                 } client.end()
             })
             .catch((err) => {
-                console.log(err)
+                res.status(500).json(err.message)
                 client.end()
             });
     }
@@ -73,7 +75,7 @@ class UserController {
         client.query(text, [req.body.email])
         .then((result) => {
             if (!result.rows[0]) {
-             return res.status(401).json({ message: 'No account with this email address' });
+             return res.status(404).json({ message: 'No account with this email address' });
             }
             if(!Helpers.comparePassword(result.rows[0].password, req.body.password)) {
                 return res.status(400).send({ 
@@ -81,7 +83,7 @@ class UserController {
               }
               
               const token = Helpers.generateToken(result.rows[0].id, result.rows[0].role);
-              return res.status(201).json({
+              return res.status(200).json({
                 message: 'Login successful',
                 data: [result.rows[0].username, result.rows[0].email, result.rows[0].role ],
                 token:  token });
@@ -140,7 +142,6 @@ class UserController {
     static getAUserParcel(req, res) {
         const text = 'SELECT * FROM parcels WHERE id= $1 AND userid = $2';
         const getuser = `SELECT id, role FROM users WHERE id= $1 AND role =$2 `;
-        console.log(parseInt(req.params.userId, 10))
         const client = new Client(connectionString);
         client.connect();
         client.query(getuser, [req.user.id, req.user.role])

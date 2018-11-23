@@ -4,7 +4,7 @@
   "description": "SendIT is a courier service that helps users deliver parcels to different destinations.",
   "main": "index.js",
   "scripts": {
-    "test": "set NODE_ENV=test&&npm run migrate&& nyc mocha ./server/src/tests/ --compilers js:@babel/register --require @babel/polyfill --timeout 15000 --exit",
+    "test": "set NODE_ENV=test&&npm run migrate&& npm run seed && nyc mocha ./server/src/tests/ --compilers js:@babel/register --require @babel/polyfill --timeout 15000 --exit",
     "devstart": "nodemon server/src/index.js --exec babel-node",
     "build": "babel ./server/src -d ./server/dist",
     "coverage": "nyc report --reporter=text-lcov | coveralls && nyc report --reporter=lcov",
