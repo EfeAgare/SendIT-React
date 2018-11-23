@@ -1,12 +1,11 @@
 class UserValidation {
     static signUp(req, res, next) {
         req.check('username').isLength({  min: 2 }).trim()
-        .withMessage('username name must be specified.').isAlphanumeric()
-        .withMessage('username name must have non-alphanumeric characters.').matches("^[a-z  A-Z]*$");
-        req.check('email','Enter a valid email address').trim().isEmail();
-        req.check('password').isLength({ min: 7 , max:12}).trim()
-        .withMessage('password name must be specified.').matches( /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,12}$/)
-        .withMessage('password 7 to 15 characters which contain at least one numeric digit and a special character');
+        .withMessage('username name must be specified.').matches("^[a-zA-Z]*$")
+        .withMessage('username name must be in alphabelt characters.');
+        req.check('email','Enter a valid email address').isEmail().trim();
+        req.check('password').matches( /^(?=.*\d).{4,10}$/)
+        .withMessage('Password must be between 4 and 10 digits long and include at least one numeric digit');
         const errors = req.validationErrors();
         if (errors) {
             return res.status(404).json({errors: errors[0].msg});
@@ -16,10 +15,8 @@ class UserValidation {
             
     static login (req, res, next) {
         req.check('email','Enter a valid email address').trim().isEmail();
-        req.check('password').isLength({ min: 7 , max:12}).trim()
-        .withMessage('password name must be specified.')
-        .matches( /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,12}$/)
-        .withMessage('password 7 to 15 characters which contain at least one numeric digit and a special character');
+        req.check('password').matches( /^(?=.*\d).{4,10}$/)
+        .withMessage('Password must be between 4 and 10 digits long and include at least one numeric digit');
         const errors = req.validationErrors();
         if (errors) {
             return res.status(404).json({errors: errors[0].msg});}next();

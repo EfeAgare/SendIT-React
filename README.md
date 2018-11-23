@@ -63,7 +63,38 @@ If you only want to access the completed work, you will find the link to the hos
       <td>/api/v1/parcels</td>
       <td>Create a parcel delivery order</td>
   </tr>
+  <tr>
+      <td>PUT</td>
+      <td>/api/v1/parcels/:parcelId/status</td>
+      <td>change the status of a parcel order </td>
+  </tr>
+  <tr>
+      <td>PUT</td>
+      <td>/api/v1/parcels/:parcelId/presentLocation</td>
+      <td>change the present location of a parcel order </td>
+  </tr>
+  <tr>
+      <td>PUT</td>
+      <td>/api/v1/parcels/:parcelId/destination</td>
+      <td>change the destination of a parcel order </td>
+  </tr>
+  <tr>
+      <td>POST</td>
+      <td>/api/v1/auth/signup</td>
+      <td>sign up users </td>
+  </tr>
+   <tr>
+      <td>POST</td>
+      <td>/api/v1/auth/login</td>
+      <td>login users </td>
+  </tr>
+   <tr>
+      <td>GET</td>
+      <td>/api/v1/users/:userId/:parcelId</td>
+      <td>Fetch a user particular parcel order </td>
+  </tr>
 </table>
+
 <br/>
 <hr>
 
