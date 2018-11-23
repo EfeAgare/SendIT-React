@@ -8,7 +8,7 @@ class UserValidation {
         .withMessage('Password must be between 4 and 10 digits long and include at least one numeric digit');
         const errors = req.validationErrors();
         if (errors) {
-            return res.status(404).json({errors: errors[0].msg});
+            return res.status(400).json({errors: errors[0].msg});
         }
         next();
     }
@@ -19,7 +19,7 @@ class UserValidation {
         .withMessage('Password must be between 4 and 10 digits long and include at least one numeric digit');
         const errors = req.validationErrors();
         if (errors) {
-            return res.status(404).json({errors: errors[0].msg});}next();
+            return res.status(400).json({errors: errors[0].msg});}next();
     }
 }
 export default UserValidation;

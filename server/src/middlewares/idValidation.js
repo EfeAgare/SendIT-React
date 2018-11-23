@@ -12,7 +12,7 @@ class IdValidation {
      * @param {route} next route
      */
     static parcelId(req, res, next) {
-        req.check('parcelId', ' Parcel Id Not consistent').trim().isInt();
+        req.check('parcelId', 'Parcel Id is Invalid').trim().isInt();
         const errors = req.validationErrors();
         if (errors) {
             return res.status(400).json({
