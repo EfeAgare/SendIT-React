@@ -17,14 +17,25 @@ const parcelsOrder = {
     itemQuantity: 3,
     status:'awaiting'
 }
+
+const parcelsOrder1 = {
+  name:'succes',
+  deliveryAddress:'ikaka', 
+  deliveryPNumber: '08054630967',
+  pickUpAddress: 'l345',
+  itemDescription: 'phine',
+  itemWeight: 34,
+  itemQuantity: 45,
+  status:'awaiting'
+}
 let login = {
   email: 'email@email.com',
-  password: '123@abc'
+  password: '123agare'
 }
 let register = {
   username: 'username',
   email: 'email@email.com',
-  password: '123@abc',
+  password: '123agare',
 };
 
 
@@ -84,6 +95,21 @@ describe('/POST', () => {
   });
 });
 
+
+describe('/POST', () => {
+  it('Should Create a parcel delivery order', (done) => {
+    chai.request(app)
+      .post('/api/v1/parcels/')
+      .set('x-access-token',token)
+      .send(parcelsOrder1)
+      .end((err, res) => {
+        assert.equal(res.status, 201);
+        assert.typeOf(res.body, 'object');
+        done();
+      });
+  });
+});
+
 describe('/GET/users/:userId/:parcelId', () => {
   it('Should Fetch a parcel delivery orders by a specific user', (done) => {
     chai.request(app)
@@ -105,7 +131,7 @@ describe('/PUT', () => {
       .set('x-access-token',token)
       .send({deliveryAddress:'Kano'})
        .end((err, res) => {
-        assert.equal(res.status, 201);
+        assert.equal(res.status, 200);
         assert.typeOf(res.body, 'object');
         done();
       });

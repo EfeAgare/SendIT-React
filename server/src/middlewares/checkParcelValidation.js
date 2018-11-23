@@ -2,8 +2,8 @@
 class CheckValidation {
     static createParcelValidation (req, res, next) {
         req.check('name').isLength({ min: 2 }).trim()
-        .withMessage('name must be specified.').isAlphanumeric()
-        .withMessage('name must have non-alphanumeric characters.');
+        .withMessage('name must be specified.').matches("^[a-zA-Z]*$")
+        .withMessage('name name must be in alphabelt characters.');
         req.check('deliveryAddress', ' deliveryAddress cannot be  empty').trim()
         .not().isEmpty();
         req.check('deliveryPNumber', 'enter a valid Nigeria phone number').trim()

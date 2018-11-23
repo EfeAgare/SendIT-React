@@ -1,6 +1,7 @@
 import { Client } from 'pg';
 import 'dotenv/config';
 import { connectionString } from '../config/config';
+import { resolve } from 'path';
 
 
 const createUserTable = `CREATE TABLE users (
@@ -16,7 +17,7 @@ const createParcelTable =
     deliveryAddress varchar(100) NOT NULL,
     deliveryPNumber varchar(20) NOT NULL,
     pickUpAddress varchar(200) NOT NULL,
-    currentLocation varChar(200),
+    currentLocation varChar(200) NOT NULL,
     itemDescription varchar(250) NOT NULL,
     itemWeight REAL NOT NULL,
     itemQuantity INT NOT NULL,
@@ -28,11 +29,9 @@ const makeQuery = (query) => {
   client.connect();
   client.query(query)
     .then((res) => {
-      
         client.end()
     })
     .catch((err) => {
-        
         client.end()}
     );
 };

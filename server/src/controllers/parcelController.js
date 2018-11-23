@@ -44,8 +44,7 @@ class ParcelController {
                     })
                 }
             }).catch((err) => {
-                console.log(err)
-
+                res.status(500).json(err.message)
 
             })
     }
@@ -84,7 +83,7 @@ class ParcelController {
                 client.end()
             })
             .catch((err) => {
-                console.log(err)
+                console.lresog(err)
                 client.end()
             });
             }else{
@@ -92,7 +91,7 @@ class ParcelController {
                     message: 'Can\t create parcel'
                 }) }
         }) .catch((err) => {
-            console.log(err)
+            res.status(500).json(err.message)
             client.end()})
         
     }
@@ -178,7 +177,6 @@ class ParcelController {
                             client.connect();
                             client.query(textUpdate, values)
                                 .then((result) => {
-                                    console.log(result.rows)
                                     res.status(200).json({
                                         success: 'true',
                                         message: 'Parcel cancelled successfully',
@@ -202,17 +200,17 @@ class ParcelController {
 
     static presentLocation(req, res) {
         const text = 'SELECT currentLocation FROM parcels WHERE id = $1';
-        const textUpdate = `UPDATE parcels SET presentLocation = $1
+        const textUpdate = `UPDATE parcels SET currentLocation = $1
          WHERE id = $2 returning *`;
-         const getUser = 'SELECT role FROM users WHERE role = $1'
+         const getUser = 'SELECT role FROM users WHERE id = $1'
         const client = new Client(connectionString);
         client.connect();
-        client.query(getUser, req.user.id)
+        client.query(getUser, [req.user.id])
             .then((result) => {
-                if (result.rows.role === 'admin'){
+                if (result.rows[0].role === 'admin'){
                     const client = new Client(connectionString);
                     client.connect();
-                    client.query(text, req.user.id)
+                    client.query(text, [parseInt(req.params.parcelId,10)])
                     .then ((result) => {
                         if (!result.rows[0]) {
                             res.status(404).json({
@@ -221,25 +219,28 @@ class ParcelController {
                         } 
                         else {
                             const values = [
-                                req.body.presentLocation,
-                                req.user.id
+                                req.body.currentLocation,
+                                parseInt(req.params.parcelId,10)
                             ];
                             const client = new Client(connectionString);
                             client.connect();
                             client.query(textUpdate, values)
-                                .then((result1) => {
-                                    console.log(result1.rows[0])
-                                    res.status(201).json({
+                                .then((result) => {
+                                    res.status(200).json({
                                         success: 'true',
                                         message: 'Parcel Location Updated successfully',
-                                        data: result1.rows[0]
+                                        data: result.rows[0]
                                     });
-                                   
-                                }).catch((err) => { res.status(500).json({ error: err.message});})
+                                   client.end()
+                                }).catch((err) => { res.status(500).json({ error: err.message});
+                                })
                     }
-                               }).catch((err) => {res.status(500).json({ error: err.message});})
-            }
-        }).catch((err) => {res.status(500).json({ error: err.message});})
+                    client.end()  }).catch((err) => {res.status(500).json({ error: err.message});
+                    client.end()      })
+            }else{
+                res.status(403).json('You are not an Admin')
+            } client.end()
+        }).catch((err) => {res.status(500).json({ error: err.message}); client.end()})
     }
 
     /**
@@ -253,15 +254,15 @@ class ParcelController {
         const text = 'SELECT status FROM parcels WHERE id = $1';
         const textUpdate = `UPDATE parcels SET status = $1
          WHERE id = $2 returning *`;
-         const getUser = 'SELECT role FROM users WHERE role = $1'
+         const getUser = 'SELECT role FROM users WHERE id = $1'
         const client = new Client(connectionString);
         client.connect();
-        client.query(getUser, req.user.id)
+        client.query(getUser, [req.user.id])
             .then((result) => {
-                if (result.rows.role === 'admin'){
+                if (result.rows[0].role === 'admin'){
                     const client = new Client(connectionString);
                     client.connect();
-                    client.query(text, req.user.id)
+                    client.query(text, [parseInt(req.params.parcelId,10)])
                     .then ((result) => {
                         if (!result.rows[0]) {
                             res.status(404).json({
@@ -272,25 +273,24 @@ class ParcelController {
                                 message: "Parcel No longer valid to be cancelled"
                             });
                         } else {
-                            const values = [
-                                req.body.status,
-                                req.user.id
-                            ];
+                            const values = [req.body.status, parseInt(req.params.parcelId,10)];
                             const client = new Client(connectionString);
                             client.connect();
                             client.query(textUpdate, values)
-                                .then((result1) => {
-                                    console.log(result1.rows[0])
-                                    res.status(201).json({
+                                .then((result1) => {                                    
+                                    res.status(200).json({
                                         success: 'true',
                                         message: 'Parcel status changed successfully',
                                         data: result1.rows[0]
                                     });
-                                   
+                                    client.end()
                                 }).catch((err) => { res.status(500).json({ error: err.message});})
-                    }
+                    }client.end()
                                }).catch((err) => {res.status(500).json({ error: err.message});})
+            }else{
+                res.status(403).json({message:'you are not an Admin'})
             }
+           
         }).catch((err) => {res.status(500).json({ error: err.message});})
     }
                         
@@ -332,18 +332,18 @@ class ParcelController {
                             client.connect();
                             client.query(textUpdate, values)
                                 .then((result) => {
-                                    console.log(result.rows[0])
-                                    res.status(201).json({
+                                    res.status(200).json({
                                         success: 'true',
                                         message: 'Parcel destination changed successfully',
                                         data: result.rows[0]
                                     });
-                                   
+                                    client.end()
                                 }).catch((err) => { res.status(500).json({ error: err.message});})
-                    }
-                }).catch((err) => {res.status(500).json({ error: err.message});})
+                    }client.end()
+                }).catch((err) => {res.status(500).json({ error: err.message}); client.end()})
             }
-        }).catch((err) => {res.status(500).json({ error: err.message});})
+        }).catch((err) => {res.status(500).json({ error: err.message}); 
+        client.end();})
     }
 }
 

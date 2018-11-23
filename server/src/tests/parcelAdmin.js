@@ -20,7 +20,6 @@ describe('/POST/auth/login', () => {
   .post('/api/v1/auth/login')
   .send(login)
       .end((err, res) => {
-        console.log(res.error);
         token = res.body.token
         assert.equal(res.status, 200);
         assert.typeOf(res.body.data, 'array');
@@ -49,7 +48,6 @@ describe('/GET', () => {
       .get('/api/v1/parcels/1')
       .set('x-access-token',token)
       .end((err, res) => {
-        console.log(res.body)
         assert.equal(res.status, 200);
         assert.typeOf(res.body, 'object');
         done();
@@ -57,10 +55,10 @@ describe('/GET', () => {
   });
 });
 
-describe('/GET/ :parcelId/status', () => {
+describe('/PUT/ :parcelId/status', () => {
   it('Admin Should change the status of a parcel', (done) => {
     chai.request(app)
-      .put('/api/v1/parcels/1/status')
+      .put('/api/v1/parcels/2/status')
       .set('x-access-token',token)
       .send({status:'tansit'})
       .end((err, res) => {
@@ -72,32 +70,18 @@ describe('/GET/ :parcelId/status', () => {
 });
 
 
-describe('/PUT', () => {
-  it('Should change the present Location of parcels', (done) => {
+describe('/PUT/ parcels/:parcelId/presentLocation' , () => {
+  it('Admin Should change the present Location of parcels', (done) => {
     chai.request(app)
-      .put('/api/v1/parcels/1/destination')
+      .put('/api/v1/parcels/2/presentLocation')
       .set('x-access-token',token)
-      .send({presentLocation:'Enugu'})
+      .send({currentLocation:'Enugu'})
        .end((err, res) => {
-        assert.equal(res.status, 201);
-        assert.typeOf(res.body, 'object');
-        done();
-      });
-  });
-});
-
-
-
-describe('/PUT', () => {
-  it('Should cancel a parcel delivery order', (done) => {
-    chai.request(app)
-      .put('/api/v1/parcels/1/cancel')
-      .set('x-access-token',token)
-       .end((err, res) => {
-        console.log(res.body)
         assert.equal(res.status, 200);
         assert.typeOf(res.body, 'object');
         done();
       });
   });
 });
+
+

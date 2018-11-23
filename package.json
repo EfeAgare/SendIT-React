@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "set NODE_ENV=test&&npm run migrate&& npm run seed && nyc mocha ./server/src/tests/ --compilers js:@babel/register --require @babel/polyfill --timeout 15000 --exit",
-    "devstart": "npm run migrate && npm run seed && nodemon server/src/index.js --exec babel-node",
+    "devstart": "nodemon server/src/index.js --exec babel-node",
     "build": "babel ./server/src -d ./server/dist",
     "coverage": "nyc report --reporter=text-lcov | coveralls && nyc report --reporter=lcov",
     "heroku-postbuild": "npm run build && npm run migrate && npm run seed",

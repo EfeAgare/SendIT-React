@@ -16,7 +16,7 @@ class UserController {
      */
 
     static userSignUp(req, res) {
-        const text = 'SELECT  FROM users WHERE email = $1';
+        const text = 'SELECT * FROM users WHERE email = $1';
         const hashPassword = Helpers.hashPassword(req.body.password);
         const textConfirm = `INSERT INTO users(username, email, password, role)
         VALUES($1, $2, $3, $4)  returning *`;
@@ -55,7 +55,7 @@ class UserController {
                 } client.end()
             })
             .catch((err) => {
-                console.log(err)
+                res.status(500).json(err.message)
                 client.end()
             });
     }
@@ -142,7 +142,6 @@ class UserController {
     static getAUserParcel(req, res) {
         const text = 'SELECT * FROM parcels WHERE id= $1 AND userid = $2';
         const getuser = `SELECT id, role FROM users WHERE id= $1 AND role =$2 `;
-        console.log(parseInt(req.params.userId, 10))
         const client = new Client(connectionString);
         client.connect();
         client.query(getuser, [req.user.id, req.user.role])
