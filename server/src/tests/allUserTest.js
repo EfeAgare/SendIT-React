@@ -49,7 +49,42 @@ describe('/POST Register', () => {
         assert.typeOf(res.body, 'object');
         done();
       })
-  })
+  });
+
+  it('it should not Register if email already exist', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send(register) 
+      .end((err, res) => {
+        assert.equal(res.status, 409);
+        assert.typeOf(res.body, 'object');
+        done();
+      })
+  });
+  
+  it('it should not Register if password is not in right format', (done) => {
+    register.password = '1111';
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send(register) 
+      .end((err, res) => {
+        assert.equal(res.status, 409);
+        assert.typeOf(res.body, 'object');
+        done();
+      })
+  });
+
+  it('it should not Register if email is not in right format', (done) => {
+    register.email = 'rubbish.com';
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send(register) 
+      .end((err, res) => {
+        assert.equal(res.status, 400);
+        assert.typeOf(res.body, 'object');
+        done();
+      })
+  });
 })
 
 
@@ -75,6 +110,18 @@ describe('/GET/users/:userId/parcels', () => {
       .set('x-access-token',token)
       .end((err, res) => {
         assert.equal(res.status, 200);
+        assert.typeOf(res.body, 'object');
+        done();
+      });
+  });
+
+  it('Should not Fetch all parcel delivery orders if user id is not integer', (done) => {
+    chai.request(app)
+      .get('/api/v1/users/1.5/parcels')
+      .set('x-access-token',token)
+      .end((err, res) => {
+        assert.equal(res.status, 400);
+        assert.equal(res.body.errors, ' User Id not correctly specifed');
         assert.typeOf(res.body, 'object');
         done();
       });
