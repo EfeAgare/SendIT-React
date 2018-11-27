@@ -18,7 +18,7 @@ class CheckValidation {
         .not().isEmpty().isInt();
         const errors = req.validationErrors();
         if (errors) {
-            return res.status(404).json({errors: errors});}next();
+            return res.status(400).json({errors: errors[0].msg});}next();
     }
 }
 export default CheckValidation;

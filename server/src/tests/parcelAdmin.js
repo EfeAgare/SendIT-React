@@ -20,9 +20,9 @@ describe('/POST/auth/login', () => {
   .post('/api/v1/auth/login')
   .send(login)
       .end((err, res) => {
-        token = res.body.token
+        token = res.body.data.token
         assert.equal(res.status, 200);
-        assert.typeOf(res.body.data, 'array');
+        assert.typeOf(res.body.data, 'object');
         done();
       });
   });

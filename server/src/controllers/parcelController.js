@@ -38,10 +38,8 @@ class ParcelController {
                             client.end()
                         });
 
-                } else {
-                    res.status(403).json({
-                        message: 'FORBIDDEN'
-                    })
+                } else{
+                    res.status(403).json('You have no access')
                 }
             }).catch((err) => {
                 res.status(500).json(err.message)
@@ -83,7 +81,6 @@ class ParcelController {
                 client.end()
             })
             .catch((err) => {
-                console.lresog(err)
                 client.end()
             });
             }else{
@@ -135,11 +132,12 @@ class ParcelController {
                     client.end()
                 });
             }else{
-                res.status(403).json({message: 'FORBIDDEN'})
+                res.status(403).json('You have no access')
             }
         }).catch((err) => {
             res.status(500).json({
-                error: err.message}); client.end()
+                error: err.message}); 
+                client.end()
         });
        
     }    
@@ -186,6 +184,8 @@ class ParcelController {
                                 }).catch((err) => { res.status(500).json({ error: err.message});})
                     }
                                }).catch((err) => {res.status(500).json({ error: err.message});})
+            }else{
+                res.status(403).json('You have no access')
             }
         }).catch((err) => {res.status(500).json({ error: err.message});})
     }
@@ -238,7 +238,7 @@ class ParcelController {
                     client.end()  }).catch((err) => {res.status(500).json({ error: err.message});
                     client.end()      })
             }else{
-                res.status(403).json('You are not an Admin')
+                res.status(403).json('You have no access')
             } client.end()
         }).catch((err) => {res.status(500).json({ error: err.message}); client.end()})
     }
@@ -288,7 +288,7 @@ class ParcelController {
                     }client.end()
                                }).catch((err) => {res.status(500).json({ error: err.message});})
             }else{
-                res.status(403).json({message:'you are not an Admin'})
+                res.status(403).json({message:'You have no access'})
             }
            
         }).catch((err) => {res.status(500).json({ error: err.message});})
@@ -341,6 +341,10 @@ class ParcelController {
                                 }).catch((err) => { res.status(500).json({ error: err.message});})
                     }client.end()
                 }).catch((err) => {res.status(500).json({ error: err.message}); client.end()})
+            }else{
+                res.status(403).json({
+                    message:'You have no access'
+                })
             }
         }).catch((err) => {res.status(500).json({ error: err.message}); 
         client.end();})
