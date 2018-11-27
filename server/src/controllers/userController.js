@@ -33,7 +33,7 @@ class UserController {
             .then((result) => {
                 if (result.rows[0]) {
                     return res.status(409).json({
-                        message: "Email Address Already exists"
+                        message: 'Email Address Already exists'
                     });
                 } else {
                     const client = new Client(connectionString);
@@ -47,7 +47,7 @@ class UserController {
                                     username:result.rows[0].username,
                                     email:result.rows[0].email,
                                     role: result.rows[0].role,
-                                    token:token 
+                                    token:token
                                 }
                             });
                             client.end()
@@ -66,8 +66,6 @@ class UserController {
      * @param {array} res - Server response array
      * @returns {array} success or failure 
      */
-
-
     static login (req, res) {
         const text = 'SELECT * FROM users WHERE email = $1';
         const client = new Client(connectionString);
@@ -75,25 +73,29 @@ class UserController {
         client.query(text, [req.body.email])
         .then((result) => {
             if (!result.rows[0]) {
-             return res.status(404).json({ message: 'No account with this email address' });
-            }
-            if(!Helpers.comparePassword(result.rows[0].password, req.body.password)) {
-                return res.status(400).send({ 
-                    message: 'Invalid Password' });
-              }
-              
-              const token = Helpers.generateToken(result.rows[0].id, result.rows[0].role);
-              return res.status(200).json({
-                message: 'Login successful',
-                data: [result.rows[0].username, result.rows[0].email, result.rows[0].role ],
-                token:  token });
-             })
+                return res.status(404).json({ message: 'No account with this email address' });
+               }
+               if(!Helpers.comparePassword(result.rows[0].password, req.body.password)) {
+                   return res.status(400).json({ 
+                       message: 'Invalid password' });
+                 }
+                 
+                 const token = Helpers.generateToken(result.rows[0].id, result.rows[0].role);
+                  res.status(200).json({
+                   message: 'Login successful',
+                   data: {
+                       email:result.rows[0].email,
+                       role: result.rows[0].role,
+                       token:token 
+                   }
+                })
+             client.end();
+            })
           .catch((err) => {
             res.status(500).json(err.stack);
             client.end();
           });
-
-        }
+    }
 
         
     /**
@@ -140,7 +142,7 @@ class UserController {
      * @returns {object} success or failure
      */
     static getAUserParcel(req, res) {
-        const text = 'SELECT * FROM parcels WHERE id= $1 AND userid = $2';
+        const text = 'SELECT * FROM parcels WHERE userid= $1 AND id = $2';
         const getuser = `SELECT id, role FROM users WHERE id= $1 AND role =$2 `;
         const client = new Client(connectionString);
         client.connect();
@@ -149,7 +151,7 @@ class UserController {
             if (result.rows[0].role === 'user'){
                const client = new Client(connectionString);
                client.connect();
-               client.query(text, [parseInt(req.params.parcelId, 10),req.user.id])
+               client.query(text, [parseInt(req.params.userId, 10), parseInt(req.params.parcelId, 10)])
                 .then((result) => {
                     if (result.rows[0]) {
                             res.status(200).json({
@@ -157,10 +159,9 @@ class UserController {
                                 message: 'Parcel retrieved successfully',
                                 data: result.rows[0]
                             });
-                       
                         }else {
                         res.status(404).json({
-                            message: "No valid entry found for provided ID"
+                            message: 'No valid resource found for provided ID'
                         });
                     }
                     client.end()

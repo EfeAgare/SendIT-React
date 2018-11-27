@@ -16,4 +16,3 @@ if (environment === 'production') setConnectionString = {
     connectionString: process.env.DATABASE_URL, ssl: true };
 else setConnectionString = config[environment].conString;
 export const connectionString = setConnectionString;
-// 
