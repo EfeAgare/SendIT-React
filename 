@@ -1,9 +1,0 @@
-
-# Please enter the commit message for your changes. Lines starting
-# with '#' will be ignored, and an empty message aborts the commit.
-#
-# On branch ft-admin-changeParcelStatus-162099293
-# Changes to be committed:
-#	modified:   server/src/controllers/parcelController.js
-#	modified:   server/src/routes/parcelRoute.js
-#
