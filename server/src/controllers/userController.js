@@ -72,24 +72,19 @@ class UserController {
         client.connect();
         client.query(text, [req.body.email])
         .then((result) => {
-            if (!result.rows[0]) {
-                return res.status(404).json({ message: 'No account with this email address' });
-               }
+            if (!result.rows[0]) {return res.status(404).json({ message: 'No account with this email address' });}
                if(!Helpers.comparePassword(result.rows[0].password, req.body.password)) {
-                   return res.status(400).json({ 
-                       message: 'Invalid password' });
-                 }
-                 
+                   return res.status(400).json({ message: 'Invalid password' });
+                }
                  const token = Helpers.generateToken(result.rows[0].id, result.rows[0].role);
                   res.status(200).json({
                    message: 'Login successful',
                    data: {
                        email:result.rows[0].email,
                        role: result.rows[0].role,
-                       token:token 
-                   }
+                       token:token }
                 })
-             client.end();
+                client.end();
             })
           .catch((err) => {
             res.status(500).json(err.stack);
