@@ -16,7 +16,6 @@ class Auth {
     try{
         const decoded = jwt.verify(token, process.env.SECRET);
         req.user = { id: decoded.userId, role: decoded.role };
-        
         next(); 
        } catch(error){
            return res.status(401).json({

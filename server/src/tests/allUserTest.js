@@ -6,7 +6,6 @@ import app from '../index';
 chai.use(chaiHttp);
 let token;
 
-
 const parcelsOrder = {
     name:'AGare',
     deliveryAddress:'abuja', 
@@ -38,6 +37,17 @@ let register = {
   password: '123agare',
 };
 
+describe('/GET WELCOME PAGE', () => {
+  it('it should display the welcome page', (done) => {
+    chai.request(app)
+      .get('/api/v1/')
+      .end((err, res) => {
+        assert.equal(res.status, 200);
+        assert.equal(res.body, 'Welcome to SendIt \n SendIT is a courier service that helps users deliver parcels to different destinations.');
+        done();
+      })
+  });
+});
 
 describe('/POST Register', () => {
   it('it should Register', (done) => {
@@ -57,7 +67,7 @@ describe('/POST Register', () => {
       .send(register) 
       .end((err, res) => {
         assert.equal(res.status, 409);
-        assert.typeOf(res.body, 'object');
+        assert.equal(res.body.message, 'Email Address Already exists');
         done();
       })
   });
@@ -69,6 +79,18 @@ describe('/POST Register', () => {
       .send(register) 
       .end((err, res) => {
         assert.equal(res.status, 409);
+        assert.typeOf(res.body, 'object');
+        done();
+      })
+  });
+  it('it should not Register if username field is empty', (done) => {
+    register.username = ' ';
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send(register) 
+      .end((err, res) => {
+        assert.equal(res.status, 400);
+        assert.equal(res.body.errors,'username name must be specified.');
         assert.typeOf(res.body, 'object');
         done();
       })
@@ -89,43 +111,59 @@ describe('/POST Register', () => {
 
 
 describe('/POST/auth/login', () => {
-  it('Should login a user', (done) => {
-  chai.request(app)
-  .post('/api/v1/auth/login')
-  .send(login)
-      .end((err, res) => {
-        token = res.body.token
-        assert.equal(res.status, 200);
-        assert.typeOf(res.body.data, 'array');
-        done();
-      });
-  });
-});
-
-
-describe('/GET/users/:userId/parcels', () => {
-  it('Should Fetch all parcel delivery orders by a specific user', (done) => {
+  it('it should not login user with an unexisting email ', (done) => {
     chai.request(app)
-      .get('/api/v1/users/1/parcels')
-      .set('x-access-token',token)
+      .post('/api/v1/auth/login')
+      .send({
+        email: 'yu@email.com',
+        password: '1agare'
+      }) 
       .end((err, res) => {
-        assert.equal(res.status, 200);
-        assert.typeOf(res.body, 'object');
+        assert.equal(res.status, 404);
+        assert.equal(res.body.message, 'No account with this email address');
         done();
       });
   });
 
-  it('Should not Fetch all parcel delivery orders if user id is not integer', (done) => {
+   it('it should not login user if register password is different from inputed password', (done) => {
     chai.request(app)
-      .get('/api/v1/users/1.5/parcels')
-      .set('x-access-token',token)
+      .post('/api/v1/auth/login')
+      .send({
+        email: 'email@email.com',
+        password: '1agare'
+      }) 
       .end((err, res) => {
         assert.equal(res.status, 400);
-        assert.equal(res.body.errors, ' User Id not correctly specifed');
-        assert.typeOf(res.body, 'object');
+        assert.equal(res.body.message, 'Invalid password');
         done();
       });
   });
+
+  it('it should not login user if register password is different from inputed password', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send({
+        email: ' ',
+        password: '2010agare'
+      }) 
+      .end((err, res) => {
+        assert.equal(res.status, 400);
+        assert.equal(res.body.errors, 'Enter a valid email address');
+        done();
+      });
+  });
+
+  it('Should login a user', (done) => {
+    chai.request(app)
+    .post('/api/v1/auth/login')
+    .send(login)
+        .end((err, res) => {
+          token = res.body.data.token;
+          assert.equal(res.status, 200);
+          assert.typeOf(res.body.data, 'object');
+          done();
+        });
+    });
 });
 
 describe('/POST', () => {
@@ -144,7 +182,43 @@ describe('/POST', () => {
 
 
 describe('/POST', () => {
+  it('Should not Create a parcel delivery order if name is empty', (done) => {
+    parcelsOrder1.name = '';
+    chai.request(app)
+      .post('/api/v1/parcels/')
+      .set('x-access-token',token)
+      .send(parcelsOrder1)
+      .end((err, res) => {
+        assert.equal(res.status, 400);
+        assert.typeOf(res.body, 'object');
+        done();
+      });
+  });
+  it('Should not Create a parcel delivery order if no token', (done) => {
+    chai.request(app)
+      .post('/api/v1/parcels/')
+      .send(parcelsOrder1)
+      .end((err, res) => {
+        assert.equal(res.status, 400);
+        assert.typeOf(res.body, 'object');
+        done();
+      });
+  });
+
+  it('Should not Create a parcel delivery order if wrong token', (done) => {
+    chai.request(app)
+      .post('/api/v1/parcels/')
+      .set('x-access-token','token')
+      .send(parcelsOrder1)
+      .end((err, res) => {
+        assert.equal(res.status, 401);
+        assert.typeOf(res.body, 'object');
+        done();
+      });
+  });
+
   it('Should Create a parcel delivery order', (done) => {
+    parcelsOrder1.name = 'knowledge';
     chai.request(app)
       .post('/api/v1/parcels/')
       .set('x-access-token',token)
@@ -157,14 +231,74 @@ describe('/POST', () => {
   });
 });
 
+
+describe('/GET/users/:userId/parcels', () => {
+  it('Should not Fetch all parcel delivery orders if user id is not integer', (done) => {
+    chai.request(app)
+      .get('/api/v1/users/1.5/parcels')
+      .set('x-access-token',token)
+      .end((err, res) => {
+        assert.equal(res.status, 400);
+        assert.equal(res.body.errors, ' User Id not correctly specifed');
+        assert.typeOf(res.body, 'object');
+        done();
+      });
+  });
+
+  it('Should Fetch all parcel delivery orders by a specific user', (done) => {
+    chai.request(app)
+      .get('/api/v1/users/2/parcels')
+      .set('x-access-token',token)
+      .end((err, res) => {
+        assert.equal(res.status, 200);
+        assert.equal(res.body.message,'Parcels retrieved successfully');
+        assert.typeOf(res.body, 'object');
+        done();
+      });
+  });
+});
+
+
 describe('/GET/users/:userId/:parcelId', () => {
   it('Should Fetch a parcel delivery orders by a specific user', (done) => {
     chai.request(app)
-      .get('/api/v1/users/1/1')
+      .get('/api/v1/users/2/1')
       .set('x-access-token',token)
       .end((err, res) => {
         assert.equal(res.status, 200);
         assert.typeOf(res.body, 'object');
+        done();
+      });
+  });
+  it('Should not Fetch a parcel delivery orders by a specific user if resource not found', (done) => {
+    chai.request(app)
+      .get('/api/v1/users/1/1')
+      .set('x-access-token',token)
+      .end((err, res) => {
+        assert.equal(res.status,404);
+        assert.typeOf(res.body, 'object');
+        done();
+      });
+  });
+
+  it('Should not Fetch a parcel delivery order if userId is Wrong ', (done) => {
+    chai.request(app)
+      .get('/api/v1/users/1.6/1')
+      .set('x-access-token',token)
+      .end((err, res) => {
+        assert.equal(res.status, 400);
+        assert.equal(res.body.errors, ' User Id not correctly specifed');
+        done();
+      });
+  });
+
+  it('Should not Fetch a parcel delivery order if ParcelId is Wrong ', (done) => {
+    chai.request(app)
+      .get('/api/v1/users/1/1.5')
+      .set('x-access-token',token)
+      .end((err, res) => {
+        assert.equal(res.status, 400);
+        assert.equal(res.body.errors,  'Parcel Id is Invalid');
         done();
       });
   });
@@ -197,5 +331,17 @@ describe('/PUT', () => {
         assert.typeOf(res.body, 'object');
         done();
       });
+  });
+});
+
+describe('/GET catch all errors', () => {
+  it('it should catch all errors', (done) => {
+    chai.request(app)
+      .get('/api/v1/dfthhyree')
+      .end((err, res) => {
+        assert.equal(res.status, 404);
+        assert.typeOf(res.body, 'object');
+        done();
+      })
   });
 });

@@ -17,8 +17,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(expressvalidator());
 
 app.get('/api/v1/', (req, res) =>{
-    res.status(200).json('Welcome to SendIt \
-    SendIT is a courier service that helps users deliver parcels to different destinations.') 
+    res.status(200).json('Welcome to SendIt \n SendIT is a courier service that helps users deliver parcels to different destinations.') 
 });
 
 app.use('/api/v1/', parcelRoute);
