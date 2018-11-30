@@ -1,81 +1,159 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title> SendIT | Delivering Your Parcel</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
   <link rel="stylesheet" type="text/css" media="screen" href="./css/style.css">
-  <link rel="stylesheet" type="text/css" media="screen" href="./css/order.css">
   <link rel="stylesheet" type="text/css" media="screen" href="./css/profile.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/order.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/allparcel.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Overlock&amp;subset=latin-ext" rel="stylesheet">
+    <script src="./script/index.js"></script>
 </head>
 
 <body>
   <div class="header-clear">
     <header>
-      <a href="index.html" class="logo"> SendIT </a>
-      <div class="header-right">
-        <a href="index.html">HOME</a>
-
-        <a href="signup.html">SIGN OUT</a>
-        <a href="order.html"> ORDER PARCEL</a>
-      </div>
-    </header>
+      <a href="index.html" class="logo"> SendIT</a>
+          <div class="header-right">
+            <div id="myLinks">
+            <a href="index.html" class="active">HOME</a>
+            <a href="order.html"> ORDER PARCEL</a>
+            </div>
+            <a href="javascript:void(0);" class="icon" onclick="indexFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+      </header>
   </div>
-
   <div id="content">
     <aside>
       <div class="aside">
-
         <img src="./Images/man.png" alt="Avatar" class="man-image">
         <p class="my"> Name</p>
         <p class="myname"> User Customer</p>
-
+        <a href="profile.html" class="number-order">Number of Parcels Order
+          <div id="number-order-parcel" class="number-order">45</div>
+        </a>
       </div>
     </aside>
     <main>
-      <div class="profile-details">
-        <div class="details">
-          <img src="./Images/numberOfparcels.png " alt="" class="img">
-          <div>
-            <p>45</p>
-          </div>
-          <a href="allparcel.html">
-            <h4>Number of Parcel Order</h4>
-          </a>
-        </div>
-        <div class="details">
-          <img src="./Images/changeparcels.jpg" alt="" class="img">
-          <a href="allparcel.html">
-            <h4>Change Parcel Details</h4>
-          </a>
-        </div>
-        <div class="details">
-          <img src="./Images/number.jpg" alt="" class="img">
-          <a href="allparcel.html">
-            <h4>Parcel Details</h4>
-          </a>
-        </div>
 
-        <div class="details">
-          <img src="./Images/all_orders.jpg " alt="" class="img">
-          <div>
-            <p>45</p>
+        <div class="wrapper">
+            <h1> Parcel Delivery Order</h1>
+            <div class="container">
+              <ul class="responsive-table">
+                <li class="table-header">
+                  <div class="col col-1">ORDER Date</div>
+                  <div class="col col-2">Order Id</div>
+                  <div class="col col-3">Name</div>
+                  <div class="col col-4">Current Location</div>
+                  <div class="col col-5">Destination</div>
+                  <div class="col col-6">Delivery date</div>
+                  <div class="col col-7">Price(₦)</div>
+                  <div class="col col-8">Status</div>
+                  <div class="col col-9"></div>
+                </li>
+                <li class="table-row">
+                  <div class="col col-1" data-label="Date">23-2-2019</div>
+                  <div class="col col-2" data-label="OrderId">42235</div>
+                  <div class="col col-3" data-label="Customer Name">John Doe</div>
+                  <div class="col col-4" data-label="Pickup"> Lagos </div>
+                  <div class="col col-5" data-label="Dest"> Lagos </div>
+                  <div class="col col-6" data-label="DeliveryDate"> 23-2-2019</div>
+                  <div class="col col-7" data-label="Price">2000</div>
+                  <div class="col col-8" data-label="Status">Transit </div>
+                  <div class="col col-9" data-label="options">
+                      <div class="dropdown">
+                          <div  class="dropbtn">
+                            <div id="myDropdown" class="dropdown-content">
+                                <a href="#"onclick="return confirm('Are you sure you want to cancel this item?');">Cancel Parcel</a>
+                              <a href="userchanges.html">change destination</a>
+                              <a href="parceldetails.html">View Details</a>
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+      
+                </li>
+                <li class="table-row">
+                  <div class="col col-1" data-label="Date">23-2-2019</div>
+                  <div class="col col-2" data-label="OrderId">42235</div>
+                  <div class="col col-3" data-label="Customer Name">John Doe</div>
+                  <div class="col col-4" data-label="Pickup"> Lagos </div>
+                  <div class="col col-5" data-label="Dest"> Lagos </div>
+                  <div class="col col-6" data-label="DeliveryDate"> 23-2-2019</div>
+                  <div class="col col-7" data-label="Price">2000</div>
+                  <div class="col col-8" data-label="Status">Transit </div>
+                  <div class="col col-9" data-label="options">
+                      <div class="dropdown">
+                          <div  class="dropbtn">
+                              <div id="myDropdown" class="dropdown-content">
+                                  <a href="#"onclick="return confirm('Are you sure you want to cancel this item?');">Cancel Parcel</a>
+                                <a href="userchanges.html">change destination</a>
+                                <a href="parceldetails.html">View Details</a>
+                              </div>
+                            </div>
+                        </div>
+                  </div>
+                </li>
+                <li class="table-row">
+                  <div class="col col-1" data-label="Date">23-11-2018</div>
+                  <div class="col col-2" data-label="OrderId">42235</div>
+                  <div class="col col-3" data-label="Customer Name">John Doe</div>
+                  <div class="col col-4" data-label="Pickup"> Lagos </div>
+                  <div class="col col-5" data-label="Dest"> Lagos </div>
+                  <div class="col col-6" data-label="DeliveryDate"> 23-2-2019</div>
+                  <div class="col col-7" data-label="Price">2000</div>
+                  <div class="col col-8" data-label="Status">Transit </div>
+                  <div class="col col-9" data-label="options">
+                      <div class="dropdown">
+                          <div  class="dropbtn">
+                              <div id="myDropdown" class="dropdown-content">
+                                  <a href="#"onclick="return confirm('Are you sure you want to cancel this item?');">Cancel Parcel</a>
+                                <a href="userchanges.html">change destination</a>
+                                <a href="parceldetails.html">View Details</a>
+                              </div>
+                            </div>
+                          </div>  
+                  </div>
+                  
+                </li>
+                <li class="table-row">
+                  <div class="col col-1" data-label="Date">23-12-2018</div>
+                  <div class="col col-2" data-label="OrderId">42235</div>
+                  <div class="col col-3" data-label="Customer Name">John Doe</div>
+                  <div class="col col-4" data-label="Pickup"> Lagos </div>
+                  <div class="col col-5" data-label="Dest"> Lagos </div>
+                  <div class="col col-6" data-label="DeliveryDate"> 23-2-2019</div>
+                  <div class="col col-7" data-label="Price">2000</div>
+                  <div class="col col-8" data-label="Status">Transit</div> 
+                  <div class="col col-9" data-label="options">
+                      <div class="dropdown">
+                          <div  class="dropbtn">
+                              <div id="myDropdown" class="dropdown-content">
+                                  <a href="#"onclick="return confirm('Are you sure you want to cancel this item?');">Cancel Parcel</a>
+                                <a href="userchanges.html">change destination</a>
+                                <a href="parceldetails.html">View Details</a>
+                              </div>
+                            </div>
+                        </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
-          <a href="allparcel.html">
-            <h4>All Ordered Parcels</h4>
-          </a>
-        </div>
-
-      </div>
     </main>
   </div>
-  <footer>
-    <p class="foot">&copy;SendIT.com</p>
-  </footer>
-
+  <div class="order-footer">
+      <p class="foot">&copy;SendIT.com</p>
+    </div>
+    
 </body>
 
 </html>

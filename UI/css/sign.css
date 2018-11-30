@@ -1,122 +1,192 @@
 .input-section {
-  width: 500px;
-  border: 5px solid white;
-  box-shadow: 0 0 5px #bdbdbd;
-  margin: 60px auto;
-  border-radius: 5px;
-  margin-top: 10px;
-}
-
-.text-center {
-  font-size: 35px;
-  display: block;
-  text-align: center;
-  font-family: "Berkshire Swash", cursive;
-}
-
-.signup {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.form-box {
-  padding: 20px 25px 20px 25px;
-}
-
-.input-box {
-  width: 95%;
-  padding: 10px;
-  font-size: 18px;
-  margin: 10px;
-  border-radius: 5px;
-  box-shadow: 0 0 1px 1px #444;
-}
-
-.input-box:focus {
-  outline: none;
-  box-shadow: 0 0 5px 1px #4169e1;
-  color: #191970;
-  font-weight: bold;
-}
-
-label {
-  font-size: 12px;
-  color: #191970;
-}
-
-#account a {
-  color: #42a5f5;
-}
-
-#account {
-  text-align: center;
-}
-
-.input-row {
-  margin: 5px 0 10px 0;
-}
-
-.submit-btn {
-  width: 95%;
-  padding: 10px;
-  font-size: 18px;
-  margin: 10px;
-  margin-top: 30px;
-  text-decoration: none;
-  text-align: center;
-  display: block;
-  cursor: pointer;
-  color: #fff;
-  background-color: #999;
-  border-color: #999;
-  border-radius: 5px;
-}
-
-.submit-btn:hover {
-  background: #bdbdbd;
-}
-
-.submit-btn:focus {
-  outline: none;
-}
-
-@media screen and (max-width: 300px) {
-  header a.logo {
-    width: 100%;
-    height: 30%;
+    width: 360px;
+    float:right;
+    border: 1px solid black;
+    box-shadow: 0 0 5px #bdbdbd;
+    margin-right: 200px;
+    border-radius: 5px;
+    margin-top: 5%;
+    margin-bottom: 15px;
+  }
+  
+  .text-center {
+    font-size: 30px;
+    margin:10px auto;
+    display: block;
     text-align: center;
-    padding: 12px;
-    margin: 10px;
-    text-decoration: none;
-    font-size: 15px;
-    line-height: 20px;
-    border-radius: 4px;
+    font-family: "Berkshire Swash", cursive;
   }
-  header a {
-    width: 90%;
-    float: none;
+  
+  .signup {
+    margin-top: 6%;
+    float:none;
+    margin-left:500px;
+    margin-right:30px;
+  }
+  .form-box {
+    padding: 10px 25px 20px 25px;
+  }
+  
+  .input-box {
+    width: 95%;
+    padding: 10px;
+    font-size: 12px;
+    margin: 5px;
+    border-radius: 3px;
+    box-shadow: 0 0 1px 1px #444;
+    background-color: white;
+  }
+  
+  .input-box:focus {
+    outline: none;
+  }
+  
+    
+  #account a {
+    color: #42a5f5;
+  }
+  
+  #account {
     text-align: center;
-    padding: 12px;
-    margin: 10px;
-    text-decoration: none;
-    font-size: 15px;
-    line-height: 20px;
-    border-radius: 4px;
+    font-size:10px;
+    margin-bottom:1px;
   }
-  .input-section {
-    width: 100%;
+  
+  #account p{
+
+    margin-bottom:1px;
   }
-}
-@media screen and (max-width: 700px) {
-  header a {
-    width: 90%;
-    float: none;
-  }
-  header a.logo {
-    width: 100%;
-    line-height: 40px;
+  
+  .input-row {
+    margin: 5px 0 5px 0;
   }
 
-  .input-section {
-    width: 100%;
-  }
+.signin-text{
+  float:left;
+  margin-left:250px;
+  margin-top:80px;
+  width:30%;
 }
+.signin-text h1{
+  margin-bottom:0%;
+}
+p{
+  margin-bottom:0px;    
+}
+.sign-img:after {
+ content:"";
+ display:block;
+ clear:both;
+}
+  .submit-btn {
+    width: 95%;
+    padding: 10px;
+    font-size: 15px;
+    margin: 5px;
+    margin-top:20px;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    color: #fff;
+    background-color: #4CAF50;
+    border-color: #999;
+    border-radius: 3px;
+  }
+  
+  .submit-btn:hover {
+    background: #bdbdbd;
+  }
+  
+  .submit-btn:focus {
+    outline: none;
+  }
+  @media screen and (max-width: 1098px) {
+   
+  .sign-img{
+    width:60%;
+  }
+    .input-section {
+      width: 70%;
+      margin-right: 20%;
+    }
+    .signup {
+      width:50%;
+      float: none;
+      margin-left: 100px;
+      margin-right: 30px;
+      margin-bottom: 50px;
+  }
+    .signin-text {
+      margin-left: 50px;
+      margin-top: 80px;
+      width: 80%;
+  }
+    footer {
+      position: absolute;
+      bottom: 0;
+      width:100%;
+      padding: 1rem;
+      background-color: #efefef;
+      text-align: center;
+      font-family: "Berkshire Swash", cursive;
+    }
+  }
+
+  @media screen and (max-width: 750px) {
+     
+    .input-section {
+      width: 80%;
+      margin-right: 10%;
+    }
+    .signup {
+      width:60%;
+      float: none;
+      margin-left: 10%;
+      margin-right: 10%;
+      margin-bottom: 50px;
+  }
+    .signin-text {
+      margin-left: 50px;
+      margin-top: 80px;
+      width: 80%;
+  }
+    footer {
+      position: absolute;
+      bottom: 0;
+      width:100%;
+      padding: 1rem;
+      background-color: #efefef;
+      text-align: center;
+      font-family: "Berkshire Swash", cursive;
+    }
+  }
+
+  @media screen and (max-width:450px) {
+    
+    .input-section {
+      width: 70%;
+      margin-right: 10%;
+    }
+    .signup {
+      width:70%;
+      float: none;
+      margin-left: 10%;
+      margin-right: 10%;
+      margin-bottom: 50px;
+  }
+    .signin-text {
+      margin-left: 50px;
+      margin-top: 80px;
+      width: 80%;
+  }
+    footer {
+      position: absolute;
+      bottom: 0;
+      width:100%;
+      padding: 1rem;
+      background-color: #efefef;
+      text-align: center;
+      font-family: "Berkshire Swash", cursive;
+    }
+  }
