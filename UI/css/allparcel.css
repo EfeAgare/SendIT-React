@@ -1,0 +1,189 @@
+.wrapper h1 {
+  margin-top: 10px;
+  margin-left: 4.7%;
+  margin-bottom: 0%;
+}
+
+select {
+  font-size: 0.9rem;
+  padding: 10px 10px;
+  line-height: 12px;
+  border-radius: 5px;
+  border-radius:5px;
+}
+
+.container {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.responsive-table li {
+  border-radius: 3px;
+  padding: 10px 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.responsive-table .table-header {
+  border-bottom: 1px solid #ccc !important;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+.responsive-table .table-row {
+  background-color: #ffffff;
+  border: 0.8px solid #ccc !important;
+  border-radius: 5px;
+  color: #202124;
+}
+.responsive-table .table-row:hover{
+  cursor: pointer;
+  box-shadow: 2px 8px 8px grey;
+}
+.responsive-table .col-1 {
+  flex-basis: 11%;
+}
+.responsive-table .col-2 {
+  flex-basis: 11%;
+}
+.responsive-table .col-3 {
+  flex-basis: 13%;
+}
+.responsive-table .col-4 {
+  flex-basis: 11%;
+}
+.responsive-table .col-5 {
+  flex-basis: 11%;
+}
+.responsive-table .col-6 {
+  flex-basis: 11%;
+}
+.responsive-table .col-7 {
+  flex-basis: 15%;
+}
+.responsive-table .col-8 {
+  flex-basis: 5%;
+}
+.responsive-table .col-9 {
+  flex-basis: 9%;
+}
+
+
+@media screen and (max-width: 1200px) {
+  .responsive-table .table-header {
+    display: none;
+  }
+  .responsive-table li {
+    display: block;
+    width: 75%;
+    float: left;
+    margin:1%;
+  }
+  .responsive-table .col {
+    flex-basis: 100%;
+  }
+  .responsive-table .col {
+    display: flex;
+    padding: 10px 0;
+  }
+  .responsive-table .col:before {
+    color: #6C7A89;
+    padding-right: 10px;
+    content: attr(data-label);
+    flex-basis: 60%;
+    text-align: right;
+  }
+  .dropdown-content {
+    justify-content: flex-start;
+    margin-right:16%;
+    overflow: hidden;
+    display: none;
+    position: absolute;
+    border: 5px solid white;
+    right: 5px;
+    background-color: #fff;
+    color: #000;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    width: 20%;
+}
+ 
+}
+
+@media screen and (max-width: 750px) {
+  .responsive-table .table-header {
+    display: none;
+  }
+  .responsive-table li {
+    display: block;
+    width: 90%;
+    float: none;
+    margin:1%;
+  }
+  .responsive-table .col {
+    flex-basis: 100%;
+  }
+  .responsive-table .col {
+    display: flex;
+    padding: 10px 0;
+  }
+  .responsive-table .col:before {
+    color: #6C7A89;
+    padding-right: 10px;
+    content: attr(data-label);
+    flex-basis: 50%;
+    text-align: right;
+  }
+  .dropdown-content {
+    margin-right: 16%;
+    overflow: hidden;
+    display: none;
+    position: absolute;
+    border: 5px solid white;
+    right: 5px;
+    background-color: #fff;
+    color: #000;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    width: 30%;
+}
+}
+@media screen and (max-width: 500px) {
+  .responsive-table .table-header {
+    display: none;
+  }
+  .responsive-table li {
+    display: block;
+    width: 90%;
+    float: none;
+    margin:1%;
+  }
+  .responsive-table .col {
+    flex-basis: 100%;
+  }
+  .responsive-table .col {
+    display: flex;
+    padding: 10px 0;
+  }
+  .responsive-table .col:before {
+    color: #6C7A89;
+    padding-right: 10px;
+    content: attr(data-label);
+    flex-basis: 50%;
+    text-align: right;
+  }
+  .dropdown-content {
+    margin-right: 1.5%;
+    overflow: hidden;
+    display: none;
+    position: absolute;
+    border: 5px solid white;
+    right: 5px;
+    background-color: #fff;
+    color: #000;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    width: 40%;
+}
+}

@@ -1,46 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>SendIT | Delivering Your Parcel</title>
-        <link rel="stylesheet" type="text/css" media="screen" href="./css/style.css">
-        <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Overlock&amp;subset=latin-ext" rel="stylesheet">
-    </head>
-    <body>
-        <div class="header-clear">
-            <header>
-                <a href="index.html" class="logo"> SendIT</a>
-                <div class="header-right">
-                    <a href="index.html">HOME</a>
-                    <a href="signin.html" class="active">LOGIN</a>
-                    <a href="signup.html">SIGN UP</a>
-                    <a href="order.html"> ORDER PARCEL</a>
-                </div>
-            </header>
-        </div>
-        
-            
-            <div class="input-section">
-                    <p class="text-center">Login</p>
-                <form class="form-box">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SendIT | Delivering Your Parcel</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/style.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/sign.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Overlock&amp;subset=latin-ext" rel="stylesheet">
+</head>
 
-                    <label for="email"></label>
-                    <div class="input-row">
-                        <input type="text" id="email" name="email" class="input-box" placeholder="example@good.com">
-                    </div>
-                    <label for="password"></label>
-                    <div class="input-row">
-                        <input type="password" id="psw" name="pass" class="input-box" placeholder="your password">
-                    </div>
-                    <a href="allparcel.html" class="submit-btn">Login</a>
-                    <p id="account">Forgot password ?</p>
-                    <p id="account"> Don't have an account yet <a href="signup.html">Sign up</a>
-                    </p>
-                </form>
+<body>
+  <div class="header-clear">
+      <header>
+          <a href="index.html" class="logo"> SendIT</a>
+          <div class="header-right">
+            <div id="myLinks">
+            <a href="index.html" class="active">HOME</a>
+            <a href="order.html"> ORDER PARCEL</a>
             </div>
-            <p id="account">  Terms and Conditions Apply  &copy; SendIT </p>
-    </body>
+            <a href="javascript:void(0);" class="icon" onclick="indexFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+      </header>
+  </div>
+  <div class="sign-img">
+  <div class="signin-text">
+      <h1>Giving Customer Confidence</h1>
+      <p>The Best value for Your parcel</p> 
+      <p>Enjoy the unbeatable prices for your orders on almost all products</p> 
+      <p>Enjoy your order</p> 
+  </div>
+  <div class="input-section">
+    <p class="text-center">Login</p>
+    <hr>
+    <form class="form-box">
+      <label for="email"></label>
+      <div class="input-row">
+        <input type="text" id="email" name="email" class="input-box" placeholder="example@good.com">
+      </div>
+      <label for="password"></label>
+      <div class="input-row">
+        <input type="password" id="psw" name="pass" class="input-box" placeholder="your password">
+      </div>
+      <a href="profile.html" class="submit-btn">Login</a>
+      <p id="account">Forgot password ?</p>
+      <p id="account"> Don't have an account yet <a href="signup.html">Sign up</a>
+      </p>
+    </form>
+  </div>
+</div>
+  <footer>
+    <p class="foot">&copy;SendIT.com</p>
+  </footer>
+  <script src="./script/index.js"></script>
+</body>
+
 </html>

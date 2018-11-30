@@ -13,7 +13,6 @@
   <link rel="stylesheet" type="text/css" media="screen" href="./css/allparcel.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Overlock&amp;subset=latin-ext" rel="stylesheet">
-    <script src="./script/index.js"></script>
 </head>
 
 <body>
@@ -22,8 +21,6 @@
       <a href="index.html" class="logo"> SendIT</a>
           <div class="header-right">
             <div id="myLinks">
-            <a href="index.html" class="active">HOME</a>
-            <a href="order.html"> ORDER PARCEL</a>
             </div>
             <a href="javascript:void(0);" class="icon" onclick="indexFunction()">
                 <i class="fa fa-bars"></i>
@@ -33,19 +30,16 @@
   </div>
   <div id="content">
     <aside>
-      <div class="aside">
-        <img src="./Images/man.png" alt="Avatar" class="man-image">
-        <p class="my"> Name</p>
-        <p class="myname"> User Customer</p>
-        <a href="profile.html" class="number-order">Number of Parcels Order
-          <div id="number-order-parcel" class="number-order">45</div>
-        </a>
-      </div>
-    </aside>
+        <div class="aside">
+            <img src="./Images/man.png" alt="Avatar" class="man-image">
+            <p class="my"> Name</p>
+            <p class="myname"> Admin</p>
+          </div>
+        </aside>
     <main>
 
         <div class="wrapper">
-            <h1> Parcel Delivery Order</h1>
+            <h1>Customer's Parcel Delivery Order</h1>
             <div class="container">
               <ul class="responsive-table">
                 <li class="table-header">
@@ -70,16 +64,17 @@
                   <div class="col col-8" data-label="Status">Transit </div>
                   <div class="col col-9" data-label="options">
                       <div class="dropdown">
-                          <div  class="dropbtn">
+                          <div class="dropbtn"></div>
                             <div id="myDropdown" class="dropdown-content">
-                                <a href="#"onclick="return confirm('Are you sure you want to cancel this item?');">Cancel Parcel</a>
-                              <a href="userchanges.html">change destination</a>
-                              <a href="parceldetails.html">View Details</a>
+                            <p> Change</p>
+                            <hr>
+                              <a href="adminchanges.html">Status</a>
+                              <a href="adminchanges.html">Location</a>
+                              <hr>
+                              <a href="#"onclick="return confirm('Are you sure you want to cancel this item?');">Cancel</a>
                             </div>
-                          </div>
-                        </div>
+                          </div>  
                   </div>
-      
                 </li>
                 <li class="table-row">
                   <div class="col col-1" data-label="Date">23-2-2019</div>
@@ -90,16 +85,18 @@
                   <div class="col col-6" data-label="DeliveryDate"> 23-2-2019</div>
                   <div class="col col-7" data-label="Price">2000</div>
                   <div class="col col-8" data-label="Status">Transit </div>
-                  <div class="col col-9" data-label="options">
-                      <div class="dropdown">
-                          <div  class="dropbtn">
-                              <div id="myDropdown" class="dropdown-content">
-                                  <a href="#"onclick="return confirm('Are you sure you want to cancel this item?');">Cancel Parcel</a>
-                                <a href="userchanges.html">change destination</a>
-                                <a href="parceldetails.html">View Details</a>
-                              </div>
-                            </div>
-                        </div>
+                 <div class="col col-9" data-label="options">
+                    <div class="dropdown">
+                        <div  class="dropbtn"></div>
+                          <div id="myDropdown" class="dropdown-content">
+                          <p> Change</p>
+                          <hr>
+                          <a href="adminchanges.html">Status</a>
+                          <a href="adminchanges.html">Location</a>
+                          <hr>
+                          <a href="#"onclick="return confirm('Are you sure you want to cancel this item?');">Cancel</a>
+                          </div>
+                        </div> 
                   </div>
                 </li>
                 <li class="table-row">
@@ -111,18 +108,19 @@
                   <div class="col col-6" data-label="DeliveryDate"> 23-2-2019</div>
                   <div class="col col-7" data-label="Price">2000</div>
                   <div class="col col-8" data-label="Status">Transit </div>
-                  <div class="col col-9" data-label="options">
+                  <div class="col col-9" data-label="options" class="clearfloat">
                       <div class="dropdown">
-                          <div  class="dropbtn">
-                              <div id="myDropdown" class="dropdown-content">
-                                  <a href="#"onclick="return confirm('Are you sure you want to cancel this item?');">Cancel Parcel</a>
-                                <a href="userchanges.html">change destination</a>
-                                <a href="parceldetails.html">View Details</a>
-                              </div>
+                          <div class="dropbtn "></div>
+                            <div id="myDropdown" class="dropdown-content">
+                            <p> Change</p>
+                            <hr>
+                            <a href="adminchanges.html">Status</a>
+                            <a href="adminchanges.html">Location</a>
+                            <hr>
+                            <a href="#"onclick="return confirm('Are you sure you want to cancel this item?');">Cancel</a>
                             </div>
-                          </div>  
+                          </div> 
                   </div>
-                  
                 </li>
                 <li class="table-row">
                   <div class="col col-1" data-label="Date">23-12-2018</div>
@@ -135,14 +133,16 @@
                   <div class="col col-8" data-label="Status">Transit</div> 
                   <div class="col col-9" data-label="options">
                       <div class="dropdown">
-                          <div  class="dropbtn">
-                              <div id="myDropdown" class="dropdown-content">
-                                  <a href="#"onclick="return confirm('Are you sure you want to cancel this item?');">Cancel Parcel</a>
-                                <a href="userchanges.html">change destination</a>
-                                <a href="parceldetails.html">View Details</a>
-                              </div>
+                          <div  class="dropbtn "></div>
+                            <div id="myDropdown" class="dropdown-content">
+                            <p> Change</p>
+                            <hr>
+                            <a href="adminchanges.html">Status</a>
+                            <a href="adminchanges.html">Location</a>
+                            <hr>
+                            <a href="#"onclick="return confirm('Are you sure you want to cancel this item?');">Cancel</a>
                             </div>
-                        </div>
+                          </div> 
                   </div>
                 </li>
               </ul>
@@ -153,7 +153,7 @@
   <div class="order-footer">
       <p class="foot">&copy;SendIT.com</p>
     </div>
-    
+    <script src="./script/index.js"></script>
 </body>
 
 </html>
