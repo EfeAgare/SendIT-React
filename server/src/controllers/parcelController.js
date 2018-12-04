@@ -1,5 +1,7 @@
 import { Client} from 'pg';
-import { connectionString } from '../config/config'
+import { connectionString } from '../config/config';
+import emailLocation from './emailLocation';
+import emailStatus from './emailStatus';
 
 /**
  * This class handles Parcels Order controllers
@@ -37,13 +39,11 @@ class ParcelController {
                             });
                             client.end()
                         });
-
                 } else{
                     res.status(403).json('You have no access')
                 }
             }).catch((err) => {
                 res.status(500).json(err.message)
-
             })
     }
 
@@ -55,16 +55,12 @@ class ParcelController {
      */
     static addParcels(req, res) {
         const getuser = `SELECT role FROM users WHERE role = $1 `;
-        const text = `INSERT INTO parcels(
-                name, deliveryAddress, deliveryPNumber,pickUpAddress,currentLocation, itemDescription,
-                itemWeight, itemQuantity,userId, status)
-                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10) 
-                RETURNING *`
-        const values = [
-            req.body.name,req.body.deliveryAddress,
-            req.body.deliveryPNumber,req.body.pickUpAddress,req.body.pickUpAddress,
-            req.body.itemDescription, req.body.itemWeight,req.body.itemQuantity,
-            req.user.id,'awaiting'];
+        const text = `INSERT INTO parcels(name, deliveryAddress, deliveryPNumber,pickUpAddress,
+                currentLocation, itemDescription,itemWeight, itemQuantity,userId, status)
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10) RETURNING *`
+        const values = [req.body.name,req.body.deliveryAddress,req.body.deliveryPNumber,
+            req.body.pickUpAddress,req.body.pickUpAddress,req.body.itemDescription,
+            req.body.itemWeight,req.body.itemQuantity,req.user.id,'awaiting'];
         const client = new Client(connectionString);
         client.connect();
         client.query(getuser, [req.user.role])
@@ -179,8 +175,7 @@ class ParcelController {
                                         success: 'true',
                                         message: 'Parcel cancelled successfully',
                                         data: result.rows[0]
-                                    });
-                                   
+                                    });    
                                 }).catch((err) => { res.status(500).json({ error: err.message});})
                     }
                                }).catch((err) => {res.status(500).json({ error: err.message});})
@@ -197,15 +192,17 @@ class ParcelController {
      * @param {object} res - User response object
      * * @returns {object} success or failure
      */
-
     static presentLocation(req, res) {
+        let getUserId;
+        let parcelResponse;
         const text = 'SELECT currentLocation FROM parcels WHERE id = $1';
         const textUpdate = `UPDATE parcels SET currentLocation = $1
          WHERE id = $2 returning *`;
-         const getUser = 'SELECT role FROM users WHERE id = $1'
+        const getAdmin = 'SELECT role FROM users WHERE id = $1';
+        const getUserEmail = 'SELECT email FROM users WHERE id = $1';
         const client = new Client(connectionString);
         client.connect();
-        client.query(getUser, [req.user.id])
+        client.query(getAdmin, [req.user.id])
             .then((result) => {
                 if (result.rows[0].role === 'admin'){
                     const client = new Client(connectionString);
@@ -226,12 +223,22 @@ class ParcelController {
                             client.connect();
                             client.query(textUpdate, values)
                                 .then((result) => {
-                                    res.status(200).json({
-                                        success: 'true',
-                                        message: 'Parcel Location Updated successfully',
-                                        data: result.rows[0]
-                                    });
-                                   client.end()
+                                    parcelResponse = result.rows[0];
+                                    getUserId= result.rows[0].userid ; 
+                                    return Promise.all([parcelResponse, getUserId])     
+                                })
+                                .then(([parcelResponse,getUserId])=>{
+                                    const client = new Client(connectionString);
+                                    client.connect();
+                                    client.query(getUserEmail, [getUserId])
+                                    .then((result2) =>{
+                                    emailLocation(result2.rows[0].email)
+                                     res.status(200).json({
+                                            success: 'true',
+                                            message: 'Parcel Location Updated successfully  and Email sent successfully',
+                                            data: parcelResponse
+                                        });
+                                 })
                                 }).catch((err) => { res.status(500).json({ error: err.message});
                                 })
                     }
@@ -249,15 +256,17 @@ class ParcelController {
      * @param {object} res - User response object
      * * @returns {object} success or failure
      */
-
     static changeStatus(req, res) {
+        let getUserId;
+        let parcelResponse;
         const text = 'SELECT status FROM parcels WHERE id = $1';
         const textUpdate = `UPDATE parcels SET status = $1
          WHERE id = $2 returning *`;
-         const getUser = 'SELECT role FROM users WHERE id = $1'
+         const getAdmin = 'SELECT role FROM users WHERE id = $1';
+        const getUserEmail = 'SELECT email FROM users WHERE id = $1';
         const client = new Client(connectionString);
         client.connect();
-        client.query(getUser, [req.user.id])
+        client.query(getAdmin, [req.user.id])
             .then((result) => {
                 if (result.rows[0].role === 'admin'){
                     const client = new Client(connectionString);
@@ -277,17 +286,29 @@ class ParcelController {
                             const client = new Client(connectionString);
                             client.connect();
                             client.query(textUpdate, values)
-                                .then((result1) => {                                    
-                                    res.status(200).json({
+                            .then((result) => {
+                                parcelResponse = result.rows[0];
+                                getUserId= result.rows[0].userid ; 
+                                       return Promise.all([parcelResponse, getUserId])     
+                            })
+                            .then(([parcelResponse,getUserId])=>{
+                                const client = new Client(connectionString);
+                                client.connect();
+                                client.query(getUserEmail, [getUserId])
+                                .then((result2) =>{
+                                emailStatus(result2.rows[0].email)
+                                 res.status(200).json({
                                         success: 'true',
-                                        message: 'Parcel status changed successfully',
-                                        data: result1.rows[0]
+                                        message: 'Parcel Location Updated successfully and Email sent successfully',
+                                        data: parcelResponse
                                     });
-                                    client.end()
-                                }).catch((err) => { res.status(500).json({ error: err.message});})
-                    }client.end()
-                               }).catch((err) => {res.status(500).json({ error: err.message});})
-            }else{
+                             })
+                            }).catch((err) => { res.status(500).json({ error: err.message});
+                            })
+                }
+                client.end()  }).catch((err) => {res.status(500).json({ error: err.message});
+                client.end()      })
+        }else{
                 res.status(403).json({message:'You have no access'})
             }
            
@@ -350,5 +371,4 @@ class ParcelController {
         client.end();})
     }
 }
-
 export default ParcelController;

@@ -1,14 +1,13 @@
 import { Client } from 'pg';
 import 'dotenv/config';
 import { connectionString } from '../config/config';
-import { resolve } from 'path';
-
 
 const createUserTable = `CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username varchar(20) NOT NULL, 
     email varchar(100) NOT NULL, 
     password varchar(100) NOT NULL,
+    registered TIMESTAMP default now(),
     role varchar(7));`;
 const createParcelTable =
 `CREATE TABLE parcels (
@@ -21,6 +20,7 @@ const createParcelTable =
     itemDescription varchar(250) NOT NULL,
     itemWeight REAL NOT NULL,
     itemQuantity INT NOT NULL,
+    registered TIMESTAMP default now(),
     status varchar(20),
     userId INT NOT NULL,
     FOREIGN KEY (userId) REFERENCES users(id) ); `
@@ -32,7 +32,8 @@ const makeQuery = (query) => {
         client.end()
     })
     .catch((err) => {
-        client.end()}
+        client.end()
+       }
     );
 };
 
