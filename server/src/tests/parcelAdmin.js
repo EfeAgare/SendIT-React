@@ -9,8 +9,8 @@ let token;
 
 
 let login = {
-  email: 'knowledgeagare157@gmail.com',
-  password: '2010agare',
+  email: process.env.ADMIN_EMAIL,
+  password: process.env.ADMIN_PASS,
 }
 
 

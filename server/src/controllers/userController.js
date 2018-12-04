@@ -18,23 +18,19 @@ class UserController {
     static userSignUp(req, res) {
         const text = 'SELECT * FROM users WHERE email = $1';
         const hashPassword = Helpers.hashPassword(req.body.password);
-        const textConfirm = `INSERT INTO users(username, email, password, role)
-        VALUES($1, $2, $3, $4)  returning *`;
+        const textConfirm = `INSERT INTO users(username, email, password, role) VALUES($1, $2, $3, $4)  returning *`;
         const values = [
             req.body.username,
             req.body.email,
             hashPassword,
             'user'
         ];
-
         const client = new Client(connectionString);
         client.connect();
         client.query(text, [req.body.email])
             .then((result) => {
                 if (result.rows[0]) {
-                    return res.status(409).json({
-                        message: 'Email Address Already exists'
-                    });
+                    return res.status(409).json({ message: 'Email Address Already exists' });
                 } else {
                     const client = new Client(connectionString);
                     client.connect();
@@ -47,7 +43,8 @@ class UserController {
                                     username:result.rows[0].username,
                                     email:result.rows[0].email,
                                     role: result.rows[0].role,
-                                    token:token
+                                    token:token,
+                                    registered:result.rows[0].registered
                                 }
                             });
                             client.end()
@@ -161,9 +158,7 @@ class UserController {
                     }
                     client.end()
                 }).catch((err) => {
-                    res.status(500).json({
-                        error: err.message
-                    });
+                    res.status(500).json({ error: err.message });
                     client.end()
                 });
             }else{
@@ -173,10 +168,7 @@ class UserController {
             res.status(500).json({
                 error: err.message}); client.end()
         });
-       
-    }
-    
-    
+    }    
 }
 
 export default UserController;

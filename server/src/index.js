@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 import expressvalidator from 'express-validator';
 import parcelRoute from './routes/parcelRoute';
+import adminRoute from './routes/adminRoute';
 import userRoute from './routes/userRoute';
 
 
@@ -21,6 +22,7 @@ app.get('/api/v1/', (req, res) =>{
 });
 
 app.use('/api/v1/', parcelRoute);
+app.use('/api/v1/', adminRoute);
 app.use('/api/v1/', userRoute);
 
 app.use((req, res, next) => {
