@@ -32,5 +32,5 @@ button.addEventListener('click', (event) => {
         }
         else messageText.textContent = res.message;
       })
-      .catch(e => console.log(e))
+      .catch(error => console.log(error))
   });
