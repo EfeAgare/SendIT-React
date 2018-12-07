@@ -33,11 +33,15 @@
     <p class="text-center">Sign Up</p>
     <hr>
     <form class="form-box">
+        <p id = "messageText" ></p>
       <label for="username"></label>
       <div class="input-row">
-        <input type="text" id="email" name="email" class="input-box" placeholder="username">
+        <input type="text" id="username" name="email" class="input-box" placeholder="username">
       </div>
-
+      <label for="lastname"></label>
+      <div class="input-row">
+        <input type="text" id="lastname" name="email" class="input-box" placeholder="lastname">
+      </div>
       <label for="email"></label>
       <div class="input-row">
         <input type="text" id="email" name="email" class="input-box" placeholder="example@good.com">
@@ -46,12 +50,7 @@
       <div class="input-row">
         <input type="password" id="password" name="password" class="input-box" placeholder="Password">
       </div>
-      <label for="password"></label>
-      <div class="input-row">
-        <input type="password" id="password" name="password" class="input-box" placeholder="Confirm password">
-      </div>
-      <a href="profile.html" class="submit-btn">Create Your Account</a>
-
+      <a id="submit-btn" class="submit-btn">Create Your Account</a>
     </form>
   </div>
 </div>
@@ -59,6 +58,7 @@
     <p class="foot">&copy;SendIT.com</p>
   </footer>
   <script src="./script/index.js"></script>
+  <script src="../client/signup.js"></script>
 </body>
 
 </html>

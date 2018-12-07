@@ -4,7 +4,8 @@ import { connectionString } from '../config/config';
 
 const createUserTable = `CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    username varchar(20) NOT NULL, 
+    username varchar(20) NOT NULL,
+    lastname varchar(20) NOT NULL,
     email varchar(100) NOT NULL, 
     password varchar(100) NOT NULL,
     registered TIMESTAMP default now(),
@@ -12,7 +13,7 @@ const createUserTable = `CREATE TABLE users (
 const createParcelTable =
 `CREATE TABLE parcels (
     id SERIAL PRIMARY KEY,
-    name varchar(20) NOT NULL,
+    name varchar(60) NOT NULL,
     deliveryAddress varchar(100) NOT NULL,
     deliveryPNumber varchar(20) NOT NULL,
     pickUpAddress varchar(200) NOT NULL,

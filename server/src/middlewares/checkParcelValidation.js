@@ -2,7 +2,7 @@
 class CheckValidation {
     static createParcelValidation (req, res, next) {
         req.check('name').isLength({ min: 2 }).trim()
-        .withMessage('name must be specified.').matches("^[a-zA-Z]*$")
+        .withMessage('name must be specified.').matches("[a-zA-Z\s]*$")
         .withMessage('name name must be in alphabelt characters.');
         req.check('deliveryAddress', ' deliveryAddress cannot be  empty').trim()
         .not().isEmpty();

@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 let token;
 
 const parcelsOrder = {
-    name:'AGare',
+    name:'AGare Efe',
     deliveryAddress:'abuja', 
     deliveryPNumber: '08066633344',
     pickUpAddress: 'lagos',
@@ -18,7 +18,7 @@ const parcelsOrder = {
 }
 
 const parcelsOrder1 = {
-  name:'succes',
+  name:'succes Efe',
   deliveryAddress:'ikaka', 
   deliveryPNumber: '08054630967',
   pickUpAddress: 'l345',
@@ -33,6 +33,7 @@ let login = {
 }
 let register = {
   username: 'username',
+  lastname:'lastname',
   email: 'email@email.com',
   password: '123agare',
 };
@@ -90,10 +91,22 @@ describe('/POST Register', () => {
       .send(register) 
       .end((err, res) => {
         assert.equal(res.status, 400);
-        assert.equal(res.body.errors,'username name must be specified.');
+        assert.equal(res.body.errors,'username must be specified.');
         assert.typeOf(res.body, 'object');
         done();
       })
+    });
+    
+    it('it should not Register if lastname field is empty', (done) => {
+        register.lastname = ' ';
+        chai.request(app)
+          .post('/api/v1/auth/signup')
+          .send(register) 
+          .end((err, res) => {
+            assert.equal(res.status, 400);
+            assert.typeOf(res.body, 'object');
+            done();
+          })
   });
 
   it('it should not Register if email is not in right format', (done) => {

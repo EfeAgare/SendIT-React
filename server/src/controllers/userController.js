@@ -18,9 +18,10 @@ class UserController {
     static userSignUp(req, res) {
         const text = 'SELECT * FROM users WHERE email = $1';
         const hashPassword = Helpers.hashPassword(req.body.password);
-        const textConfirm = `INSERT INTO users(username, email, password, role) VALUES($1, $2, $3, $4)  returning *`;
+        const textConfirm = `INSERT INTO users(username, lastname, email, password, role) VALUES($1, $2, $3, $4,$5)  returning *`;
         const values = [
             req.body.username,
+            req.body.lastname,
             req.body.email,
             hashPassword,
             'user'
@@ -41,6 +42,7 @@ class UserController {
                                 message: 'user created successfully',
                                 data: {
                                     username:result.rows[0].username,
+                                    lastname:result.rows[0].lastname,
                                     email:result.rows[0].email,
                                     role: result.rows[0].role,
                                     token:token,
