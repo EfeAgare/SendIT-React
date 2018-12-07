@@ -27,9 +27,12 @@ button.addEventListener('click', (event) => {
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('userRole', res.data.role);
           localStorage.setItem('username', res.data.username);
-          if (res.data.role === 'admin') localStorage.setItem('username', 'Admin');
-          window.location.href = 'profile.html';
+          if (res.data.role === 'admin') {localStorage.setItem('username', 'Admin');
+          window.location.href = 'admin.html';
+        }else{
+            window.location.href = 'profile.html';
         }
+    }
         else messageText.textContent = res.message;
       })
       .catch(error => console.log(error))
