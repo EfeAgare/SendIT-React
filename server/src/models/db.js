@@ -4,7 +4,8 @@ import { connectionString } from '../config/config';
 
 const createUserTable = `CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    username varchar(20) NOT NULL, 
+    username varchar(20) NOT NULL,
+    lastname varchar(20) NOT NULL,
     email varchar(100) NOT NULL, 
     password varchar(100) NOT NULL,
     registered TIMESTAMP default now(),
