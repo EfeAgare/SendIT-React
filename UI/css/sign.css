@@ -1,7 +1,8 @@
 #messageText{
-  padding:10px;
-  text-align: center;
-  color:red;
+  margin-top:0px;
+  padding:5px;
+  text-align: justify;
+  color:rgb(255, 80, 80);
 }
 .input-section {
     width: 360px;
@@ -100,7 +101,7 @@ p{
   }
   
   .submit-btn:hover {
-    background: rgb(22, 255, 30);
+    background: #4CAF50;
   }
   
   .submit-btn:focus {
