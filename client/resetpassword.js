@@ -18,6 +18,7 @@ button.addEventListener('click', (event) => {
   })
     .then(res => res.json())
     .then((res) => {
+        console.log(res)
         if (res.message === 'Email sent.')window.location.href = 'signin.html';
         else if (res.message === 'Authentication Failed') {
           messageText.textContent = res.message;
@@ -29,6 +30,7 @@ button.addEventListener('click', (event) => {
          }
       })
       .catch(error => {
+        console.log(error)
           messageText.textContent = error + '' +'server error'
       })
       });
