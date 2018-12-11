@@ -19,11 +19,13 @@ button.addEventListener('click', (event) => {
     headers: { 'content-type': 'application/json', 'x-access-token': token },
     body: JSON.stringify(inputData)
   })
-    .then(response => response.json())
-    .then((response) => {
-      messageText.textContent = response.message;
-      if (response.message === 'Authentication Failed') {
-        window.location.href = 'signin.html';
-      } 
+    .then(res => res.json())
+    .then((res) => {
+     window.location.href = 'signin.html';
+      if (res.message === 'Authentication Failed') {
+        messageText.textContent = res.message;
+      } else{
+        messageText.textContent = res.message;
+      }
     });
 });

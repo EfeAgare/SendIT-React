@@ -40,14 +40,14 @@ class PasswordController {
                         to: req.body.email,
                         subject: 'Forget Password @ SENDIT.com',
                         html: `<h1>Forgot your Password</h1>
-                        <p>Dear ${result.rows[0].lastname}</p><p> We\'ve  received a request to reset the password for this email address.</p><p>To reset your password please click on this link or copy and paste this URL into your browser (link expires in 24 hours)<a href='https://efe-sendit.herokuapp.com/api/v1/users/auth/resetpassword/resetpassword.html?token=${token}'> Click to reset Password </a></p><p>If you did not request to reset your password, please ignore this email. However, it may mean someone is trying to log in to your account</p>`,
+                        <p>Dear ${result.rows[0].lastname}</p><p> We\'ve  received a request to reset the password for this email address.</p><p>To reset your password please click on this link or copy and paste this URL into your browser (link expires in 24 hours)<a href='https://efeagare.github.io/SendIT/UI/resetpassword.html?token=${token}'> Click to reset Password </a></p><p>If you did not request to reset your password, please ignore this email. However, it may mean someone is trying to log in to your account</p>`,
                     };
                     transport.sendMail(mailOptions, (error) => {
                         if (error) {
                             return res.status(500).json({message: 'Email failed to send',errors:error.code});
                         }
                         res.status(200).json({
-                            message: 'Kindly check your email for further instructions',
+                            message: 'Email Send. Kindly check your email for further instructions',
                             token: token
                         });
                     });
@@ -72,14 +72,15 @@ class PasswordController {
                         to: result.rows[0].email,
                         subject: 'Password Reset Successful @ SENDIT.com',
                         html: `<h1>Reset Password Successfully</h1>
-                        <p>Dear ${result.rows[0].lastname}</p><p> Password reset Successfully. You can now login</p>`,
+                        <p>Dear ${result.rows[0].lastname}</p><p> Password reset Successfully. You can now login</p>
+                        <a href='https://efeagare.github.io/SendIT/UI/signin.html'>`,
                     };
                     transport.sendMail(mailOptions, (error) => {
                         if (error) {
                             return res.status(500).json({message: 'Email failed to send',errors:error.code});
                         }
                         res.status(200).json({
-                            message: 'Kindly check your email for further instructions'
+                            message: 'Eamil sent. Kindly check your email for further instructions'
                         });
                     });
                     client.end();
