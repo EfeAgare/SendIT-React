@@ -59,7 +59,7 @@ describe('/PUT/ :parcelId/status', () => {
     chai.request(app)
       .put('/api/v1/parcels/2/status')
       .set('x-access-token',token)
-      .send({status:'tansit'}, user.email)
+      .send({status:'tansit'})
       .end((err, res) => {
         assert.equal(res.status, 200);
         assert.typeOf(res.body, 'object');
@@ -97,7 +97,7 @@ describe('/PUT/ parcels/:parcelId/presentLocation' , () => {
     chai.request(app)
       .put('/api/v1/parcels/2/presentLocation')
       .set('x-access-token',token)
-      .send({currentLocation:'Enugu'}, user.email)
+      .send({currentLocation:'Enugu'})
        .end((err, res) => {
         assert.equal(res.status, 200);
         assert.typeOf(res.body, 'object');
