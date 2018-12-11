@@ -1,16 +1,14 @@
 const button = document.getElementById('submit-btn');
-const password = document.getElementById('password');
-const confirmPassword = document.getElementById('password1');
 const messageText = document.querySelector('#messageText');
 const token = window.location.search.replace('?token=','');
 
 button.addEventListener('click', (event) => {
- event.preventDefault();
-  if (password.value !== confirmPassword.value) {
-    messageText.textContent = 'Inputed Password does not Match';
-  }
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('password1');
+ 
   const inputData = {
-    password: password.value
+    password: password.value,
+    confirm: confirmPassword.value
   };
   event.preventDefault();
   fetch(`https://efe-sendit.herokuapp.com/api/v1/users/auth/resetpassword`, {
@@ -20,12 +18,15 @@ button.addEventListener('click', (event) => {
   })
     .then(res => res.json())
     .then((res) => {
-            if (res.message === 'Email sent.')window.location.href = 'signin.html';
-            else if (res.message === 'Authentication Failed') {
-              messageText.textContent = res.message;
+        if (res.message === 'Email sent.')window.location.href = 'signin.html';
+        else if (res.message === 'Authentication Failed') {
+          messageText.textContent = res.message;
+        }
+        else if (res.message === 'Password does not match') {
+            messageText.textContent = res.message;
         }else {
               messageText.textContent =  res.message;
-          }
+         }
       })
       .catch(error => {
           messageText.textContent = error + '' +'server error'

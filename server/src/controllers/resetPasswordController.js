@@ -56,7 +56,7 @@ class PasswordController {
     }
 
     static confirmPasswordReset(req, res) {
-        if (req.body.password === req.body.confirmPassword) {
+        if (req.body.password === req.body.confirm) {
             const hashPassword = Helpers.hashPassword(req.body.password);
             const text = 'UPDATE users SET password=$1 WHERE id=$2  RETURNING *'
             const values = [hashPassword, req.user.id]
