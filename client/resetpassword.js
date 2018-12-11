@@ -5,6 +5,10 @@ const messageText = document.querySelector('#messageText');
 const token = window.location.search.replace('?token=','');
 
 button.addEventListener('click', (event) => {
+ event.preventDefault();
+  if (password.value !== confirmPassword.value) {
+    messageText.textContent = 'Inputed Password does not Match';
+  }
   const inputData = {
     password: password.value
   };
@@ -16,13 +20,9 @@ button.addEventListener('click', (event) => {
   })
     .then(res => res.json())
     .then((res) => {
-            if (res.status === 200) {
-             window.location.href = 'signin.html';
-            }else if (res.message === 'Authentication Failed') {
+            if (res.message === 'Email sent.')window.location.href = 'signin.html';
+            else if (res.message === 'Authentication Failed') {
               messageText.textContent = res.message;
-        }
-        else if (res.message === 'Password does not match') {
-            messageText.textContent = res.message;
         }else {
               messageText.textContent =  res.message;
           }
