@@ -175,17 +175,7 @@ body {
     clear: both;
     display: block;
   }
-  footer {
-    position: absolute;
-    bottom:0;
-    width: 100%;
-    padding: 1rem;
-    background-color: #efefef;
-    color: black;
-    border-radius: 0;
-    text-align: center;
-    font-family: "Berkshire Swash", cursive;
-  }
+ 
   .order-footer{
     position: absolute;
     width: 100%;
@@ -265,16 +255,6 @@ body {
       overflow: hidden;
     }
   
-    footer {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      padding: 1rem;
-      background-color: #efefef;
-      text-align: center;
-      font-family: "Berkshire Swash", cursive;
-    }
   }
   
   @media screen and (max-width: 750px) {
@@ -402,17 +382,6 @@ body {
       height: 150px;
     }    
   
-    footer {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      padding: 1rem;
-      background-color: #efefef;
-      text-align: center;
-      font-family: "Berkshire Swash", cursive;
-      line-height: 25px;
-    }
   }
   @media screen and (max-width: 450px) {
     header a.logo {
@@ -516,16 +485,6 @@ body {
       height: 150px;
     }    
   
-    footer {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      padding: 1rem;
-      background-color: #efefef;
-      text-align: center;
-      font-family: "Berkshire Swash", cursive;
-      line-height: 25px;
-    }
+
   }
   

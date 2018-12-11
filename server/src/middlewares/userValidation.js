@@ -23,5 +23,22 @@ class UserValidation {
         if (errors) {
             return res.status(400).json({errors: errors[0].msg});}next();
     }
+
+    static resetEmail(req, res, next) {
+        req.check('email','Enter a valid email address').trim().isEmail();
+        const errors = req.validationErrors();
+        if (errors) {
+            return res.status(400).json({errors: errors[0].msg});}next();
+    }
+    static resetPassword (req, res, next) {
+        req.check('password').matches( /^(?=.*\d).{4,10}$/)
+        .withMessage('Password must be between 4 and 10 digits long and include at least one numeric digit');
+        req.check('confirmPassword').matches( /^(?=.*\d).{4,10}$/)
+        .withMessage('Password must be between 4 and 10 digits long and include at least one numeric digit');
+        const errors = req.validationErrors();
+        if (errors) {
+            return res.status(400).json({errors: errors[0].msg});}next();
+    }
+
 }
 export default UserValidation;

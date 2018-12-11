@@ -149,8 +149,7 @@ class AdminController {
         let getUserId;
         let parcelResponse;
         const text = 'SELECT status FROM parcels WHERE id = $1';
-        const textUpdate = `UPDATE parcels SET status = $1
-         WHERE id = $2 returning *`;
+        const textUpdate = `UPDATE parcels SET status = $1 WHERE id = $2 returning *`;
          const getAdmin = 'SELECT role FROM users WHERE id = $1';
         const getUserEmail = 'SELECT email FROM users WHERE id = $1';
         const client = new Client(connectionString);

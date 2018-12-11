@@ -38,6 +38,7 @@
     <p class="text-center">Login</p>
     <hr>
     <form class="form-box">
+        <p id = "messageText" ></p>
       <label for="email"></label>
       <div class="input-row">
         <input type="text" id="email" name="email" class="input-box" placeholder="example@good.com">
@@ -46,17 +47,34 @@
       <div class="input-row">
         <input type="password" id="psw" name="pass" class="input-box" placeholder="your password">
       </div>
-      <a href="profile.html" class="submit-btn">Login</a>
-      <p id="account">Forgot password ?</p>
+      <a href="profile.html" class="submit-btn" id="submit-btn">Login</a>
+      <a href="" id="forgot-pswd"> Forgot your password ?</a>
       <p id="account"> Don't have an account yet <a href="signup.html">Sign up</a>
       </p>
     </form>
   </div>
 </div>
-  <footer>
+<div class="modal">
+    <div class="modal-content clearfix"> 
+        <div class="close">&times;</div>
+        <h4>Password Recovery</h4> 
+  <p>Provide your registered email address to reset your Password</p>
+  <p>We will send you a link to reset your password. You may also need to check your spam folder (link expires in 24 hrs)</p>
+      <div class="email-container">
+        <form>
+         &nbsp;<i class="fa fa-user"></i>&nbsp; <input type="email" id="modal-email" placeholder="Email" autofocus>
+      </div>
+      
+      <p id = "modal-messageText" class="text-center" ></p>
+      <button id="modal-btn" type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+<footer>
     <p class="foot">&copy;SendIT.com</p>
   </footer>
   <script src="./script/index.js"></script>
+  <script src="../client/login.js"></script>
 </body>
 
 </html>

@@ -2,11 +2,10 @@ import chai, {assert} from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../index';
 
-
 chai.use(chaiHttp);
 let token;
 
-
+let user = {email:'email@email.com'}
 
 let login = {
   email: process.env.ADMIN_EMAIL,
@@ -63,6 +62,29 @@ describe('/PUT/ :parcelId/status', () => {
       .send({status:'tansit'})
       .end((err, res) => {
         assert.equal(res.status, 200);
+        assert.typeOf(res.body, 'object');
+        done();
+      });
+  });
+  
+  it('Admin cannnot change the status of a parcel if delivered', (done) => {
+    chai.request(app)
+      .put('/api/v1/parcels/1/status')
+      .set('x-access-token',token)
+      .send({status:'delivered'})
+      .end((err, res) => {
+        assert.equal(res.status, 400);
+        assert.typeOf(res.body, 'object');
+        done();
+      });
+  });
+  it('Admin cannnot change the status of a parcel if cancelled', (done) => {
+    chai.request(app)
+      .put('/api/v1/parcels/1/status')
+      .set('x-access-token',token)
+      .send({status:'cancelled'})
+      .end((err, res) => {
+        assert.equal(res.status, 400);
         assert.typeOf(res.body, 'object');
         done();
       });
