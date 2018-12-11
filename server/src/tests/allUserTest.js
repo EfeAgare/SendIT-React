@@ -2,7 +2,6 @@ import chai, {assert} from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../index';
 
-
 chai.use(chaiHttp);
 let token;
 
@@ -187,7 +186,9 @@ describe('/POST', () => {
       .send(parcelsOrder)
       .end((err, res) => {
         assert.equal(res.status, 201);
+        assert.equal(res.body.message, 'Parcels created successfully');
         assert.typeOf(res.body, 'object');
+        assert.typeOf(res.body.data, 'object');
         done();
       });
   });
