@@ -77,7 +77,7 @@ describe('/PUT', () => {
           .put('/api/v1/users/auth/resetpassword')
           .send({
               password:'abcd', 
-              confirmPassword:'abcd'})
+              confirm:'abcd'})
           .set('x-access-token',token)
            .end((err, res) => {
             assert.equal(res.status, 400);
