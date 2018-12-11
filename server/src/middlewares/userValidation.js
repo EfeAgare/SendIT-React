@@ -33,7 +33,7 @@ class UserValidation {
     static resetPassword (req, res, next) {
         req.check('password').matches( /^(?=.*\d).{4,10}$/)
         .withMessage('Password must be between 4 and 10 digits long and include at least one numeric digit');
-        req.check('confirm').matches( /^(?=.*\d).{4,10}$/)
+        req.check('confirmPassword').matches( /^(?=.*\d).{4,10}$/)
         .withMessage('Password must be between 4 and 10 digits long and include at least one numeric digit');
         const errors = req.validationErrors();
         if (errors) {

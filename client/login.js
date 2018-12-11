@@ -24,12 +24,12 @@ window.addEventListener('click', (event) => {
   if (event.target.className === 'modal') modal.style.display = 'none';
 });
 modalBtn.addEventListener('click', (event) => {
+  event.preventDefault();
   modalMessageText.style.color = 'yellow' ;
   modalMessageText.textContent = 'Processing..';
   const inputData = {
     email: modalEmailInput.value,
   };
-  event.preventDefault();
   fetch(`https://efe-sendit.herokuapp.com/api/v1/users/auth/resetpassword`, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },

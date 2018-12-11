@@ -34,5 +34,3 @@ button.addEventListener('click', (event) => {
           messageText.textContent = error + '' +'server error'
       })
       });
-        
-

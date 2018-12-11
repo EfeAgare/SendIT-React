@@ -47,7 +47,7 @@ class PasswordController {
                             return res.status(500).json({message: 'Email failed to send',errors:error.code});
                         }
                         res.status(200).json({
-                            message: 'Email Send. Kindly check your email for further instructions',
+                            message: 'Kindly check your email for further instructions',
                             token: token
                         });
                     });
@@ -56,7 +56,7 @@ class PasswordController {
     }
 
     static confirmPasswordReset(req, res) {
-        if (req.body.password === req.body.confirm) {
+        if (req.body.password === req.body.confirmPassword) {
             const hashPassword = Helpers.hashPassword(req.body.password);
             const text = 'UPDATE users SET password=$1 WHERE id=$2  RETURNING *'
             const values = [hashPassword, req.user.id]
@@ -73,7 +73,7 @@ class PasswordController {
                         subject: 'Password Reset Successful @ SENDIT.com',
                         html: `<h1>Reset Password Successfully</h1>
                         <p>Dear ${result.rows[0].lastname}</p><p> Password reset Successfully. You can now login</p>
-                        <a href='https://efeagare.github.io/SendIT/UI/signin.html'>`,
+                        <p><a href='https://efeagare.github.io/SendIT/UI/signin.html'> Click to Login </a></p>`,
                     };
                     transport.sendMail(mailOptions, (error) => {
                         if (error) {
