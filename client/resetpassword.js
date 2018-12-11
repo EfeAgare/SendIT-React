@@ -21,8 +21,9 @@ button.addEventListener('click', (event) => {
   })
     .then(res => res.json())
     .then((res) => {
-     window.location.href = 'signin.html';
-      if (res.message === 'Authentication Failed') {
+        if (res.message === 'Eamil sent.'){
+            window.location.href="signin.html"
+        }else if (res.message === 'Authentication Failed') {
         messageText.textContent = res.message;
       } else{
         messageText.textContent = res.message;
