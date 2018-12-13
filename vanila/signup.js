@@ -30,6 +30,7 @@ button.addEventListener('click', (event) => {
                 localStorage.setItem('token', res.data.token);
                 localStorage.setItem('userRole', res.data.role);
                 localStorage.setItem('username', res.data.username);
+                localStorage.setItem('userid', res.data.id)
                 window.location.href = 'profile.html';         
             } else if (res.message === 'Email Address Already exists') {
                 messageText.textContent = res.message;

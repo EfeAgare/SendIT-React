@@ -31,7 +31,17 @@
   <div id="content">
     <aside>
         <div class="aside">
-            <img src="./Images/man.png" alt="Avatar" class="man-image">
+            <div class="imagerow">
+                <div class="small-12 medium-2 large-2 columns">
+                  <div class="circle">
+                    <img class="profile-pic man-image" src="https://cdn.cutestpaw.com/wp-content/uploads/2012/07/l-Wittle-puppy-yawning.jpg">
+                  </div>
+                  <div class="p-image">
+                    <i class="fa fa-camera upload-button"></i>
+                     <input class="file-upload" type="file" accept="image/*"/>
+                  </div>
+               </div>
+             </div>
             <p class="my"> Name</p>
             <p class="myname"> Admin</p>
           </div>
@@ -41,110 +51,15 @@
         <div class="wrapper">
             <h1>Customer's Parcel Delivery Order</h1>
             <div class="container">
+                <div class="loader"></div>
               <ul class="responsive-table">
-                <li class="table-header">
-                  <div class="col col-1">ORDER Date</div>
-                  <div class="col col-2">Order Id</div>
-                  <div class="col col-3">Name</div>
-                  <div class="col col-4">Current Location</div>
-                  <div class="col col-5">Destination</div>
-                  <div class="col col-6">Delivery date</div>
-                  <div class="col col-7">Price(₦)</div>
-                  <div class="col col-8">Status</div>
-                  <div class="col col-9"></div>
-                </li>
-                <li class="table-row">
-                  <div class="col col-1" data-label="Date">23-2-2019</div>
-                  <div class="col col-2" data-label="OrderId">42235</div>
-                  <div class="col col-3" data-label="Customer Name">John Doe</div>
-                  <div class="col col-4" data-label="Pickup"> Lagos </div>
-                  <div class="col col-5" data-label="Dest"> Lagos </div>
-                  <div class="col col-6" data-label="DeliveryDate"> 23-2-2019</div>
-                  <div class="col col-7" data-label="Price">2000</div>
-                  <div class="col col-8" data-label="Status">Transit </div>
-                  <div class="col col-9" data-label="options">
-                      <div class="dropdown">
-                          <div class="dropbtn"></div>
-                            <div id="myDropdown" class="dropdown-content">
-                            <p> Change</p>
-                            <hr>
-                              <a href="adminchanges.html">Status</a>
-                              <a href="adminchanges.html">Location</a>
-                              <hr>
-                              <a href="#"onclick="return confirm('Are you sure you want to cancel this item?');">Cancel</a>
-                            </div>
-                          </div>  
-                  </div>
-                </li>
-                <li class="table-row">
-                  <div class="col col-1" data-label="Date">23-2-2019</div>
-                  <div class="col col-2" data-label="OrderId">42235</div>
-                  <div class="col col-3" data-label="Customer Name">John Doe</div>
-                  <div class="col col-4" data-label="Pickup"> Lagos </div>
-                  <div class="col col-5" data-label="Dest"> Lagos </div>
-                  <div class="col col-6" data-label="DeliveryDate"> 23-2-2019</div>
-                  <div class="col col-7" data-label="Price">2000</div>
-                  <div class="col col-8" data-label="Status">Transit </div>
-                 <div class="col col-9" data-label="options">
-                    <div class="dropdown">
-                        <div  class="dropbtn"></div>
-                          <div id="myDropdown" class="dropdown-content">
-                          <p> Change</p>
-                          <hr>
-                          <a href="adminchanges.html">Status</a>
-                          <a href="adminchanges.html">Location</a>
-                          <hr>
-                          <a href="#"onclick="return confirm('Are you sure you want to cancel this item?');">Cancel</a>
-                          </div>
-                        </div> 
-                  </div>
-                </li>
-                <li class="table-row">
-                  <div class="col col-1" data-label="Date">23-11-2018</div>
-                  <div class="col col-2" data-label="OrderId">42235</div>
-                  <div class="col col-3" data-label="Customer Name">John Doe</div>
-                  <div class="col col-4" data-label="Pickup"> Lagos </div>
-                  <div class="col col-5" data-label="Dest"> Lagos </div>
-                  <div class="col col-6" data-label="DeliveryDate"> 23-2-2019</div>
-                  <div class="col col-7" data-label="Price">2000</div>
-                  <div class="col col-8" data-label="Status">Transit </div>
-                  <div class="col col-9" data-label="options" class="clearfloat">
-                      <div class="dropdown">
-                          <div class="dropbtn "></div>
-                            <div id="myDropdown" class="dropdown-content">
-                            <p> Change</p>
-                            <hr>
-                            <a href="adminchanges.html">Status</a>
-                            <a href="adminchanges.html">Location</a>
-                            <hr>
-                            <a href="#"onclick="return confirm('Are you sure you want to cancel this item?');">Cancel</a>
-                            </div>
-                          </div> 
-                  </div>
-                </li>
-                <li class="table-row">
-                  <div class="col col-1" data-label="Date">23-12-2018</div>
-                  <div class="col col-2" data-label="OrderId">42235</div>
-                  <div class="col col-3" data-label="Customer Name">John Doe</div>
-                  <div class="col col-4" data-label="Pickup"> Lagos </div>
-                  <div class="col col-5" data-label="Dest"> Lagos </div>
-                  <div class="col col-6" data-label="DeliveryDate"> 23-2-2019</div>
-                  <div class="col col-7" data-label="Price">2000</div>
-                  <div class="col col-8" data-label="Status">Transit</div> 
-                  <div class="col col-9" data-label="options">
-                      <div class="dropdown">
-                          <div  class="dropbtn "></div>
-                            <div id="myDropdown" class="dropdown-content">
-                            <p> Change</p>
-                            <hr>
-                            <a href="adminchanges.html">Status</a>
-                            <a href="adminchanges.html">Location</a>
-                            <hr>
-                            <a href="#"onclick="return confirm('Are you sure you want to cancel this item?');">Cancel</a>
-                            </div>
-                          </div> 
-                  </div>
-                </li>
+              </ul>
+            </div>
+          </div>
+          <p class="text-center" id="page-num"></p>
+    <div class="pagination">
+      <button disabled><i class="fa fa-arrow-circle-left"></i> Prev</button>
+      <button>Next <i class="fa fa-arrow-circle-right"></i> </button>
               </ul>
             </div>
           </div>

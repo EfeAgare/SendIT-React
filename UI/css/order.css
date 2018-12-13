@@ -38,6 +38,12 @@
     display:block;
     clear:both;
   }
+  #messageText{
+    margin-top:0px;
+    padding:5px;
+    text-align: justify;
+    color:rgb(255, 80, 80);
+  }
   
   .order-submit-btn {
     display: flex;
@@ -49,6 +55,45 @@
 .order-title{
   text-align:left;
   margin-left:220px;
+}
+.profile-pic {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.imagerow{
+  display:flex;
+ justify-content: center;
+}
+.file-upload {
+  display: none;
+}
+.circle {
+  border-radius: 1000px !important;
+  overflow: hidden;
+  width: 128px;
+  height: 128px;
+  border: 8px solid rgba(255, 255, 255, 0.7);
+  margin-top:40px;
+}
+.p-image {
+color: white;
+transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+
+}
+.my{
+  margin-top:40px;
+}
+.p-image:hover {
+transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+}
+.upload-button {
+font-size: 1.2em;
+}
+
+.upload-button:hover {
+transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+color: #999;
 }
 .form-container {
   margin: 5% 5%;
@@ -205,6 +250,40 @@
     text-align: center;
     font-family: "Berkshire Swash", cursive;
   }
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5%;
+  }
+  .pagination button {
+    background-color: grey;
+    color:black;
+    border: solid 2px slateblue;
+    padding: 1px 5px;
+    visibility: hidden;
+    margin: 8px 3px;
+    border-radius: 10px;
+  }
+  .loader {
+    margin: 20px auto;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #15437F;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation-duration: 5000ms;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
   
   @media screen and (max-width: 950px) {
     #content {

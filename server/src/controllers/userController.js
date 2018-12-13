@@ -41,6 +41,7 @@ class UserController {
                             res.status(201).json({
                                 message: 'user created successfully',
                                 data: {
+                                    id:result.rows[0].id,
                                     username:result.rows[0].username,
                                     lastname:result.rows[0].lastname,
                                     email:result.rows[0].email,
@@ -79,6 +80,8 @@ class UserController {
                   res.status(200).json({
                    message: 'Login successful',
                    data: {
+                       id: result.rows[0].id,
+                       name:result.rows[0].username,
                        email:result.rows[0].email,
                        role: result.rows[0].role,
                        token:token }
@@ -113,6 +116,7 @@ class UserController {
                      res.status(200).json({
                     success: 'true',
                     message: 'Parcels retrieved successfully',
+                    parcelCount:result.rows.length,
                     data: result.rows
                     });
                 client.end()

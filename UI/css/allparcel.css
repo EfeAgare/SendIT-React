@@ -42,32 +42,30 @@ select {
   box-shadow: 2px 8px 8px grey;
 }
 .responsive-table .col-1 {
-  flex-basis: 11%;
+  flex-basis: 10%;
 }
 .responsive-table .col-2 {
-  flex-basis: 11%;
+  flex-basis: 12%;
 }
 .responsive-table .col-3 {
-  flex-basis: 13%;
+  flex-basis: 20%;
 }
 .responsive-table .col-4 {
-  flex-basis: 11%;
+  flex-basis: 20%;
 }
 .responsive-table .col-5 {
-  flex-basis: 11%;
+  flex-basis: 12%;
 }
 .responsive-table .col-6 {
-  flex-basis: 11%;
+  flex-basis: 10%;
 }
 .responsive-table .col-7 {
-  flex-basis: 15%;
+  flex-basis: 10%;
 }
 .responsive-table .col-8 {
   flex-basis: 5%;
 }
-.responsive-table .col-9 {
-  flex-basis: 9%;
-}
+
 
 
 @media screen and (max-width: 1200px) {
