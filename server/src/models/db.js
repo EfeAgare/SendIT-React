@@ -9,6 +9,7 @@ const createUserTable = `CREATE TABLE users (
     email varchar(100) NOT NULL, 
     password varchar(100) NOT NULL,
     registered TIMESTAMP default now(),
+    image varchar(300),
     role varchar(7));`;
 const createParcelTable =
 `CREATE TABLE parcels (

@@ -67,8 +67,9 @@ button.addEventListener('click', (event) => {
     .then((res) => {
       if (res.message === 'Login successful') {
         localStorage.setItem('token', res.data.token);
+        localStorage.setItem('userid', res.data.id);
         localStorage.setItem('userRole', res.data.role);
-        localStorage.setItem('username', res.data.username);
+        localStorage.setItem('username', res.data.name);
         if (res.data.role === 'admin') {window.location.href = 'admin.html'}
         else{ window.location.href = 'profile.html'};
       }else if (res.message === 'No account with this email address') {
