@@ -1,72 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>SendIT | Delivering Your Parcel</title>
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" media="screen" href="./css/style.css">
-  <link rel="stylesheet" type="text/css" media="screen" href="./css/order.css">
-  <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Overlock&amp;subset=latin-ext" rel="stylesheet">
-</head>
 
-<body>
-  <div class="header-clear">
-    <header>
-      <a href="index.html" class="logo"> SendIT</a>
-      <div class="header-right">
-      </div>
-    </header>
-  </div>
-  <div id="content">
-    <main>
-      <h3 class="order-title"> Order Details</h3>
-      <div class="form-container">
-      <div class="container">
-          <form>
-            <ul class="flex-outer">
-              <li>
-                <label for="name">Name: </label>
-                <div id="name">Johnson</div> </li> <li>
-                <label for="delivery-address">Delivery Address: </label>
-                <div id="delivery-address"> 4 Oshodi apapa lane</div>
-              </li>
-              <li>
-                  <label for="phone-number">Phone Number: </label> <div id="phone-number"> 08184943967</div>
-                </li>
-              <li>
-                <label for="item-name">Item Name:</label>
-                <div id="item-name"> Dell</div>
-              </li>
-              <li>
-                  <label for="item-description">Item Description:</label>
-                  <div id="item-description"> flat black dell</div>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SendIT | Delivering Your Parcel</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/order.css">
+    <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Overlock&amp;subset=latin-ext" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="header-clear">
+      <header>
+        <a href="index.html" class="logo"> SendIT</a>
+        <div class="header-right">
+        </div>
+      </header>
+    </div>
+    <div id="content">
+      <main>
+        <h3 class="order-title"> Order Details</h3>
+        <div class="form-container">
+          <div class="container">
+              <div class="loader"></div>
+              <div class="messageText"></div>
+            <form>
+              <ul class="flex-outer">
+                <li>
+                  <label for="name">Name: </label>
+                  <div id="name"></div>
                 </li>
                 <li>
-                    <label for="item-weight">Item Weight (Kg):</label>
-                    <div id="item-weight"> 4</div>
-                  </li>
-                  <li>
-                      <label for="item-quantity">Item Quantity:</label>
-                      <div id="item-quantity"> 4</div>
-                    </li>
-                    <li>
-                            <label for="price">Price:</label>
-                            ₦<div id="item-quantity">2000</div>
-                    </li>
-                    <li>
-                            <a href="profile.html"> Back</a>
-                    </li>
-            </ul>
-          </form>
+                  <label for="delivery-address">Delivery Address: </label>
+                  <div id="delivery-address"></div>
+                </li>
+                <li>
+                  <label for="phone-number">Phone Number: </label>
+                  <div id="phone-number"> </div>
+                </li>
+                <li>
+                  <label for="pick-up">PickUp Address:</label>
+                  <div id="pick-up"> </div>
+                </li>
+                <li>
+                  <label for="item-name">Destination:</label>
+                  <div id="destination"> </div>
+                </li>
+                <li>
+                  <label for="item-description">Item Description:</label>
+                  <div id="item-description"></div>
+                </li>
+                <li>
+                  <label for="item-weight">Item Weight (Kg):</label>
+                  <div id="item-weight"></div>
+                </li>
+                <li>
+                  <label for="item-quantity">Item Quantity:</label>
+                  <div id="item-quantity"></div>
+                </li>
+                <li>
+                  <label for="price">Price:</label>
+                  ₦<div id="price"></div>
+                </li>
+                <li>
+                  <label for="price">Order Date:</label>
+                  <div id="date"></div>
+                </li>
+                <li>
+                  <label for="status">Status:</label>
+                  <div id="status"></div>
+                </li>
+                <li>
+                  <a href="profile.html"> Back</a>
+                </li>
+              </ul>
+            </form>
+          </div>
         </div>
-        </div>
-    </main>
-  </div>
-  <div class="order-footer">
-    <p class="foot">&copy;SendIT.com</p>
-  </div>
-</body>
-
+      </main>
+    </div>
+    <div class="order-footer">
+      <p class="foot">&copy;SendIT.com</p>
+    </div>
+    <script src="../vanila/parceldetails.js"></script>
+  </body>
 </html>
