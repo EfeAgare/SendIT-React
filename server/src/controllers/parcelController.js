@@ -93,11 +93,11 @@ class ParcelController {
      */
     static destination(req, res) {
         const text = `SELECT  deliveryAddress, status FROM parcels WHERE id = $1;`
-        const textUpdate = `UPDATE parcels SET deliveryAddress = $1, status =$2  WHERE userId= $3 returning *`;
-         const getUser = 'SELECT role FROM users WHERE role = $1'
+        const textUpdate = `UPDATE parcels SET deliveryAddress = $1, status =$2  WHERE id= $3 returning *`;
+         const getUser = 'SELECT role, id FROM users WHERE role = $1 AND id=$2'
         const client = new Client(connectionString);
         client.connect();
-        client.query(getUser, [req.user.role])
+        client.query(getUser, [req.user.role, req.user.id])
             .then((result) => {
                 if (result.rows[0].role === 'user'){
                     const client = new Client(connectionString);
@@ -108,7 +108,7 @@ class ParcelController {
                             res.status(404).json({
                                 message: "No valid entry found for provided ID"
                             });
-                        } else if (result.rows[0].status === 'delivered') {
+                        } else if (result.rows[0].status === 'delivered' ||result.rows[0].status === 'cancelled') {
                             res.status(400).json({
                                 message: "Parcel Destination can no longer be Changed"
                             });
@@ -116,7 +116,7 @@ class ParcelController {
                             const values = [
                                  req.body.deliveryAddress,
                                  'awaiting',
-                                 req.user.id
+                                 parseInt(req.params.parcelId,10)
                             ];
                             const client = new Client(connectionString);
                             client.connect();

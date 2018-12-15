@@ -114,6 +114,18 @@
     width: 100%;
     height: 100%;
   }
+  .modal-dest{
+    display: none;
+    position: fixed;
+    background-color: rgb(0, 0, 0, 0.4);
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    padding-top: 15%;
+    width: 100%;
+    height: 100%;
+  }
   .modal-content {
   background-color: white;
   padding: 5%;
@@ -127,7 +139,7 @@
   .text-dark {
     color: #3f3f44;
   }
-  #modal-btn:hover {
+  #modal-btn:hover, #dest-btn:hover {
     background-color: tomato;
   }
   .modal-content h4 {
@@ -136,6 +148,14 @@
     color: tomato;
   }
   #modal-btn {
+    margin-top: 6%;
+    border-radius: 6px;
+    padding: 1% 2%;
+    background-color: #0B2240;
+    color: white;
+    float: right;
+  }
+  #dest-btn {
     margin-top: 6%;
     border-radius: 6px;
     padding: 1% 2%;
@@ -157,7 +177,21 @@
     margin-top: 10px;
     border-radius: 6px;
   }
+  .dest-container{
+    border: solid 2px tomato;
+    padding: 0 5px;
+    margin-top: 10px;
+    border-radius: 6px;
+  }
   .email-container input {
+    border: none;
+    border-left: solid 1px tomato;
+    font-size: 110%;
+    padding: 5px;
+    width: 85%;
+    height: 30px;
+  }
+  .dest-container input {
     border: none;
     border-left: solid 1px tomato;
     font-size: 110%;
@@ -174,7 +208,16 @@
     font-weight: bold;
     cursor: pointer;
   }
-  .close:hover {
+  .close-dest {
+    float: right;
+    font-size: 250%;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .close:hover{
+    color: tomato;
+  }
+  .close-dest:hover{
     color: tomato;
   }
   #forgot-pswd {

@@ -25,7 +25,6 @@ window.addEventListener('click', (event) => {
 });
 modalBtn.addEventListener('click', (event) => {
   event.preventDefault();
-  modalMessageText.style.color = 'yellow' ;
   modalMessageText.textContent = 'Processing..';
   const inputData = {
     email: modalEmailInput.value,
@@ -41,13 +40,13 @@ modalBtn.addEventListener('click', (event) => {
       if (res.message === 'Email send successfully. Kindly check your email for further instructions') {
         modalMessageText.textContent = res.message;
     }  else if (res.message === 'Email not Found') {
-      messageText.textContent = res.message;
+      modalMessageText.textContent = res.message;
   } else {
-      messageText.textContent = res.errors;
+    modalMessageText.textContent = res.errors;
   }
 })
 .catch(error => {
-  messageText.textContent = error +''+ 'server error'
+  modalMessageText.textContent = error +''+ 'server error'
 })
 });
 
