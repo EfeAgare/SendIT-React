@@ -154,8 +154,7 @@ const refreshPagination = () => {
         } else if (res.message === 'Authentication failed') {
           document.body.innerHTML = 'You are not logged in....';
           window.location.href = 'signin.html';
-        }
-        else {
+        }else if(res.parcelCount === 0){
           parcelTable.innerHTML = '<p class="text-center">No Parcel Order Created yet. You can easily add a parcel order by clicking the Order button at the top of the page</p>';
         }
       });
