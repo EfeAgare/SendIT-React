@@ -1,5 +1,3 @@
-const button = document.getElementById('submit-btn');
-const messageText = document.getElementById('messageText');
 const numberOfParcel = document.getElementById('number-order-parcel');
 const loader = document.querySelector('.loader');
 const username = document.querySelector('.myname');
@@ -51,6 +49,7 @@ const refreshPagination = () => {
         </li>`;
           res.data.forEach((parcelOrder) => {
             const date = new Date(parcelOrder.registered);
+            const orderId = parcelOrder.id;
             let year = date.getFullYear();
             let month = date.getMonth();
             let day = date.getDate() + 10;
@@ -69,9 +68,10 @@ const refreshPagination = () => {
                     <div  class="dropbtn">
                         <div id="myDropdown" class="dropdown-content">
                             <p>OPTIONS</p>
-                              <a href="#"onclick="return confirm('Are you sure you want to cancel this item?');">Cancel Parcel</a>
-                            <a href="userchanges.html">change destination</a>
-                            <a href="parceldetails.html">View Details</a>
+                            <p>OPTIONS</p>
+                            <a href="#"onclick="cancelparcel(${orderId})">Cancel Parcel</a>
+                            <a href="#" onclick="changeDestination(${orderId} )">change destination</a>
+                            <a href="parceldetails.html?parcelid=${orderId}">View Details</a>
                           </div>
                     </div>
                   </div>
@@ -123,6 +123,7 @@ const refreshPagination = () => {
         </li>`;
           res.data.forEach((parcelOrder) => {
             const date = new Date(parcelOrder.registered);
+            const orderId = parcelOrder.id;
             let year = date.getFullYear();
             let month = date.getMonth();
             let day = date.getDate();
@@ -137,17 +138,18 @@ const refreshPagination = () => {
             <div class="col col-6" data-label="Price: " id="price">${parcelOrder.itemweight  * parcelOrder.itemquantity* 2000}</div>
             <div class="col col-7" data-label="Status:" id="status">${parcelOrder.status} </div>
             <div class="col col-8" data-label="options">
-                <div class="dropdown">
-                    <div  class="dropbtn">
-                        <div id="myDropdown" class="dropdown-content">
-                            <p>OPTIONS</p>
-                              <a href="#"onclick="return confirm('Are you sure you want to cancel this item?');">Cancel Parcel</a>
-                            <a href="userchanges.html">change destination</a>
-                            <a href="parceldetails.html">View Details</a>
-                          </div>
-                    </div>
+            <div class="dropdown">
+            <div  class="dropbtn">
+                <div id="myDropdown" class="dropdown-content">
+                    <p>OPTIONS</p>
+                    <a href="#"onclick="cancelparcel(${orderId})">Cancel Parcel</a>
+                    <a href="#" onclick="changeDestination(${orderId})">change destination</a>
+                    <a href="parceldetails.html?parcelid=${orderId}">View Details</a>
                   </div>
-            </div>`;
+            </div>
+          </div>
+            </div>
+            </li>`;
           });
         } else if (res.message === 'Authentication failed') {
           document.body.innerHTML = 'You are not logged in....';
@@ -182,3 +184,85 @@ prevButton.addEventListener('click', () => {
   pageNumber.textContent = `Page ${pageCounter}`;
   fetchParcelOrder(`https://efe-sendit.herokuapp.com/api/v1/users/${ localStorage.getItem('userid')}/parcels?page=${pageCounter}&limit=${limit}`);
 });
+
+const modal = document.getElementsByClassName('modal')[0];
+const modalBtn = document.getElementById('modal-btn');
+const modalMessageCancelText = document.querySelector('#modal-messageText');
+const closeBtn = document.querySelector('.close');
+
+const modalDest = document.getElementsByClassName('modal-dest')[0];
+const destBtn = document.getElementById('dest-btn');
+const modalDestMessageText = document.querySelector('#dest-messageText');
+const closeBtnDest = document.querySelector('.close-dest');
+const modalDestInput = document.getElementById('dest-input')
+
+const cancelparcel = (parcelid) => {
+  modal.style.display = 'block';
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+    window.location.reload()
+    modalMessageCancelText.textContent = '';
+  });
+  modalBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    modalMessageCancelText.textContent = 'Processing..';
+    fetch(`https://efe-sendit.herokuapp.com/api/v1/parcels/${parcelid}/cancel`, {
+      method: 'PUT',
+      headers: { 
+        'content-type': 'application/json',
+        'x-access-token': localStorage.getItem('token')
+       }
+    })
+      .then((res) => {
+        if (res.message === 'Parcel cancelled successfully') {
+          modalMessageCancelText.textContent = res.message;
+      }  else if (res.message === 'Parcel No longer valid to be cancelled') {
+        modalMessageCancelText.textContent = res.message;
+    } else {
+      modalMessageCancelText.textContent = res.errors;
+    }
+  })
+  .catch(error => {
+    modalMessageCancelText.textContent = error +''+ 'server error'
+  })
+  });
+}
+
+const changeDestination = (parcelid) => {
+  modalDest.style.display = 'block';
+  closeBtnDest.addEventListener('click', () => {
+    modalDest.style.display = 'none';
+    window.location.reload()
+    modalDestMessageText.textContent = '';
+  });
+  destBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    const inputData = {
+      deliveryAddress: modalDestInput.value
+    };
+    modalDestMessageText.textContent = 'Processing..';
+    fetch(`https://efe-sendit.herokuapp.com/api/v1/parcels/${parcelid}/destination`, {
+      method: 'PUT',
+      headers: { 
+        'content-type': 'application/json',
+        'x-access-token': localStorage.getItem('token')
+       },
+       body: JSON.stringify(inputData),
+       mode: 'cors'
+    })
+      .then(res => res.json())
+      .then((res) => {
+        console.log(res)
+        if (res.message === 'Parcel destination changed successfully') {
+          modalDestMessageText.textContent = res.message;
+      }  else if (res.message === 'Parcel Destination can no longer be Changed') {
+        modalDestMessageText .textContent = res.message;
+    } else {
+      modalDestMessageText.textContent = res.errors;
+    }
+  })
+  .catch(error => {
+    modalDestMessageText .textContent = error +''+ 'server error'
+  })
+  });
+}

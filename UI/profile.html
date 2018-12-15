@@ -11,6 +11,7 @@
   <link rel="stylesheet" type="text/css" media="screen" href="./css/profile.css">
   <link rel="stylesheet" type="text/css" media="screen" href="./css/order.css">
   <link rel="stylesheet" type="text/css" media="screen" href="./css/allparcel.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/sign.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Overlock&amp;subset=latin-ext" rel="stylesheet">
     <script src="./script/index.js"></script>
@@ -59,13 +60,40 @@
             <div class="container">
               <div class="loader"></div>
               <ul class="responsive-table">
-              </ul>
-            </div>
+        </ul>
+        <div class="modal">
+          <div class="modal-content clearfix"> 
+              <div class="close">&times;</div>
+              <h4>Cancel Parcel Order</h4> 
+        <p>Are You Really sure You want to cancel the Parcel Order</p>
+            <p id ="modal-messageText" class="text-center" ></p>
+            <button id="modal-btn" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+      <div class="modal-dest">
+        <div class="modal-content clearfix"> 
+            <div class="close-dest">&times;</div>
+            <h4>Change Parcel Destination</h4> 
+      
+          <div class="dest-container">
+            <form>
+             &nbsp;<i class="fa fa-user"></i>&nbsp; <input type="text" id="dest-input" placeholder="destination" autofocus>
           </div>
+          
+          <p id = "dest-messageText" class="text-center" ></p>
+          <button id="dest-btn" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
           <p class="text-center" id="page-num"></p>
     <div class="pagination">
       <button disabled><i class="fa fa-arrow-circle-left"></i> Prev</button>
       <button>Next <i class="fa fa-arrow-circle-right"></i> </button>
+      </div>
+      </div>
+        </div>
+
     </main>
   </div>
   <div class="order-footer">
