@@ -62,6 +62,17 @@ body {
     height: 40px;
     margin-top: 15px;
   }
+  #documentation {
+    display:flex;
+    justify-content: left;
+    font-size: 110%;
+    margin-left: 2%;
+    color: black;
+    text-decoration: none;
+    }
+  #documentation:hover{
+    cursor: pointer;
+  }
     
   .hero-section {
     background: url("../Images/hero3.jpg") 70% no-repeat;

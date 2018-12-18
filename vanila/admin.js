@@ -137,7 +137,7 @@ const refreshPagination = () => {
                     <p>OPTIONS</p>
                     <a href="#"onclick="changeStatus(${orderId})">Change status</a>
                     <a href="#" onclick="changeLocation(${orderId})">Change Location</a>
-                    <a href="parceldetails.html?parcelid=${orderId}">View Details</a>
+                    <a href="admingetaparcel.html?parcelid=${orderId}">View Details</a>
                   </div>
             </div>
           </div>
