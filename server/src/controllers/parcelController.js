@@ -39,7 +39,7 @@ class ParcelController {
             .catch((err) => {  res.status(500).json(err.message) 
                 client.end()
             });
-            }else{ res.status(400).json({message: 'Can\t create parcel' }) }
+            }else{ res.status(400).json({message: 'Can\'t create parcel' }) }
         }) .catch((err) => {
             res.status(500).json(err.message)
             client.end()})

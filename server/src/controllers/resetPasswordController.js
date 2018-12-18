@@ -80,7 +80,7 @@ class PasswordController {
                             return res.status(500).json({message: 'Email failed to send',errors:error.code});
                         }
                         res.status(200).json({
-                            message: 'Email sent.'
+                            message: 'Password Successful change and email sent.'
                         });
                     });
                     client.end();

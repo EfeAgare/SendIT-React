@@ -3,6 +3,8 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from '../../swagger.json';
 import expressvalidator from 'express-validator';
 import parcelRoute from './routes/parcelRoute';
 import adminRoute from './routes/adminRoute';
@@ -30,10 +32,12 @@ app.use((req, res, next) => {
     next();
 })
 
+app.use('/', express.static('UI'));
+
 app.get('/api/v1/', (req, res) =>{
     res.status(200).json('Welcome to SendIt \n SendIT is a courier service that helps users deliver parcels to different destinations.') 
 });
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/v1/', parcelRoute);
 app.use('/api/v1/', adminRoute);
 app.use('/api/v1/', userRoute);

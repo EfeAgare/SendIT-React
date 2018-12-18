@@ -30,6 +30,7 @@ class AdminController {
                             res.status(200).json({
                                 success: 'true',
                                 message: 'Parcels retrieved successfully',
+                                parcelCount:result.rows.length,
                                 data: result.rows
                             });
                             client.end()
@@ -104,8 +105,9 @@ class AdminController {
                     .then ((result) => {
                         if (!result.rows[0]) {
                             res.status(404).json({message: "No Parcel found for provided ID"});
-                        } 
-                        else {
+                        }  else if (result.rows[0].status === 'delivered' || result.rows[0].status === 'cancelled') {
+                            res.status(400).json({message: "Parcel Present Location can no longer be change"});
+                        } else {
                             const values = [
                                 req.body.currentLocation,
                                 parseInt(req.params.parcelId,10)
@@ -164,7 +166,7 @@ class AdminController {
                         if (!result.rows[0]) {
                             res.status(404).json({message: "No Parcel found for provided ID"});
                         } else if (result.rows[0].status === 'delivered' || result.rows[0].status === 'cancelled') {
-                            res.status(400).json({message: "Parcel No longer valid to be cancelled"});
+                            res.status(400).json({message: "Parcel Status can no longer be change"});
                         } else {
                             const values = [req.body.status, parseInt(req.params.parcelId,10)];
                             const client = new Client(connectionString);

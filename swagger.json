@@ -1,0 +1,622 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1",
+    "title": "Send-It App",
+    "description": "SendIT is a courier service that helps users deliver parcels to different destinations."
+  },
+  "host": " https://efe-sendit.herokuapp.com",
+  "basePath": "/api/v1/",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users in the system"
+    }, {
+      "name": "parcels",
+      "description": "API for parcel order in the system"
+    }
+  ],
+  "schemes": [
+    "https", "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/auth/signup": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Creates an account for a new user",
+        "parameters":
+          [
+            {
+              "name": "User",
+              "in": "body",
+              "description": "The details of the user created",
+              "schema": {
+                "$ref": "#/definitions/user"
+              }
+            }
+          ],
+        "responses": {
+          "201": {
+            "description": "New user is created",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          },
+          "400": {
+            "description": "Error - Missing required fields"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Logs a created user in",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "parameters":
+          [
+            {
+              "name": "email",
+              "in": "formData",
+              "required": true,
+              "description": "The email of the user",
+              "type": "string"
+            },
+            {
+              "name": "password",
+              "in": "formData",
+              "required": true,
+              "description": "The password of the user",
+              "type": "string"
+            }
+          ],
+        "responses": {
+          "201": {
+            "description": "User is logged in",
+            "schema": {
+              "$ref": "#/definitions/users"
+            }
+          },
+          "400": {
+            "description": "Invalid Credentials"
+          }
+        }
+      }
+    },
+    "/parcels": {
+      "post": {
+        "tags": [
+          "parcels"
+        ],
+        "summary": "Create a parcel order for the logged in user",
+        "parameters": [
+          {
+            "name": "Parcel order",
+            "in": "body",
+            "description": "The parcel order to created",
+            "schema": {
+              "$ref": "#/definitions/parcels"
+            }
+          },
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "The access token",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "'Parcels created successfully",
+            "schema": {
+              "$ref": "#/definitions/parcels"
+            }
+          },
+          "400": {
+            "description": "Can\"t create parcel"
+          },
+          "401": {
+            "description": "Invalid login"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "parcels"
+        ],
+        "summary": "Get all parcel order created in the application available only to the admin",
+        "parameters": [
+          {
+            "name": "orders",
+            "in": "body",
+            "description": "Parcels retrieved successfully",
+            "type": "string"
+          },
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "The access token",
+            "type": "string"
+          }
+        ],
+        "responses": {
+           "200": {
+            "description": "Returns all parcel order of created user",
+            "schema": {
+              "$ref": "#/definitions/parcels"
+            }
+          },
+          "401": {
+            "description": "Invalid login"
+          },
+          "403": {
+            "description": "Available only to admin"
+          }
+        }
+      }
+    },
+    "/users/{userId}/parcels": {
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "required": true,
+          "description": "ID of the user to get parcel",
+          "type": "integer"
+        },
+        {
+          "name": "x-access-token",
+          "in": "header",
+          "description": "The access token",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "parcels"
+        ],
+        "summary": "Get all parcels order of the user with given ID",
+        "responses": {
+           "200": {
+            "description": "Returns the user parcel order",
+            "schema": {
+              "$ref": "#/definitions/parcels"
+            }
+          },
+          "404": {
+            "description": "Could not find request"
+          },
+          "401": {
+            "description": "Invalid login"
+          }
+        }
+      }
+    },
+    "/users/{userId}/{parcelId}": {
+      "get": {
+        "tags": ["parcels"],
+        "summary": "Get a provide parcel ID for the Specific user ID",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the user to get parcel",
+            "type": "integer"
+          },
+          {
+            "name": "parcelId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the parcel to get",
+            "type": "integer"
+          },
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "The access token",
+            "type": "string"
+          }
+        ],
+        "responses": {
+           "200": {
+            "description": "A given parcel fo a User",
+            "schema": {
+              "$ref": "#/definitions/parcels"
+            }
+          },
+          "401": {
+            "description": "Invalid login"
+          }
+        }
+      }
+    },
+    "/users/auth/resetpassword": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Set the email for passsword reset",
+        "parameters":
+          [
+            {
+              "name": "email",
+              "in": "body",
+              "required": true,
+              "description": "User registered Email",
+              "type": "string"
+            }
+          ],
+        "responses": {
+           "200": {
+            "description": "message sent to user email for futher instruction",
+            "schema": {
+              "$ref": "#/definitions/parcels"
+            }
+          },
+          "401": {
+            "description": "Invalid login"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Users"],
+        "summary": "Set the new password for passsword reset",
+        "parameters":
+          [
+            {
+              "name": "password",
+              "in": "body",
+              "required": true,
+              "description": "User new password",
+              "type": "string"
+            },
+            {
+              "name": "confirmpassword",
+              "in": "body",
+              "required": true,
+              "description": "User new password",
+              "type": "string"
+            },
+            {
+              "name": "x-access-token",
+              "in": "header",
+              "description": "The access token",
+              "type": "string"
+            }
+          ],
+        "responses": {
+           "200": {
+            "description": "Password Successful change and email sent to user",
+            "schema": {
+              "$ref": "#/definitions/parcels"
+            }
+          },
+          "401": {
+            "description": "Invalid login"
+          }
+        }
+      }
+    },
+    "/parcels/{parcelId}/cancel": {
+      "put": {
+        "tags": ["parcels"],
+        "summary": "cancel a parcel order with given parcelID",
+        "parameters":
+          [
+            {
+              "name": "parcelId",
+              "in": "path",
+              "required": true,
+              "description": "ID of the parcel to be cancelled",
+              "type": "integer"
+            },
+            {
+              "name": "x-access-token",
+              "in": "header",
+              "description": "The access token",
+              "type": "string"
+            }
+          ],
+        "responses": {
+           "200": {
+            "description": "Parcel cancelled successfully",
+            "schema": {
+              "$ref": "#/definitions/parcels"
+            }
+          },
+          "400":{
+            "description": "Parcel No longer valid to be cancelled"
+          },
+          "401": {
+            "description": "Invalid login"
+          },
+          "403": {
+            "description": "Available only to user who created the parcel order"
+          }
+        }
+      }
+    },
+    "/parcels/{parcelId}/destination": {
+      "put": {
+      "tags": ["parcels"],
+      "summary": "cancel a parcel order with given parcelID",
+      "parameters":
+        [
+          {
+            "name": "parcelId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the parcel delivery address to be changed",
+            "type": "integer"
+          },
+          {
+            "name": "deliveryAddress",
+            "in": "body",
+            "required": true,
+            "description": "deliveryAddress of parcelId specified",
+            "type": "integer"
+          },
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "The access token",
+            "type": "string"
+          }
+        ],
+      "responses": {
+         "200": {
+          "description": "Parcel cancelled successfully",
+          "schema": {
+            "$ref": "#/definitions/parcels"
+          }
+        },
+        "400":{
+          "description": "Parcel No longer valid to be cancelled"
+        },
+        "401": {
+          "description": "Invalid login"
+        },
+        "403": {
+          "description": "Available only to user who created the parcel order"
+        }
+      }
+    }
+  },
+    "/parcels/{parcelId}": {
+      "get": {
+        "tags": ["parcels"],
+        "summary": "admin gets a parcel with provided parcelID",
+        "parameters":
+          [
+            {
+              "name": "parcelId",
+              "in": "path",
+              "required": true,
+              "description": "ID of the parcel for admin to get",
+              "type": "integer"
+            },
+            {
+              "name": "x-access-token",
+              "in": "header",
+              "description": "The access token",
+              "type": "string"
+            }
+          ],
+        "responses": {
+           "200": {
+            "description": "Parcel retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/parcels"
+            }
+          },
+          "401": {
+            "description": "Invalid login"
+          },
+          "403": {
+            "description": "Available only to admin"
+          }
+        }
+      }
+    },
+  "/parcels/{parcelId}/status": {
+      "put": {
+        "tags": ["parcels"],
+        "summary": "admin change the status of the parcel with provided parcelID",
+        "parameters":
+          [
+            {
+              "name": "parcelId",
+              "in": "path",
+              "required": true,
+              "description": "ID of the parcel for admin to change status",
+              "type": "integer"
+            },
+            {
+              "name": "status",
+              "in": "body",
+              "required": true,
+              "description": "status of parcel Inputed by admin",
+              "type": "string"
+            },
+            {
+              "name": "x-access-token",
+              "in": "header",
+              "description": "The access token",
+              "type": "string"
+            }
+          ],
+        "responses": {
+           "200": {
+            "description": "Parcel retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/parcels"
+            }
+          },
+          "401": {
+            "description": "Invalid login"
+          },
+          "403": {
+            "description": "Available only to admin"
+          }
+        }
+      }
+    },
+    "/parcels/{parcelId}/presentLocation": {
+      "put": {
+        "tags": ["parcels"],
+        "summary": "admin change the current Location of the parcel with provided parcelID",
+        "parameters":
+          [
+            {
+              "name": "parcelId",
+              "in": "path",
+              "required": true,
+              "description": "ID of the parcel for admin to change Current Location",
+              "type": "integer"
+            },
+            {
+              "name": "currentLocation",
+              "in": "body",
+              "required": true,
+              "description": "location of parcel Inputed by admin",
+              "type": "string"
+            },
+            {
+              "name": "x-access-token",
+              "in": "header",
+              "description": "The access token",
+              "type": "string"
+            }
+          ],
+        "responses": {
+           "200": {
+            "description": "Parcel Location Updated successfully  and Email sent successfully",
+            "schema": {
+              "$ref": "#/definitions/parcels"
+            }
+          },
+          "401": {
+            "description": "Invalid login"
+          },
+          "403": {
+            "description": "Available only to admin"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "parcelsOrder": {
+      "required": [
+        "name", "deliveryAddress", "deliveryPNumber","pickUpAddress",
+        "currentLocation","itemDescription", "itemDescription","itemWeight","itemQuantity"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "deliveryAddress": {
+          "type": "string"
+        },
+        "deliveryPNumber": {
+          "type": "integer"
+        },
+        "pickUpAddress": {
+          "type": "string"
+        },
+        "currentLocation": {
+          "type": "string"
+        },
+        "itemDescription": {
+          "type": "string"
+        },
+        "itemWeight": {
+          "type": "integer"
+        },
+        "itemQuantity": {
+          "type": "integer"
+        }
+      }
+    },
+    "parcelsResponse": {
+      "properties": {
+        "id": {
+          "type":"integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "deliveryaddress": {
+          "type": "string"
+        },
+        "deliverypnumber": {
+          "type": "integer"
+        },
+        "currentlocation": {
+          "type": "string"
+        },
+        "itemdescription": {
+          "type": "string"
+        },
+        "itemweight": {
+          "type": "integer"
+        },
+        "itemquantity": {
+          "type": "integer"
+        },
+        "registered": {
+          "type": "integer"
+        },
+        "status": {
+          "type": "string"
+        },
+        "userid": {
+          "type": "integer"
+        }
+      }
+    },
+    "user": {
+      "required": [
+        "username",
+        "lastname",
+        "email",
+        "password"
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "uniqueitems": true
+        },
+        "lastname": {
+          "type": "string",
+          "uniqueitems": true
+        },
+        "email": {
+          "type": "string",
+          "uniqueitems": true
+        },
+        "password": {
+          "type": "string",
+          "uniqueitems": true
+        },
+        "role": {
+          "type": "string",
+          "default": "user"
+        }
+      }
+    }
+  },
+  "Users": {
+    "type": "array",
+    "$ref": "#/definitions/User"
+  },
+  "parcels": {
+    "type": "array",
+    "$ref": "#/definitions/parcelOrder"
+  }
+}

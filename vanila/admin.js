@@ -1,4 +1,3 @@
-const numberOfParcel = document.getElementById('number-order-parcel');
 const loader = document.querySelector('.loader');
 const username = document.querySelector('.myname');
 const parcelTable = document.querySelector('.responsive-table');
@@ -20,6 +19,8 @@ const refreshPagination = () => {
     prevButton.disabled = true;
     prevButton.style.backgroundColor = 'grey';
   }
+
+
   const fetchParcelOrder = (url) => {
     fetch(url, {
       method: 'GET',
@@ -32,9 +33,8 @@ const refreshPagination = () => {
       .then((res) => {
         loader.style.display = 'none';
         if (res.data) {
-          totalParcelOrder = res.parcelCount;
           username.innerHTML =  localStorage.getItem('username');
-          numberOfParcel.innerHTML = res.parcelCount;
+          totalParcelOrder = res.parcelCount;
           parcelTable.innerHTML = `<li class="table-header">
           <div class="col col-1">ORDER Date</div>
           <div class="col col-2">Name</div>
@@ -47,12 +47,9 @@ const refreshPagination = () => {
         </li>`;
           res.data.forEach((parcelOrder) => {
             const date = new Date(parcelOrder.registered);
-            const orderId = parcelOrder.id;
-            let year = date.getFullYear();
-            let month = date.getMonth();
-            let day = date.getDate() + 10;
-            let newdate = new Date();
-            newdate.setFullYear(year,month,day+10);
+            const orderId = parcelOrder.id;   let year = date.getFullYear();
+            let month = date.getMonth();   let day = date.getDate() + 10;
+            let newdate = new Date();         newdate.setFullYear(year,month,day+10);
             parcelTable.innerHTML += ` <li class="table-row">
             <div class="col col-1" data-label="Order Date: " id="date">${date.toLocaleDateString()}</div>
             <div class="col col-2" data-label="Customer Name:" id="name">${parcelOrder.name}</div>
@@ -67,8 +64,8 @@ const refreshPagination = () => {
                         <div id="myDropdown" class="dropdown-content">
                             <p>OPTIONS</p>
                             <p>OPTIONS</p>
-                            <a href="#"onclick="cancelparcel(${orderId})">Cancel Parcel</a>
-                            <a href="#" onclick="changeDestination(${orderId} )">change destination</a>
+                            <a href="#"onclick="parcel(${orderId})">Change Location</a>
+                            <a href="#" onclick="changeDestination(${orderId} )">Change Status</a>
                             <a href="parceldetails.html?parcelid=${orderId}">View Details</a>
                           </div>
                     </div>
@@ -78,14 +75,15 @@ const refreshPagination = () => {
         } else if (res.message === 'Authentication Failed') {
           document.body.innerHTML = 'You are not logged in....';
           window.location.href = 'signin.html';
-        }else {
+        }
+        else {
           parcelTable.innerHTML = '<p class="text-center">No result found</p>';
         }
       });
   }
   window.addEventListener('load', (event) => {
     event.preventDefault();
-    let url = `https://efe-sendit.herokuapp.com/api/v1/users/${ localStorage.getItem('userid')}/parcels`;
+    let url = `https://efe-sendit.herokuapp.com/api/v1/parcels`;
     fetch(url, {
       method: 'GET',
       headers: {
@@ -96,10 +94,8 @@ const refreshPagination = () => {
       .then(res => res.json())
       .then((res) => {
         username.innerHTML =  localStorage.getItem('username');
-        numberOfParcel.innerHTML = res.parcelCount;
         loader.style.display = 'none';
         if (res.data) {
-          totalParcelOrder = res.parcelCount;
           if (totalParcelOrder <= limit) {
             nextButton.style.display = 'none';
             prevButton.style.display = 'none';
@@ -139,8 +135,8 @@ const refreshPagination = () => {
             <div  class="dropbtn">
                 <div id="myDropdown" class="dropdown-content">
                     <p>OPTIONS</p>
-                    <a href="#"onclick="cancelparcel(${orderId})">Cancel Parcel</a>
-                    <a href="#" onclick="changeDestination(${orderId})">change destination</a>
+                    <a href="#"onclick="changeStatus(${orderId})">Change status</a>
+                    <a href="#" onclick="changeLocation(${orderId})">Change Location</a>
                     <a href="parceldetails.html?parcelid=${orderId}">View Details</a>
                   </div>
             </div>
@@ -166,7 +162,7 @@ nextButton.addEventListener('click', () => {
     nextButton.style.backgroundColor = 'grey';
   }
   pageNumber.textContent = `Page ${pageCounter}`;
-  fetchParcelOrder(`https://efe-sendit.herokuapp.com/api/v1/users/${ localStorage.getItem('userid')}/parcels?page=${pageCounter}&limit=${limit}`);
+  fetchParcelOrder(`https://efe-sendit.herokuapp.com/api/v1/parcels?page=${pageCounter}&limit=${limit}`);
 });
 prevButton.addEventListener('click', () => {
   nextButton.disabled = false;
@@ -177,46 +173,50 @@ prevButton.addEventListener('click', () => {
     prevButton.style.backgroundColor = 'grey';
   }
   pageNumber.textContent = `Page ${pageCounter}`;
-  fetchParcelOrder(`https://efe-sendit.herokuapp.com/api/v1/users/${ localStorage.getItem('userid')}/parcels?page=${pageCounter}&limit=${limit}`);
+  fetchParcelOrder(`https://efe-sendit.herokuapp.com/api/v1/parcels?page=${pageCounter}&limit=${limit}`);
 });
 
 const modal = document.getElementsByClassName('modal')[0];
 const modalBtn = document.getElementById('modal-btn');
-const modalMessageCancelText = document.querySelector('#modal-messageText');
+const modalStatusText = document.querySelector('#modal-messageText');
 const closeBtn = document.querySelector('.close');
 const modalDest = document.getElementsByClassName('modal-dest')[0];
 const destBtn = document.getElementById('dest-btn');
 const modalDestMessageText = document.querySelector('#dest-messageText');
 const closeBtnDest = document.querySelector('.close-dest');
+const modalStatusInput = document.getElementById('modal-email')
 const modalDestInput = document.getElementById('dest-input')
 
-const cancelparcel = (parcelid) => {
+const changeStatus = (parcelid) => {
   modal.style.display = 'block';
   closeBtn.addEventListener('click', () => {
     modal.style.display = 'none';
     window.location.reload()
-    modalMessageCancelText.textContent = '';
+    modalStatusText.textContent = '';
   });
   modalBtn.addEventListener('click', (event) => {
     event.preventDefault();
-    modalMessageCancelText.textContent = 'Processing..';
-    fetch(`https://efe-sendit.herokuapp.com/api/v1/parcels/${parcelid}/cancel`, {
+    const inputData = { status: modalStatusInput.value};
+    modalStatusText.textContent = 'Processing..';
+    fetch(`https://efe-sendit.herokuapp.com/api/v1/parcels/${parcelid}/status`, {
       method: 'PUT',
       headers: { 
         'content-type': 'application/json',
         'x-access-token': localStorage.getItem('token')
-       }
+       },
+       body: JSON.stringify(inputData),
+       mode: 'cors'
     })
       .then((res) => {
-        if (res.message === 'Parcel cancelled successfully') {
-          modalMessageCancelText.textContent = res.message;
-      }  else if (res.message === 'Parcel No longer valid to be cancelled') { modalMessageCancelText.textContent = res.message;
-    } else { modalMessageCancelText.textContent = res.errors; }
+        if (res.message === 'Parcel Location Updated successfully and Email sent successfully') {
+          modalStatusText.textContent = res.message;
+      }  else if (res.message === 'Parcel Status can no longer be change') {modalStatusText.textContent = res.message;
+    } else {   modalStatusText.textContent = res.errors;  }
   })
-  .catch(error => { modalMessageCancelText.textContent = error +''+ 'server error' })
+  .catch(error => {  modalStatusText.textContent = error +''+ 'server error' })
   });
 }
-const changeDestination = (parcelid) => {
+const changeLocation = (parcelid) => {
   modalDest.style.display = 'block';
   closeBtnDest.addEventListener('click', () => {
     modalDest.style.display = 'none';
@@ -225,9 +225,9 @@ const changeDestination = (parcelid) => {
   });
   destBtn.addEventListener('click', (event) => {
     event.preventDefault();
-    const inputData = { deliveryAddress: modalDestInput.value};
+    const inputData = {currentLocation: modalDestInput.value    };
     modalDestMessageText.textContent = 'Processing..';
-    fetch(`https://efe-sendit.herokuapp.com/api/v1/parcels/${parcelid}/destination`, {
+    fetch(`https://efe-sendit.herokuapp.com/api/v1/parcels/${parcelid}/presentLocation`, {
       method: 'PUT',
       headers: { 
         'content-type': 'application/json',
@@ -238,12 +238,11 @@ const changeDestination = (parcelid) => {
     })
       .then(res => res.json())
       .then((res) => {
-        if (res.message === 'Parcel destination changed successfully') {
+        if (res.message === 'Parcel Location Updated successfully  and Email sent successfully') {
           modalDestMessageText.textContent = res.message;
-      }  else if (res.message === 'Parcel Destination can no longer be Changed') {
-        modalDestMessageText .textContent = res.message;
+      }  else if (res.message === 'Parcel Destination can no longer be Changed') {  modalDestMessageText .textContent = res.message;
     } else { modalDestMessageText.textContent = res.errors;    }
   })
-  .catch(error => { modalDestMessageText .textContent = error +''+ 'server error'  })
+  .catch(error => {modalDestMessageText .textContent = error +''+ 'server error' })
   });
 }
