@@ -80,6 +80,16 @@ If you only want to access the completed work, you will find the link to the hos
   </tr>
   <tr>
       <td>POST</td>
+      <td>/api/v1/users/auth/resetpassword</td>
+      <td>sent email to user to reset password</td>
+  </tr>
+  <tr>
+      <td>PUT</td>
+      <td>/api/v1/users/auth/resetpassword</td>
+      <td>Change to new user password</td>
+  </tr>
+  <tr>
+      <td>POST</td>
       <td>/api/v1/auth/signup</td>
       <td>sign up users </td>
   </tr>
@@ -99,5 +109,4 @@ If you only want to access the completed work, you will find the link to the hos
 <hr>
 
 You can access the app here https://efe-sendit.herokuapp.com/api/v1/parcels/
-
 You can also access the API documentation at https://efe-sendit.herokuapp.com/api-docs
