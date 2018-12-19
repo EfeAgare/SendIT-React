@@ -96,6 +96,7 @@ const refreshPagination = () => {
         username.innerHTML =  localStorage.getItem('username');
         loader.style.display = 'none';
         if (res.data) {
+          totalParcelOrder = res.parcelCount;
           if (totalParcelOrder <= limit) {
             nextButton.style.display = 'none';
             prevButton.style.display = 'none';
