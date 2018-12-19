@@ -31,7 +31,8 @@ app.use((req, res, next) => {
     }
     next();
 })
-
+app.use('/', express.static('UI'));
+app.use(express.static('vanilla'));
 app.get('/api/v1/', (req, res) =>{
     res.status(200).json('Welcome to SendIt \n SendIT is a courier service that helps users deliver parcels to different destinations.') 
 });
