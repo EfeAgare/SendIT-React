@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
   entry: './client/index.js',
@@ -11,7 +12,7 @@ const config = {
     and also tells webpack-dev-server where to serve files from.
     The publicPath property is a special property that helps us with our dev-server. It specifies the public URL of the the directory — at least as far as webpack-dev-server will know or care
      */
-    
+
     publicPath: '/dist/',
     filename: 'bundle.js'
   },
@@ -27,7 +28,13 @@ const config = {
       },
       {
         test: /\.css$/,
+        include: path.join(__dirname, 'UI'),
         use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.(jpe?g|png|gif|mp3)$/i,
+        include: path.join(__dirname, 'UI'),
+        loaders: ['file-loader']
       }
     ]
   },
@@ -36,12 +43,16 @@ const config = {
     contentBase: path.join(__dirname, 'client/public/'),
     port: 2000,
     publicPath: 'http://localhost:2000/dist/',
-    hotOnly: true
+    hotOnly: true,
+    historyApiFallback: true
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
+    new HtmlWebpackPlugin({
+      template: 'client/public/index.html'
+    })
   ]
 };
 
