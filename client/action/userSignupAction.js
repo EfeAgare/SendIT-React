@@ -14,7 +14,10 @@ export default userSignup => dispatch => {
   })
     .then(res => res.json())
     .then(res => {
-      
+      if (res.message === 'Login successful') {
+        dispatch(userLogin(res.data));
+        localStorage.setItem('token', res.token);
+      }
       return res;
     });
 };
