@@ -12,7 +12,8 @@
     "migrate": "babel-node ./server/src/models/db.js",
     "seed": "babel-node ./server/src/models/seed.js",
     "react": "webpack-dev-server --mode development",
-    "start": "node server/dist/index.js"
+    "start": "node server/dist/index.js",
+    "connect": "concurrently \"npm run devstart\" \"npm run react\""
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
+    "concurrently": "^4.1.0",
     "cors": "^2.8.5",
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
@@ -39,15 +41,15 @@
     "morgan": "^1.9.1",
     "multer": "^1.4.1",
     "nodemailer": "^4.7.0",
+    "pg": "^7.6.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "webpack-hot-middleware": "^2.24.3",
-    "pg": "^7.6.1",
-    "swagger-ui-express": "^4.0.1"
+    "swagger-ui-express": "^4.0.1",
+    "webpack-hot-middleware": "^2.24.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",

@@ -12,7 +12,7 @@ class SignupForm extends Component {
       email: '',
       password: '',
       passwordConfirmation: '',
-      errors: []
+      errors: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -25,7 +25,11 @@ class SignupForm extends Component {
   }
   onSubmit(event) {
     event.preventDefault();
-    this.props.userSignup(this.state);
+    this.props.userSignup(this.state).then(res => {
+      res.message !== 'user created successfully'
+        ? this.setState({ errors: res.errors || res.message})
+        : this.props.history.push('/');
+    });
   }
   render() {
     return (
@@ -33,6 +37,7 @@ class SignupForm extends Component {
         <div className="input-section signup">
           <p className="text-center">Sign Up</p>
           <hr />
+          <p id="messageText">{this.state.errors}</p>
           <form className="form-box" onSubmit={this.onSubmit}>
             <p id="messageText" />
             <label htmlFor="username" />

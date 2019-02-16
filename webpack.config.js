@@ -41,8 +41,14 @@ const config = {
   resolve: { extensions: ['*', '.js', '.jsx'] },
   devServer: {
     contentBase: path.join(__dirname, 'client/public/'),
-    port: 2000,
-    publicPath: 'http://localhost:2000/dist/',
+    port: 3000,
+    open: true,
+    proxy: {
+      '/api': 'http://127.0.0.1:2000',
+      secure: false,
+      changeOrigin: true
+    },
+    publicPath: 'http://127.0.0.1:3000/dist/',
     hotOnly: true,
     historyApiFallback: true
   },

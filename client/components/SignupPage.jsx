@@ -18,9 +18,6 @@ class SignupPage extends Component {
     );
   }
 }
-const mapStateToProps = state => {
-  return {};
-};
 
 SignupPage.propTypes = {
   userSignup: PropTypes.func.isRequired
