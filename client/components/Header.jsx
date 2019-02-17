@@ -9,6 +9,7 @@ const Header = props => {
       <div className="header-right">
         <div id="myLinks">
           <Link to="/" className="active">HOME</Link>
+          <Link to="/signin"> LOGIN</Link>
           <Link to="/order">ORDER PARCEL</Link>
         </div>
         <a href="javascript:void(0);" className="icon">

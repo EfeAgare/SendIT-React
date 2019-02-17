@@ -1,18 +1,20 @@
-import { USER_LOGIN } from '../constants/action-types';
+import { USER_LOGIN, USER_SIGNUP } from '../constants/action-types';
 
-const userReducer =(state={}, action) => {
-  switch(action.type){
-    case USER_LOGIN:
-    return {
-      
+const userReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_SIGNUP:
+      return {
         ...state,
-        articles: state.articles.concat(action.payload)
-     
-    }
+        user: Object.assign({}, action.user)
+      };
+    case USER_LOGIN:
+      return {
+        ...state,
+        user: Object.assign({}, action.user)
+      };
     default:
-    return state;
+      return state;
   }
+};
 
-}
-
-export default userReducer
+export default userReducer;

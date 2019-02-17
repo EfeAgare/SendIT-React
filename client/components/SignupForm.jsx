@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import '../../UI/css/sign.css';
 import TextFieldGroup from './common/TextFieldGroup';
 
+
 class SignupForm extends Component {
   constructor(props) {
     super(props);
@@ -46,7 +47,7 @@ class SignupForm extends Component {
               type="text"
               onChange={this.handleChange}
               value={this.state.username}
-              field="Username"
+              field="username"
             />
 
             <label htmlFor="lastname" />
@@ -54,32 +55,33 @@ class SignupForm extends Component {
               type="text"
               onChange={this.handleChange}
               value={this.state.lastname}
-              field="Lastname"
+              field="lastname"
             />
             <label htmlFor="email" />
             <TextFieldGroup
-              type="text"
+              type="email"
               onChange={this.handleChange}
               value={this.state.email}
-              field="Email"
+              field="email"
             />
             <label htmlFor="password" />
             <TextFieldGroup
               type="password"
               onChange={this.handleChange}
               value={this.state.password}
-              field="Password"
+              field="password"
             />
             <label htmlFor="passwordConfirmation" />
             <TextFieldGroup
               type="password"
               onChange={this.handleChange}
-              value={this.state.password}
-              field="PasswordConfirmation"
+              value={this.state.passwordConfirmation}
+              field="passwordConfirmation"
             />
-            <button id="submit-btn" className="submit-btn">
+           
+            <a id="submit-btn" className="submit-btn" onClick={this.onSubmit}>
               Create Your Account
-            </button>
+            </a>
           </form>
         </div>
       </div>
