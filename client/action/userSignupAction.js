@@ -1,11 +1,4 @@
-import { USER_LOGIN } from '../constants/action-types';
-
-export const userLogin = user => {
-  return {
-    type: USER_LOGIN,
-    user
-  };
-};
+import { userLogin } from './userSigninAction';
 export default userSignup => dispatch => {
   return fetch(`/api/v1/auth/signup`, {
     method: 'POST',
@@ -14,7 +7,10 @@ export default userSignup => dispatch => {
   })
     .then(res => res.json())
     .then(res => {
-      
+      if (res.message === 'user created successfully') {
+        dispatch(userLogin(res.data));
+        localStorage.setItem('token', res.data.token);
+      }
       return res;
     });
 };

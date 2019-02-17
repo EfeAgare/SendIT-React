@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import '../../UI/css/sign.css';
+import TextFieldGroup from './common/TextFieldGroup';
+
 
 class SignupForm extends Component {
   constructor(props) {
@@ -27,7 +29,7 @@ class SignupForm extends Component {
     event.preventDefault();
     this.props.userSignup(this.state).then(res => {
       res.message !== 'user created successfully'
-        ? this.setState({ errors: res.errors || res.message})
+        ? this.setState({ errors: res.errors || res.message })
         : this.props.history.push('/');
     });
   }
@@ -41,63 +43,45 @@ class SignupForm extends Component {
           <form className="form-box" onSubmit={this.onSubmit}>
             <p id="messageText" />
             <label htmlFor="username" />
-            <div className="input-row">
-              <input
-                type="text"
-                name="username"
-                onChange={this.handleChange}
-                value={this.state.username}
-                className="input-box"
-                placeholder="username"
-              />
-            </div>
+            <TextFieldGroup
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.username}
+              field="username"
+            />
+
             <label htmlFor="lastname" />
-            <div className="input-row">
-              <input
-                type="text"
-                name="lastname"
-                onChange={this.handleChange}
-                value={this.state.lastname}
-                className="input-box"
-                placeholder="lastname"
-              />
-            </div>
+            <TextFieldGroup
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.lastname}
+              field="lastname"
+            />
             <label htmlFor="email" />
-            <div className="input-row">
-              <input
-                type="text"
-                name="email"
-                onChange={this.handleChange}
-                value={this.state.email}
-                className="input-box"
-                placeholder="example@good.com"
-              />
-            </div>
+            <TextFieldGroup
+              type="email"
+              onChange={this.handleChange}
+              value={this.state.email}
+              field="email"
+            />
             <label htmlFor="password" />
-            <div className="input-row">
-              <input
-                type="password"
-                name="password"
-                onChange={this.handleChange}
-                value={this.state.password}
-                className="input-box"
-                placeholder="Password"
-              />
-            </div>
+            <TextFieldGroup
+              type="password"
+              onChange={this.handleChange}
+              value={this.state.password}
+              field="password"
+            />
             <label htmlFor="passwordConfirmation" />
-            <div className="input-row">
-              <input
-                type="password"
-                name="passwordConfirmation"
-                className="input-box"
-                placeholder="Password Confirmation"
-                onChange={this.handleChange}
-                value={this.state.passwordConfirmation}
-              />
-            </div>
-            <button id="submit-btn" className="submit-btn">
+            <TextFieldGroup
+              type="password"
+              onChange={this.handleChange}
+              value={this.state.passwordConfirmation}
+              field="passwordConfirmation"
+            />
+           
+            <a id="submit-btn" className="submit-btn" onClick={this.onSubmit}>
               Create Your Account
-            </button>
+            </a>
           </form>
         </div>
       </div>
