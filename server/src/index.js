@@ -33,7 +33,7 @@ app.use((req, res, next) => {
   }
   next();
 });
-app.use('/', express.static('UI'));
+// app.use('/', express.static('UI'));
 app.get('/api/v1/', (req, res) => {
   res
     .status(200)
@@ -50,8 +50,8 @@ app.use('/api/v1/', userRoute);
 app.use(express.static(path.resolve(__dirname, '../../dist')));
 
 // handling react router, for request to react app
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../dist/index.html'));
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../client/public/index.html'));
 });
 app.use((req, res, next) => {
   const error = new Error("We can't find the page you are looking for");
