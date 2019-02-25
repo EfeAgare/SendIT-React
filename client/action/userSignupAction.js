@@ -10,7 +10,11 @@ export default userSignup => dispatch => {
       if (res.message === 'user created successfully') {
         dispatch(userLogin(res.data));
         localStorage.setItem('token', res.data.token);
+        localStorage.setItem('userid', res.data.id);
       }
       return res;
+    })
+    .catch(error => {
+      throw error;
     });
 };

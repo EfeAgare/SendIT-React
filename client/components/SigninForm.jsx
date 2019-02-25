@@ -36,7 +36,7 @@ class SigninForm extends Component {
     this.props.userSignin(this.state).then(res => {
       res.message !== 'Login successful'
         ? this.setState({ error: res.errors || res.message })
-        : this.props.history.push('/');
+        : this.props.history.push('/profile');
     });
   }
   openModal() {

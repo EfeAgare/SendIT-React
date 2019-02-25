@@ -15,7 +15,7 @@
 a{
     text-decoration: none;
     color: black;
-    font-family: 'Roboto', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
 }
 .profile-clear {
     width: 60%;
@@ -70,7 +70,7 @@ a{
   /**
   drop down for user
   */
-  .dropbtn::after {
+  .dropbtn:after {
     content: "\2807";
     font-size: 120%;
   }

@@ -1,12 +1,11 @@
-import { USER_LOGIN } from '../constants/action-types';
+import { SET_CURRENT_USER } from '../constants/action-types';
 
 export const userLogin = user => {
   return {
-    type: USER_LOGIN,
+    type: SET_CURRENT_USER,
     user
   };
 };
-
 
 export default userSignin => dispatch => {
   return fetch(`/api/v1/auth/login`, {
@@ -19,8 +18,11 @@ export default userSignin => dispatch => {
       if (res.message === 'Login successful') {
         dispatch(userLogin(res.data));
         localStorage.setItem('token', res.data.token);
-      
-      } 
+        localStorage.setItem('userid', res.data.id);
+      }
       return res;
+    })
+    .catch(error => {
+      throw error;
     });
 };

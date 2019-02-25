@@ -1,4 +1,4 @@
-const resetPasswordEmail=(email) => dispatch => {
+const resetPasswordEmail = email => dispatch => {
   return fetch(`/api/v1/users/auth/resetpassword`, {
     method: 'POST',
     headers: { 'content-type': 'application/json', Accept: 'application/json' },
@@ -7,6 +7,9 @@ const resetPasswordEmail=(email) => dispatch => {
     .then(res => res.json())
     .then(res => {
       return res;
+    })
+    .catch(error => {
+      throw error;
     });
 };
-export default resetPasswordEmail
+export default resetPasswordEmail;
