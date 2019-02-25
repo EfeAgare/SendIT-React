@@ -35,6 +35,7 @@ let register = {
   lastname:'lastname',
   email: 'email@email.com',
   password: '123agare',
+  passwordConfirmation:"123agare"
 };
 
 describe('/GET WELCOME PAGE', () => {
@@ -74,6 +75,7 @@ describe('/POST Register', () => {
   
   it('it should not Register if password is not in right format', (done) => {
     register.password = '1111';
+    register.passwordConfirmation = '1111';
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send(register) 
@@ -351,7 +353,7 @@ describe('/PUT', () => {
 describe('/GET catch all errors', () => {
   it('it should catch all errors', (done) => {
     chai.request(app)
-      .get('/api/v1/dfthhyree')
+      .post('/api/v1/dfthhyree')
       .end((err, res) => {
         assert.equal(res.status, 404);
         assert.typeOf(res.body, 'object');

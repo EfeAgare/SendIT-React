@@ -12,18 +12,24 @@ class SignupPage extends Component {
     return (
       <React.Fragment>
         <Header />
-        <SignupForm userSignup={userSignup} />
+        <SignupForm userSignup={userSignup} user={this.props.user} />
         <Footer />
       </React.Fragment>
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    user: state.user.detail,
+    parcels: state.parcels
+  };
+};
 
 SignupPage.propTypes = {
   userSignup: PropTypes.func.isRequired
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   { userSignup }
 )(SignupPage);

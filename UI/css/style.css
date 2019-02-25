@@ -1,501 +1,499 @@
+html {
+  height: 100%;
+  
+}
+/* body {
+  min-height: 100%;
+} */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    background-color: white;
-    color: #000000;
-    margin: 0;
-  }
-  header {
-    display: block;
-    overflow: hidden;
-    background-color: #efefef;
-  }
-  header a {
-    float: left;
-    color:black;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: white;
+  color: #000000;
+}
+header {
+  display: block;
+  overflow: hidden;
+  background-color: #efefef;
+}
+header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  margin: 10px;
+  margin-left: 20px;
+  text-decoration: none;
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: bold;
+}
+
+header a.logo {
+  font-family: 'Berkshire Swash', cursive;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+header a:hover {
+  color: black;
+}
+
+header a.active {
+  background-color: #f1f1f1;
+  color: black;
+}
+.icon {
+  display: none;
+}
+
+header .header-right {
+  float: right;
+}
+
+.header-clear::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.navbar {
+  overflow: hidden;
+
+  float: left;
+}
+
+.imageprofie {
+  border-radius: 50%;
+  height: 40px;
+  margin-top: 15px;
+}
+#documentation {
+  display: flex;
+  justify-content: left;
+  font-size: 110%;
+  margin-left: 2%;
+  color: black;
+  text-decoration: none;
+}
+#documentation:hover {
+  cursor: pointer;
+}
+
+.hero-section {
+  background: url('../Images/hero3.jpg') 70% no-repeat;
+  background-size: cover;
+  height: 85vh;
+  text-align: center;
+  opacity: 6;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-section .hero-section-text {
+  margin-top: auto;
+  color: #fefefe;
+  text-shadow: 1px 1px 2px #0a0a0a;
+}
+.hero-section .hero-section-text h1 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  margin-bottom: 0%;
+}
+.hero-section .hero-section-text p {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: auto;
+  font-weight: bolder;
+  text-transform: capitalize;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+section h1 {
+  font-family: 'Berkshire Swash', cursive;
+  text-align: center;
+  margin-top: 50px;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+.line {
+  width: 10%;
+}
+section .direction {
+  display: block;
+  overflow: hidden;
+  width: 80%;
+}
+
+section .section-two-p1 {
+  float: left;
+  width: 30%;
+  text-align: center;
+  margin: 2%;
+  margin-left: 300px;
+  padding: 2%;
+  box-shadow: 0 0 5px #bdbdbd;
+  height: 150px;
+}
+section .section-two-p2 {
+  float: right;
+  width: 30%;
+  text-align: center;
+  margin: 2%;
+  padding: 2%;
+  box-shadow: 0 0 5px #bdbdbd;
+  height: 150px;
+}
+section .section-two-p3 {
+  float: right;
+  width: 30%;
+  text-align: center;
+  margin: 2%;
+  padding: 2%;
+  box-shadow: 0 0 5px #bdbdbd;
+  height: 150px;
+}
+section .section-two-p4 {
+  float: left;
+  width: 30%;
+  text-align: center;
+  margin: 2%;
+  margin-left: 300px;
+  padding: 2%;
+  box-shadow: 0 0 5px #bdbdbd;
+  height: 150px;
+}
+#get-started {
+  margin: 5%;
+  display: flex;
+  justify-content: center;
+  font-size: 170%;
+}
+#get-started a {
+  cursor: pointer;
+  color: #fff;
+  background-color: #4caf50;
+  border-color: #999;
+  border-radius: 3px;
+  padding: 3px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+}
+section::after {
+  content: '';
+  clear: both;
+  display: block;
+}
+
+.order-footer {
+  position: absolute;
+  width: 100%;
+  padding: 1rem;
+  background-color: #efefef;
+  color: black;
+  border-radius: 0;
+  text-align: center;
+  font-family: 'Berkshire Swash', cursive;
+}
+
+@media screen and (max-width: 1098px) {
+  .section-one p {
+    font-family: 'Overlock', cursive;
+    font-size: 30px;
     text-align: center;
-    padding: 12px;
-    margin: 10px;
-    margin-left: 20px;
-    text-decoration: none;
-    font-size: 15px;
-    line-height: 20px;
-    font-weight: bold;
+    margin-top: 100px;
   }
-    
-  header a.logo {
-    font-family: "Berkshire Swash", cursive;
-    font-size: 35px;
-    font-weight: bold;
-  }
-  
-  header a:hover {
-    color: black;
-  }
-  
-  header a.active {
-    background-color: #f1f1f1;
-    color: black;
-  }
-  .icon{
-    display:none;
+  .hero-section {
+    height: 100vh;
+    background: url('../Images/hero3.jpg') 70% no-repeat;
+    background-size: cover;
   }
 
-  header .header-right {
-    float: right;
+  .navbar {
+    display: none;
   }
-  
   .header-clear::after {
-    content: "";
+    content: '';
     display: table;
     clear: both;
   }
-  
-  .navbar {
-    overflow: hidden;
-  
-    float: left;
-  }
- 
-  .imageprofie {
-    border-radius: 50%;
-    height: 40px;
-    margin-top: 15px;
-  }
-  #documentation {
-    display:flex;
-    justify-content: left;
-    font-size: 110%;
-    margin-left: 2%;
-    color: black;
-    text-decoration: none;
-    }
-  #documentation:hover{
-    cursor: pointer;
-  }
-    
-  .hero-section {
-    background: url("../Images/hero3.jpg") 70% no-repeat;
-    background-size: cover;
-    height: 85vh;
-    text-align: center;
-    opacity: 6;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .hero-section .hero-section-text {
-    margin-top: auto;
-    color: #fefefe;
-    text-shadow: 1px 1px 2px #0a0a0a;
-  }
-  .hero-section .hero-section-text h1 {
-    width:100%;
-    display: flex;
-    justify-content: center;
-    margin-top: auto;
-    margin-bottom: 0%;
-   
-  }
-  .hero-section .hero-section-text p {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: auto;
-    font-weight: bolder;
-    text-transform: capitalize;
-  }
-  
-  * {
-    box-sizing: border-box;
-  }
- 
-   
-  section h1 {
-    font-family: "Berkshire Swash", cursive;
-    text-align: center;
-    margin-top: 50px;
-    margin-left: 30%;
-    margin-right: 30%;
-  }
-  .line {
-    width: 10%;
-  }
-  section .direction {
-    display: block;
-    overflow: hidden;
-    width: 80%;
-  }
-  
   section .section-two-p1 {
     float: left;
     width: 30%;
     text-align: center;
-    margin: 2%;
-    margin-left: 300px;
-    padding: 2%;
+    padding: 4%;
+    margin-left: 30%;
     box-shadow: 0 0 5px #bdbdbd;
-    height: 150px;
+    height: 200px;
   }
   section .section-two-p2 {
     float: right;
     width: 30%;
     text-align: center;
-    margin: 2%;
-    padding: 2%;
+    padding: 4%;
     box-shadow: 0 0 5px #bdbdbd;
-    height: 150px;
+    height: 200px;
   }
   section .section-two-p3 {
     float: right;
     width: 30%;
     text-align: center;
-    margin: 2%;
-    padding: 2%;
+    padding: 4%;
     box-shadow: 0 0 5px #bdbdbd;
-    height: 150px;
+    height: 200px;
   }
   section .section-two-p4 {
     float: left;
     width: 30%;
     text-align: center;
-    margin: 2%;
-    margin-left: 300px;
+    margin-left: 30%;
+    padding: 4%;
+    box-shadow: 0 0 5px #bdbdbd;
+    height: 200px;
+  }
+  section h1 {
+    font-family: 'Berkshire Swash', cursive;
+    text-align: center;
+    margin-left: 30%;
+    margin-right: 30%;
+  }
+
+  section .direction {
+    display: block;
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  header a {
+    width: 40%;
+  }
+  header a.icon {
+    width: 10%;
+  }
+  header .header-right {
+    float: none;
+    width: 100%;
+    margin: 5%;
+  }
+  header a.logo {
+    margin-left: 30%;
+  }
+  .section-one p {
+    font-family: 'Overlock', cursive;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 100px;
+  }
+  .icon {
+    display: block;
+  }
+
+  .header-right #myLinks {
+    display: none;
+  }
+
+  /* Style navigation menu links */
+  .header-right a {
+    color: black;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 13px;
+    display: block;
+  }
+
+  /* Style the hamburger menu */
+  .header-right a.icon {
+    background: gray;
+    color: white;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  /* Add a grey background color on mouse-over */
+  .header-right a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  .hero-section {
+    height: 60vh;
+    background: url('../Images/hero3.jpg') 70% no-repeat;
+    background-size: cover;
+  }
+
+  .navbar {
+    display: none;
+  }
+  .header-clear::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  section h1 {
+    font-family: 'Berkshire Swash', cursive;
+    text-align: center;
+    margin-left: 30%;
+    margin-right: 30%;
+  }
+
+  section .direction {
+    display: block;
+    overflow: hidden;
+  }
+
+  section .section-two-p1 {
+    float: none;
+    width: 80%;
+    text-align: center;
+    margin: 19%;
+    margin-top: 2%;
+    margin-bottom: 0;
     padding: 2%;
     box-shadow: 0 0 5px #bdbdbd;
     height: 150px;
-  }    
-  #get-started{
-    margin: 5%;
-    display: flex;
-    justify-content: center;
-    font-size: 170%;
   }
-  #get-started a {
-    cursor: pointer;
-    color: #fff;
-    background-color: #4CAF50;
-    border-color: #999;
-    border-radius: 3px;
-    padding: 3px 20px;
-    border-radius: 25px;
-    text-decoration: none;
+  section .section-two-p2 {
+    float: none;
+    width: 80%;
+    text-align: center;
+    margin: 19.2%;
+    margin-top: 2%;
+    margin-bottom: 0;
+    padding: 2%;
+    box-shadow: 0 0 5px #bdbdbd;
+    height: 150px;
+  }
+  section .section-two-p3 {
+    float: none;
+    width: 80%;
+    text-align: center;
+    margin: 19.2%;
+    margin-top: 2%;
+    margin-bottom: 0;
+    padding: 2%;
+    box-shadow: 0 0 5px #bdbdbd;
+    height: 150px;
+  }
+  section .section-two-p4 {
+    float: none;
+    width: 80%;
+    text-align: center;
+    margin: 19.2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding: 2%;
+    box-shadow: 0 0 5px #bdbdbd;
+    height: 150px;
+  }
 }
-  section::after {
-    content: "";
+@media screen and (max-width: 450px) {
+  header a.logo {
+    width: 90%;
+    margin-left: 0%;
+  }
+  .navbar {
+    display: none;
+  }
+  .hero-section {
+    height: 60vh;
+    background: url('../Images/hero3.jpg') 70% no-repeat;
+    background-size: cover;
+  }
+
+  .section-one p {
+    font-family: 'Overlock', cursive;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 100px;
+  }
+  .header-clear::after {
+    content: '';
+    display: table;
     clear: both;
-    display: block;
   }
- 
-  .order-footer{
-    position: absolute;
+
+  .box-one {
+    width: 70%;
+    box-shadow: 2px 3px 8px grey;
+  }
+
+  .box-two {
+    float: none;
+    margin-top: 10px;
+    text-align: center;
+    width: 90%;
+    box-shadow: none;
+    margin-left: 0px;
+  }
+
+  .box-three {
+    text-align: center;
     width: 100%;
-    padding: 1rem;
-    background-color: #efefef;
-    color: black;
-    border-radius: 0;
-    text-align: center;
-    font-family: "Berkshire Swash", cursive;
+    margin-left: 0px;
+    box-shadow: none;
   }
-  
-  @media screen and (max-width: 1098px) {
-    .section-one p {
-      font-family: "Overlock", cursive;
-      font-size: 30px;
-      text-align: center;
-      margin-top: 100px;
-    }
-    .hero-section {
-        height: 100vh;
-        background: url("../Images/hero3.jpg") 70% no-repeat;
-        background-size: cover;
-    }
-    
-  
-    .navbar {
-      display: none;
-    }
-    .header-clear::after {
-      content: "";
-      display: table;
-      clear: both;
-    }
-    section .section-two-p1 {
-      float: left;
-    width: 30%;
+
+  .box-four {
+    width: 100%;
+    margin: 5%;
+    box-shadow: 2px 3px 8px grey;
+  }
+
+  section h1 {
+    font-family: 'Berkshire Swash', cursive;
     text-align: center;
-    padding: 4%;
     margin-left: 30%;
-    box-shadow: 0 0 5px #bdbdbd;
-    height: 200px;
-    }
-    section .section-two-p2 {
-      float: right;
-    width: 30%;
+    margin-right: 30%;
+  }
+
+  section .direction {
+    display: block;
+    overflow: hidden;
+  }
+
+  section .section-two-p1 {
+    float: none;
+    width: 80%;
     text-align: center;
-    padding: 4%;
+    margin: 19%;
+    padding: 2%;
     box-shadow: 0 0 5px #bdbdbd;
-    height: 200px;
-    }
-    section .section-two-p3 {
-      float: right;
-      width: 30%;
-      text-align: center;
-      padding: 4%;
-      box-shadow: 0 0 5px #bdbdbd;
-      height: 200px;
-    }
-    section .section-two-p4 {
-      float: left;
-      width: 30%;
-      text-align: center;
-      margin-left: 30%;
-      padding: 4%;
-      box-shadow: 0 0 5px #bdbdbd;
-      height: 200px;
-    }    
-    section h1 {
-      font-family: "Berkshire Swash", cursive;
-      text-align: center;
-      margin-left: 30%;
-      margin-right: 30%;
-    }
-  
-    section .direction {
-      display: block;
-      overflow: hidden;
-    }
-  
+    height: 150px;
   }
-  
-  @media screen and (max-width: 750px) {
-    header a {
-      width: 40%;
-    }
-    header a.icon {
-      width: 10%;
-    }
-    header .header-right {
-      float: none;
-      width: 100%;
-      margin: 5%;
-    }
-    header a.logo {
-      margin-left: 30%;
-    }
-    .section-one p {
-      font-family: "Overlock", cursive;
-      font-size: 30px;
-      text-align: center;
-      margin-top: 100px;
-    }
-    .icon{
-      display:block;
-    }
-
-    .header-right #myLinks {
-  display: none;
+  section .section-two-p2 {
+    float: none;
+    width: 80%;
+    text-align: center;
+    margin: 19%;
+    padding: 2%;
+    box-shadow: 0 0 5px #bdbdbd;
+    height: 150px;
+  }
+  section .section-two-p3 {
+    float: none;
+    width: 80%;
+    text-align: center;
+    margin: 19%;
+    padding: 2%;
+    box-shadow: 0 0 5px #bdbdbd;
+    height: 150px;
+  }
+  section .section-two-p4 {
+    float: none;
+    width: 80%;
+    text-align: center;
+    margin: 19%;
+    padding: 2%;
+    box-shadow: 0 0 5px #bdbdbd;
+    height: 150px;
+  }
 }
-
-/* Style navigation menu links */
-.header-right a {
-  color: black;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 13px;
-  display: block;
-}
-
-/* Style the hamburger menu */
-.header-right a.icon {
-  background:gray;
-  color:white;
-  display: block;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-
-/* Add a grey background color on mouse-over */
-.header-right a:hover {
-  background-color: #ddd;
-  color: black;
-}
-    .hero-section {
-      height: 60vh;
-      background: url("../Images/hero3.jpg") 70% no-repeat;
-      background-size: cover;
-  }
-  
-    .navbar {
-      display: none;
-    }
-    .header-clear::after {
-      content: "";
-      display: table;
-      clear: both;
-    }
-   
-    section h1 {
-      font-family: "Berkshire Swash", cursive;
-      text-align: center;
-      margin-left: 30%;
-      margin-right: 30%;
-    }
-  
-    section .direction {
-      display: block;
-      overflow: hidden;
-    }
-  
-    section .section-two-p1 {
-      float: none;
-      width: 80%;
-      text-align: center;
-      margin: 19%;
-      margin-top:2%;
-      margin-bottom:0;
-      padding: 2%;
-      box-shadow: 0 0 5px #bdbdbd;
-      height: 150px;
-    }
-    section .section-two-p2 {
-      float: none;
-      width: 80%;
-      text-align: center;
-      margin: 19.2%;
-      margin-top:2%;
-      margin-bottom:0;
-      padding: 2%;
-      box-shadow: 0 0 5px #bdbdbd;
-      height: 150px;
-    }
-    section .section-two-p3 {
-      float: none;
-      width: 80%;
-      text-align: center;
-      margin: 19.2%;
-      margin-top:2%;
-      margin-bottom:0;
-      padding: 2%;
-      box-shadow: 0 0 5px #bdbdbd;
-      height: 150px;
-    }
-    section .section-two-p4 {
-      float: none;
-      width: 80%;
-      text-align: center;
-      margin: 19.2%;
-      margin-top:2%;
-      margin-bottom:2%;
-      padding: 2%;
-      box-shadow: 0 0 5px #bdbdbd;
-      height: 150px;
-    }    
-  
-  }
-  @media screen and (max-width: 450px) {
-    header a.logo {
-      width: 90%;
-      margin-left: 0%;
-    }
-    .navbar {
-      display: none;
-    }
-    .hero-section {
-      height: 60vh;
-      background: url("../Images/hero3.jpg") 70% no-repeat;
-      background-size: cover;
-  }
-  
-    .section-one p {
-      font-family: "Overlock", cursive;
-      font-size: 30px;
-      text-align: center;
-      margin-top: 100px;
-    }
-    .header-clear::after {
-      content: "";
-      display: table;
-      clear: both;
-    }
-  
-    .box-one {
-      width: 70%;
-      box-shadow: 2px 3px 8px grey;
-    }
-  
-    .box-two {
-      float: none;
-      margin-top: 10px;
-      text-align: center;
-      width: 90%;
-      box-shadow: none;
-      margin-left: 0px;
-    }
-  
-    .box-three {
-      text-align: center;
-      width: 100%;
-      margin-left: 0px;
-      box-shadow: none;
-    }
-  
-    .box-four {
-      width: 100%;
-      margin: 5%;
-      box-shadow: 2px 3px 8px grey;
-    }
-  
-    section h1 {
-      font-family: "Berkshire Swash", cursive;
-      text-align: center;
-      margin-left: 30%;
-      margin-right: 30%;
-    }
-  
-    section .direction {
-      display: block;
-      overflow: hidden;
-    }
-  
-    section .section-two-p1 {
-      float: none;
-      width: 80%;
-      text-align: center;
-      margin: 19%;
-      padding: 2%;
-      box-shadow: 0 0 5px #bdbdbd;
-      height: 150px;
-    }
-    section .section-two-p2 {
-      float: none;
-      width: 80%;
-      text-align: center;
-      margin: 19%;
-      padding: 2%;
-      box-shadow: 0 0 5px #bdbdbd;
-      height: 150px;
-    }
-    section .section-two-p3 {
-      float: none;
-      width: 80%;
-      text-align: center;
-      margin: 19%;
-      padding: 2%;
-      box-shadow: 0 0 5px #bdbdbd;
-      height: 150px;
-    }
-    section .section-two-p4 {
-      float: none;
-      width: 80%;
-      text-align: center;
-      margin: 19%;
-      padding: 2%;
-      box-shadow: 0 0 5px #bdbdbd;
-      height: 150px;
-    }    
-  
-
-  }
-  

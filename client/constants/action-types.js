@@ -1,2 +1,3 @@
-export const USER_SIGNUP = 'USER_SIGNUP'
-export const USER_LOGIN = 'USER_LOGIN'
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const LOAD_PARCEL_ORDER = 'LOAD_PARCEL_ORDER';
+export const CREATE_PARCEL = 'CREATE_PARCEL ';

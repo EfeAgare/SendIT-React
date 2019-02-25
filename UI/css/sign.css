@@ -114,7 +114,7 @@
   height: 100%;
 }
 .modal-dest {
-  display: none;
+  /* display: none; */
   position: fixed;
   background-color: rgb(0, 0, 0, 0.4);
   z-index: 1;
@@ -162,12 +162,13 @@
   outline: none;
 }
 #dest-btn {
-  margin-top: 6%;
+  margin-top: 10%;
   border-radius: 6px;
   padding: 1% 2%;
-  background-color: #0b2240;
+  background-color: #4caf50;
   color: white;
   float: right;
+  outline: none;
 }
 .clearfix {
   overflow: auto;
@@ -184,10 +185,11 @@
   border-radius: 6px;
 }
 .dest-container {
-  border: solid 2px tomato;
+  border: solid 2px #4caf50;;
   padding: 0 5px;
   margin-top: 10px;
   border-radius: 6px;
+  outline: none;
 }
 .email-container input {
   border: none;
@@ -204,6 +206,7 @@
   font-size: 110%;
   padding: 5px;
   width: 85%;
+  outline: none;
   height: 30px;
 }
 .email-container i {
@@ -241,9 +244,19 @@
 #forgot-pswd:hover {
   color: #42a5f5;
 }
-footer {
+footer,
+.footer-login {
   position: absolute;
   bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+  font-family: 'Berkshire Swash', cursive;
+}
+.footer-order{
+  position: absolute;
   left: 0;
   right: 0;
   padding: 1rem;
@@ -260,10 +273,8 @@ footer {
     margin-right: 20%;
   }
   .signup {
-    width: 50%;
     float: none;
-    margin-left: 100px;
-    margin-right: 30px;
+    margin-left: 200px;
     margin-bottom: 50px;
   }
   .signin-text {
@@ -272,12 +283,15 @@ footer {
     width: 80%;
   }
   footer {
-    bottom: unset;
+    /* bottom: unset; */
     padding: 1rem;
     background-color: #efefef;
     text-align: center;
     font-family: 'Berkshire Swash', cursive;
   }
+  /* .footer-login {
+    bottom: unset;
+  } */
 }
 
 @media screen and (max-width: 750px) {
@@ -297,12 +311,15 @@ footer {
     width: 80%;
   }
   footer {
-    bottom: unset;
+    /* bottom: unset; */
     padding: 1rem;
     background-color: #efefef;
     text-align: center;
     font-family: 'Berkshire Swash', cursive;
   }
+  /* .footer-login{
+    bottom: unset;
+  } */
 }
 
 @media screen and (max-width: 450px) {
@@ -323,10 +340,13 @@ footer {
     width: 80%;
   }
   footer {
-    bottom: unset;
+    /* bottom: unset; */
     padding: 1rem;
     background-color: #efefef;
     text-align: center;
     font-family: 'Berkshire Swash', cursive;
   }
+  /* .footer-login {
+    bottom: unset;
+  } */
 }

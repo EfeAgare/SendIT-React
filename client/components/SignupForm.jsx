@@ -30,7 +30,7 @@ class SignupForm extends Component {
     this.props.userSignup(this.state).then(res => {
       res.message !== 'user created successfully'
         ? this.setState({ errors: res.errors || res.message })
-        : this.props.history.push('/');
+        : this.props.history.push('/profile');
     });
   }
   render() {
@@ -88,6 +88,7 @@ class SignupForm extends Component {
     );
   }
 }
+
 SignupForm.propTypes = {
   userSignup: PropTypes.func.isRequired
 };

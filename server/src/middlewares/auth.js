@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 
 class Auth {
   /**
-   * Verify Token 
+   * Verify Token
    * @param {object} req - client request object
    * @param {object} res - server response object
    * @param {object} next - route
@@ -10,18 +10,22 @@ class Auth {
    */
   static verifyToken(req, res, next) {
     const token = req.headers['x-access-token'];
-    if(!token) {
-      return res.status(400).send({ 'message': 'Token is not provided' });
+    if (!token) {
+      return res.status(400).send({ message: 'Token is not provided' });
     }
-    try{
-        const decoded = jwt.verify(token, process.env.SECRET);
-        req.user = { id: decoded.userId, role: decoded.role };
-        next(); 
-       } catch(error){
-           return res.status(401).json({
-               message: 'Authentication Failed'
-           });
-       }  
+    try {
+      const decoded = jwt.verify(token, process.env.SECRET);
+      req.user = {
+        id: decoded.userId,
+        role: decoded.role,
+        username: decoded.name
+      };
+      next();
+    } catch (error) {
+      return res.status(401).json({
+        message: 'Authentication Failed'
+      });
+    }
   }
 }
 

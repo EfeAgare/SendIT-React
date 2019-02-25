@@ -1,16 +1,13 @@
-import { USER_LOGIN, USER_SIGNUP } from '../constants/action-types';
+import { SET_CURRENT_USER } from '../constants/action-types';
 
-const userReducer = (state = {}, action) => {
+const userReducer = (state = {
+  detail: { name: ''}
+}, action) => {
   switch (action.type) {
-    case USER_SIGNUP:
+    case SET_CURRENT_USER:
       return {
-        ...state,
-        user: Object.assign({}, action.user)
-      };
-    case USER_LOGIN:
-      return {
-        ...state,
-        user: Object.assign({}, action.user)
+        isAuthenticated: action.isAuthenticated || true,
+        detail: Object.assign({}, action.user)
       };
     default:
       return state;

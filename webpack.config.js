@@ -1,9 +1,10 @@
+
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
-  entry: './client/index.js',
+  entry: ['@babel/polyfill', './client/index.js'],
   output: {
     path: path.resolve(__dirname, 'dist/'),
 
@@ -22,7 +23,7 @@ const config = {
       {
         test: /\.(js|jsx)$/,
         include: path.join(__dirname, 'client'),
-        exclude: /(node_modules|bower_components)/,
+        exclude: /(node_modules)/,
         loader: 'babel-loader',
         options: { presets: ['@babel/env'] }
       },
