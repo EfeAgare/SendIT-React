@@ -1,32 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../UI/css/style.css';
+import Header from './Header';
 
 const Home = props => {
   return (
     <div>
-      <div className="header-clear">
-        <header>
-          <Link to="/" className="logo">
-            {' '}
-            SendIT
-          </Link>
-          <div className="header-right">
-            <div id="myLinks" className="myLinks">
-              <Link to="/" className="active">
-                {' '}
-                HOME
-              </Link>
-              <Link to="/signin"> LOGIN</Link>
-              <Link to="/signup"> SIGN UP</Link>
-              <Link to="/order"> ORDER PARCEL</Link>
-            </div>
-            <a className="icon">
-              <i className="fa fa-bars" />
-            </a>
-          </div>
-        </header>
-      </div>
+     <Header/>
       <div className="hero-section">
         <div className="hero-section-text">
           <h1>SEND IT ANYWHERE</h1>
@@ -70,7 +50,9 @@ const Home = props => {
       </section>
 
       <div id="get-started">
-        <a href="">GET STARTED</a>
+        <Link to="/signup" href="">
+          GET STARTED
+        </Link>
       </div>
 
       <div className="order-footer">

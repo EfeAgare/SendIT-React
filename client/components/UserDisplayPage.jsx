@@ -7,6 +7,7 @@ import '../../UI/css/order.css';
 import '../../UI/css/allparcel.css';
 import ParcelListRow from './ParcelListRow';
 
+import Header from './Header';
 class UserDisplayPage extends Component {
   constructor() {
     super();
@@ -49,26 +50,7 @@ class UserDisplayPage extends Component {
     });
     return (
       <div>
-        <div className="header-clear">
-          <header>
-            <Link to="/" className="logo">
-              {' '}
-              SendIT
-            </Link>
-            <div className="header-right">
-              <div id="myLinks">
-                <Link to="/" className="active">
-                  HOME
-                </Link>
-                <Link to="/logout"> LOG OUT</Link>
-                <Link to="/order">ORDER PARCEL</Link>
-              </div>
-              <a href="javascript:void(0);" className="icon">
-                <i className="fa fa-bars" />
-              </a>
-            </div>
-          </header>
-        </div>
+       <Header/>
         <div id="content">
           <aside>
             <div className="aside">

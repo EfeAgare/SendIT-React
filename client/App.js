@@ -9,6 +9,7 @@ import UserPage from './components/UserPage';
 import CreateParcel from './components/CreateParcel';
 import { SET_CURRENT_USER } from './constants/action-types';
 import store from './store/configureStore';
+import requireAuth from './utils/Authenticate';
 
 if (localStorage.getItem('token')) {
   // Set auth token header auth
@@ -27,10 +28,11 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <Route exact path="/" component={Home} />
+          <Route exact path="/logout" component={Home} />
           <Route exact path="/signup" component={SignupPage} />
           <Route exact path="/signin" component={SigninPage} />
-          <Route exact path="/profile" component={UserPage} />
-          <Route exact path="/order" component={CreateParcel} />
+          <Route exact path="/profile" component={requireAuth(UserPage)} />
+          <Route exact path="/order" component={requireAuth(CreateParcel)} />
         </div>
       </BrowserRouter>
     );
