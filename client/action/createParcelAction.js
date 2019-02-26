@@ -1,9 +1,9 @@
 import { CREATE_PARCEL } from '../constants/action-types';
 
-export const createParcelOrder = parcel => {
+export const createParcelOrder = parcels => {
   return {
     type: CREATE_PARCEL,
-    parcel
+    parcels
   };
 };
 

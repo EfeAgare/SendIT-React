@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import '../../UI/css/sign.css';
 import '../../UI/css/order.css';
 import '../../UI/css/style.css';
+import Header from './Header';
 import TextFieldGroup from './common/TextFieldGroup';
 import parcelOrder from '../action/createParcelAction';
 class CreateParcel extends Component {
@@ -41,15 +42,7 @@ class CreateParcel extends Component {
     const { error } = this.state;
     return (
       <div>
-        <div className="header-clear">
-          <header>
-            <Link to="/" className="logo">
-              {' '}
-              SendIT
-            </Link>
-            <div className="header-right" />
-          </header>
-        </div>
+        <Header />
         <div id="content-parcel">
           <aside>
             <div className="aside">

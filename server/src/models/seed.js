@@ -16,7 +16,6 @@ client.connect();
 client
   .query(textConfirm, values)
   .then(result => {
-    console.log(result);
     client.end();
   })
   .catch(err => {
