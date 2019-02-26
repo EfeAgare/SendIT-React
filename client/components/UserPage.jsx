@@ -32,7 +32,7 @@ class UserPage extends Component {
 }
 const mapStateToProps = state => {
   return {
-    user: state.user.detail,
+    user: state.user,
     parcels: state.parcels
   };
 };

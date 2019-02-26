@@ -6,7 +6,8 @@ export const ChangeParcelDestination = ({
   changeDestination,
   deliveryAddress,
   textMessage,
-  handleChange
+  handleChange,
+  parcelId
 }) => (
   <div onClick={closeModal} className="modal">
     <div className="modal-content clearfix">
@@ -28,20 +29,28 @@ export const ChangeParcelDestination = ({
             onChange={handleChange}
             autoFocus
           />
-          <button id="dest-btn" type="submit" onClick={changeDestination}>
+          <button
+            id="dest-btn"
+            type="submit"
+            onClick={() => changeDestination(deliveryAddress, parcelId)}
+          >
             Submit
           </button>
         </form>
       </div>
+      {textMessage.message && (
+        <p
+          id="modal-messageText"
+          style={{
+            color: textMessage.color,
+            fontSize: 12,
+            textAlign: 'center'
+          }}
+          className="text-center"
+        >
+          {textMessage.message}
+        </p>
+      )}
     </div>
-    {textMessage.message && (
-      <p
-        id="modal-messageText"
-        style={{ color: textMessage.color, fontSize: 12 }}
-        className="text-center"
-      >
-        {textMessage.message}
-      </p>
-    )}
   </div>
 );

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import createHistory from 'history/createBrowserHistory';
 import '../../UI/css/allparcel.css';
 import { CancelParcelOrder } from './CancelParcelOrder';
 import { ChangeParcelDestination } from './ChangeParcelDestination';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { dateFormat, newDateFormat } from './DateFormat';
+import { cancelParcel } from '../action/cancelParcelAction';
+import changeDestination from '../action/parcelDestinationAction';
 
 class ParcelListRow extends Component {
   constructor(props) {
@@ -18,10 +21,11 @@ class ParcelListRow extends Component {
       }
     };
     this.handleChange = this.handleChange.bind(this);
-
     this.openModal = this.openModal.bind(this);
     this.openCancelModal = this.openCancelModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+    this.handleDestination = this.handleDestination.bind(this);
   }
   handleChange(event) {
     const { name, value } = event.target;
@@ -29,20 +33,60 @@ class ParcelListRow extends Component {
       [name]: value
     });
   }
-  changeDestination() {
-    this.props.userSignin(this.state).then(res => {
-      res.message !== 'Login successful'
-        ? this.setState({ error: res.errors || res.message })
-        : this.props.history.push('/profile');
+  handleDestination(address, id) {
+    const {  modalState } = this.state;
+    this.setState({
+      modalState: {
+        ...modalState,
+        text: { message: 'Processing...', color: 'lightblue' }
+      }
+    });
+    changeDestination(address, id).then(res => {
+      if (res.message === 'Parcel cancelled successfully') {
+        this.setState({
+          modalState: {
+            ...modalState,
+            text: { message: res.message, color: 'green' }
+          }
+        });
+      } else {
+        this.setState({
+          modalState: {
+            ...modalState,
+            text: { message: res.message || res.errors, color: 'tomato' }
+          }
+        });
+      }
     });
   }
-  cancelParcel() {
-    this.props.userSignin(this.state).then(res => {
-      res.message !== 'Login successful'
-        ? this.setState({ error: res.errors || res.message })
-        : this.props.history.push('/profile');
+
+  handleCancel(id) {
+    const {  modalState } = this.state;
+    this.setState({
+      modalState: {
+        ...modalState,
+        text: { message: 'Processing...', color: 'lightblue' }
+      }
+    });
+    cancelParcel(id).then(res => {
+      if (res.message === 'Parcel cancelled successfully') {
+        this.setState({
+          modalState: {
+            ...modalState,
+            text: { message: res.message, color: 'green' }
+          }
+        });
+      } else {
+        this.setState({
+          modalState: {
+            ...modalState,
+            text: { message: res.message || res.errors, color: 'tomato' }
+          }
+        });
+      }
     });
   }
+
   openModal() {
     this.setState({ modalIsOpen: true });
   }
@@ -65,7 +109,7 @@ class ParcelListRow extends Component {
   }
 
   render() {
-    const { parcels} = this.props;
+    const { parcels } = this.props;
     return (
       <ul className="responsive-table">
         <li className="table-header">
@@ -134,16 +178,18 @@ class ParcelListRow extends Component {
             </div>
             {this.state.showModal && (
               <CancelParcelOrder
+                parcelId={parcel.id}
                 closeModal={this.closeModal}
                 handleChange={this.handleChange}
-                cancelParcel={this.cancelParcel}
+                cancelParcel={this.handleCancel}
                 textMessage={this.state.modalState.text}
               />
             )}
             {this.state.modalIsOpen && (
               <ChangeParcelDestination
                 closeModal={this.closeModal}
-                changeDestination={this.changeDestination}
+                parcelId={parcel.id}
+                changeDestination={this.handleDestination}
                 handleChange={this.handleChange}
                 textMessage={this.state.modalState.text}
                 deliveryAddress={this.state.deliveryAddress}
