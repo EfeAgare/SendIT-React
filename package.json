@@ -37,6 +37,7 @@
     "express": "^4.16.4",
     "express-fileupload": "^1.0.0",
     "express-validator": "^5.3.0",
+    "history": "^4.7.2",
     "jsonwebtoken": "^8.4.0",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.11",

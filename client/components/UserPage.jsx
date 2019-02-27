@@ -14,7 +14,11 @@ class UserPage extends Component {
   }
   componentDidMount() {
     this.props.loadParcel();
-    this.setState({ isLoading: false });
+    setTimeout(() => {
+      this.setState({
+        isLoading: false
+      });
+    }, 1000);
   }
   render() {
     const { parcels, user } = this.props;
@@ -32,7 +36,7 @@ class UserPage extends Component {
 }
 const mapStateToProps = state => {
   return {
-    user: state.user.detail,
+    user: state.user,
     parcels: state.parcels
   };
 };

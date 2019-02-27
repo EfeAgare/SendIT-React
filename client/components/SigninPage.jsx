@@ -22,7 +22,7 @@ class SigninPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user.details,
+    user: state.user.detail,
     parcels: state.parcels
   };
 };

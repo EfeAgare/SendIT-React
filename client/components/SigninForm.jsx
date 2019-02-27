@@ -127,7 +127,7 @@ class SigninForm extends Component {
               sendEmail={this.sendEmail}
               handleChange={this.handleChange}
               textMessage={this.state.modalState.text}
-              resetEmail1={this.state.resetEmail}
+              resetEmail={this.state.resetEmail}
             />
           )}
         </div>

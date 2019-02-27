@@ -1,4 +1,4 @@
-export const cancelParcel = (parcelId) => dispatch => {
+export const cancelParcel = (parcelId) =>  {
   return fetch(`/api/v1//parcels/${parcelId}/cancel`, {
     method: 'PUT',
     headers: {

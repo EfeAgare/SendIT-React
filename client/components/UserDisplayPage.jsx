@@ -39,13 +39,14 @@ class UserDisplayPage extends Component {
 
     const renderPageNumbers = pageNumbers.map((number, id) => {
       return (
-         <div
-              key={id}
-              id={number}
-              onClick={this.handleClick} className="pagination"
-            >
-              {number}
-            </div>
+        <div
+          key={id}
+          id={number}
+          onClick={this.handleClick}
+          className="pagination"
+        >
+          {number}
+        </div>
       );
     });
     return (
@@ -71,7 +72,7 @@ class UserDisplayPage extends Component {
               </div>
               <p className="my" />
               <p className="myname" />
-              {user.name}
+              {user.detail.name}
               <a href="profile.html" className="number-order">
                 Number of Parcels Order
                 <div id="number-order-parcel" className="number-order" />

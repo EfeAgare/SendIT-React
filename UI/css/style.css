@@ -11,6 +11,10 @@ body {
   background-color: white;
   color: #000000;
 }
+.active {
+  background-color: #adadad;
+  color: black;
+}
 header {
   display: block;
   overflow: hidden;
@@ -39,7 +43,7 @@ header a:hover {
   color: black;
 }
 
-header a.active {
+header.active {
   background-color: #f1f1f1;
   color: black;
 }

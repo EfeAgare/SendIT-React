@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import '../../UI/css/style.css';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
@@ -11,57 +11,77 @@ class Header extends Component {
     }
   }
   render() {
-    const { isAuthenticated } = this.props.isAuthenticated;
+    const { isAuthenticated, user } = this.props;
     const userLinks = (
-      <div className="header-right">
-        <div id="myLinks">
-          <Link to="/" className="active">
-            HOME
-          </Link>
-          <Link to="/order">ORDER PARCEL</Link>
-          <Link
-            to=""
-            onClick={() => {
-              localStorage.removeItem('token');
-              localStorage.removeItem('userid');
-              window.location.reload(true);
-              this.context.router.history.push('/');
-            }}
-          >
-            {' '}
-            LOGOUT
-          </Link>
-          <Link to="/profile"> PROFILE </Link>
+      <div>
+        <div className="header-right">
+          <div id="myLinks">
+            <NavLink to="/" exact activeClassName="active">
+              HOME
+            </NavLink>
+            <NavLink to="/order" activeClassName="active">
+              ORDER PARCEL
+            </NavLink>
+            <NavLink
+              to=""
+              onClick={() => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('userid');
+                window.location.reload(true);
+                this.context.router.history.push('/');
+              }}
+              activeClassName="active"
+            >
+              LOGOUT
+            </NavLink>
+            <NavLink to="/profile" activeClassName="active">
+              {' '}
+              PROFILE{' '}
+            </NavLink>
+          </div>
+          <a href="javascript:void(0);" className="icon">
+            <i className="fa fa-bars" />
+          </a>
         </div>
-        <a href="javascript:void(0);" className="icon">
-          <i className="fa fa-bars" />
-        </a>
       </div>
     );
     const guessLinks = (
       <div className="header-right">
         <div id="myLinks">
-          <Link to="/" className="active">
+          <NavLink to="/" exact activeClassName="active">
             HOME
-          </Link>
-          <Link to="/signup">SIGN UP</Link>
-          <Link to="/signin"> LOGIN</Link>
-          <Link to="/order">ORDER PARCEL</Link>
+          </NavLink>
+          <NavLink to="/signup" activeClassName="active">
+            SIGN UP
+          </NavLink>
+          <NavLink to="/signin" activeClassName="active">
+            {' '}
+            LOGIN
+          </NavLink>
+          <NavLink to="/order" activeClassName="active">
+            ORDER PARCEL
+          </NavLink>
         </div>
-        <a href="javascript:void(0);" className="icon">
-          <i className="fa fa-bars" />
-        </a>
       </div>
     );
 
     return (
+      <div>
       <header>
         <Link to="/" className="logo">
           {' '}
           SendIT
         </Link>
-        {isAuthenticated ? userLinks : guessLinks}
+        {isAuthenticated.isAuthenticated ? userLinks : guessLinks}
+       
       </header>
+      <div>
+         <p id="userWelcomeText">
+          <i className="fa fa-user-circle" />
+          &nbsp;Logged in as {user.detail.name}
+        </p>
+      </div>
+      </div>
     );
   }
 }
@@ -72,7 +92,8 @@ Header.contextTypes = {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.user
+    isAuthenticated: state.user,
+    user: state.user
   };
 };
 export default connect(mapStateToProps)(Header);
