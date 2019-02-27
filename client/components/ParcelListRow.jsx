@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import createHistory from 'history/createBrowserHistory';
+import { PropTypes } from 'prop-types';
 import '../../UI/css/allparcel.css';
 import { CancelParcelOrder } from './CancelParcelOrder';
 import { ChangeParcelDestination } from './ChangeParcelDestination';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { dateFormat, newDateFormat } from './DateFormat';
 import { cancelParcel } from '../action/cancelParcelAction';
-import changeDestination from '../action/parcelDestinationAction';
+import { changeDestination } from '../action/parcelDestinationAction';
 
 class ParcelListRow extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class ParcelListRow extends Component {
       error: '',
       modalIsOpen: false,
       showModal: false,
-      deliveryAddress: '',
+      deliveryAddress: ' ',
       modalState: {
         text: { message: '', color: '' }
       }
@@ -24,8 +24,8 @@ class ParcelListRow extends Component {
     this.openModal = this.openModal.bind(this);
     this.openCancelModal = this.openCancelModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.handleCancel = this.handleCancel.bind(this);
-    this.handleDestination = this.handleDestination.bind(this);
+    this.handleCancelParcel = this.handleCancelParcel.bind(this);
+    this.handleDestinationChange = this.handleDestinationChange.bind(this);
   }
   handleChange(event) {
     const { name, value } = event.target;
@@ -33,16 +33,16 @@ class ParcelListRow extends Component {
       [name]: value
     });
   }
-  handleDestination(address, id) {
-    const {  modalState } = this.state;
+  handleDestinationChange(parcelId) {
+    const { modalState, deliveryAddress } = this.state;
     this.setState({
       modalState: {
         ...modalState,
         text: { message: 'Processing...', color: 'lightblue' }
       }
     });
-    changeDestination(address, id).then(res => {
-      if (res.message === 'Parcel cancelled successfully') {
+    changeDestination(deliveryAddress, parcelId).then(res => {
+      if (res.message === 'Parcel destination changed successfully') {
         this.setState({
           modalState: {
             ...modalState,
@@ -60,15 +60,15 @@ class ParcelListRow extends Component {
     });
   }
 
-  handleCancel(id) {
-    const {  modalState } = this.state;
+  handleCancelParcel(parcelId) {
+    const { modalState } = this.state;
     this.setState({
       modalState: {
         ...modalState,
         text: { message: 'Processing...', color: 'lightblue' }
       }
     });
-    cancelParcel(id).then(res => {
+    cancelParcel(parcelId).then(res => {
       if (res.message === 'Parcel cancelled successfully') {
         this.setState({
           modalState: {
@@ -99,13 +99,17 @@ class ParcelListRow extends Component {
     if (
       event.target.className === 'modal' ||
       event.target.className === 'close'
-    )
+    ) {
       this.setState({ modalIsOpen: false });
+      window.location.reload(true);
+    }
     if (
       event.target.className === 'modal' ||
       event.target.className === 'close'
-    )
+    ) {
       this.setState({ showModal: false });
+      window.location.reload(true);
+    }
   }
 
   render() {
@@ -181,15 +185,15 @@ class ParcelListRow extends Component {
                 parcelId={parcel.id}
                 closeModal={this.closeModal}
                 handleChange={this.handleChange}
-                cancelParcel={this.handleCancel}
                 textMessage={this.state.modalState.text}
+                cancelParcel={this.handleCancelParcel}
               />
             )}
             {this.state.modalIsOpen && (
               <ChangeParcelDestination
                 closeModal={this.closeModal}
                 parcelId={parcel.id}
-                changeDestination={this.handleDestination}
+                changeDestination={this.handleDestinationChange}
                 handleChange={this.handleChange}
                 textMessage={this.state.modalState.text}
                 deliveryAddress={this.state.deliveryAddress}
@@ -201,5 +205,8 @@ class ParcelListRow extends Component {
     );
   }
 }
+ParcelListRow.contextTypes = {
+  router: PropTypes.object.isRequired
+};
 
 export default ParcelListRow;

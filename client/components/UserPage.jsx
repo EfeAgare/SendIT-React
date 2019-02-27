@@ -14,7 +14,11 @@ class UserPage extends Component {
   }
   componentDidMount() {
     this.props.loadParcel();
-    this.setState({ isLoading: false });
+    setTimeout(() => {
+      this.setState({
+        isLoading: false
+      });
+    }, 1000);
   }
   render() {
     const { parcels, user } = this.props;

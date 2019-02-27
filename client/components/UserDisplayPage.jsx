@@ -24,7 +24,6 @@ class UserDisplayPage extends Component {
   }
   render() {
     const { parcels, user, isLoading } = this.props;
-    console.log(this.props);
     const { currentPage, parcelsPage } = this.state;
 
     // Logic for displaying current parcels

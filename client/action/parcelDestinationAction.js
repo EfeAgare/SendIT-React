@@ -1,12 +1,11 @@
-const changeDestination = (data, parcelId) => dispatch => {
-  return fetch(`/api/v1//parcels/${parcelId}/destination`, {
+export const changeDestination = (deliveryAddress, parcelId) => {
+  return fetch(`/api/v1/parcels/${parcelId}/destination`, {
     method: 'PUT',
     headers: {
       'content-type': 'application/json',
-      Accept: 'application/json',
       'x-access-token': localStorage.getItem('token')
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify({ deliveryAddress })
   })
     .then(res => res.json())
     .then(res => {
@@ -16,5 +15,3 @@ const changeDestination = (data, parcelId) => dispatch => {
       throw error;
     });
 };
-
-export default changeDestination;

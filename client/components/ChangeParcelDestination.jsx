@@ -3,11 +3,11 @@ import '../../UI/css/allparcel.css';
 
 export const ChangeParcelDestination = ({
   closeModal,
+  parcelId,
   changeDestination,
-  deliveryAddress,
-  textMessage,
   handleChange,
-  parcelId
+  textMessage,
+  deliveryAddress
 }) => (
   <div onClick={closeModal} className="modal">
     <div className="modal-content clearfix">
@@ -32,7 +32,7 @@ export const ChangeParcelDestination = ({
           <button
             id="dest-btn"
             type="submit"
-            onClick={() => changeDestination(deliveryAddress, parcelId)}
+            onClick={() => changeDestination(parcelId)}
           >
             Submit
           </button>
