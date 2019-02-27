@@ -23,14 +23,13 @@ class Header extends Component {
               ORDER PARCEL
             </NavLink>
             <NavLink
-              to=""
+              to="#"
               onClick={() => {
                 localStorage.removeItem('token');
                 localStorage.removeItem('userid');
                 window.location.reload(true);
                 this.context.router.history.push('/');
               }}
-              activeClassName="active"
             >
               LOGOUT
             </NavLink>
@@ -75,12 +74,12 @@ class Header extends Component {
         {isAuthenticated.isAuthenticated ? userLinks : guessLinks}
        
       </header>
-      <div>
+      {/* <div>
          <p id="userWelcomeText">
           <i className="fa fa-user-circle" />
           &nbsp;Logged in as {user.detail.name}
         </p>
-      </div>
+      </div> */}
       </div>
     );
   }

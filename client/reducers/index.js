@@ -1,9 +1,12 @@
 import { combineReducers } from 'redux';
 import user from './userReducer';
-import parcels from './parcelReducer';
+import parcels, {
+  currentParcelReducer as currentParcel
+} from './parcelReducer';
 const rootReducer = combineReducers({
   user,
-  parcels
+  parcels,
+  currentParcel
 });
 
 export default rootReducer;

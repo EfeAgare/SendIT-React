@@ -1,7 +1,7 @@
 #content {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: minmax(60%, auto);
+  grid-auto-rows: minmax(400px, auto);
   margin: 0 auto;
   grid-template-areas:
     'aside main main main main'
@@ -14,6 +14,20 @@
   justify-content: space-evenly;
 }
 #content-parcel {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0 auto;
+  grid-template-areas:
+    'aside main main main main'
+    'aside main main main main'
+    'aside main main main main'
+    'aside main main main main';
+  grid-gap: 5px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  justify-content: space-evenly;
+}
+#content-parceldetail {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   margin: 0 auto;
@@ -252,7 +266,6 @@ label {
 .order-footer {
   position: absolute;
   width: 100%;
-  bottom: 0;
   padding: 1rem;
   background-color: #efefef;
   color: black;
@@ -300,8 +313,8 @@ label {
 @media screen and (max-width: 950px) {
   #content {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-auto-rows: minmax(44%, auto);
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(200px, auto);
     margin: 0 auto;
     grid-template-areas:
       'aside main main main main'
@@ -316,6 +329,22 @@ label {
   #content-parcel {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    margin: 0 auto;
+    grid-template-areas:
+      'aside main main main main'
+      'aside main main main main'
+      'aside main main main main'
+      'aside main main main main';
+    grid-gap: 5px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    justify-content: space-evenly;
+  }
+
+  #content-parceldetail {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: minmax(200px, auto);
     margin: 0 auto;
     grid-template-areas:
       'aside main main main main'
@@ -344,7 +373,7 @@ label {
 @media screen and (max-width: 750px) {
   #content {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: minmax(200px, auto);
     margin: 0 auto;
     grid-template-areas:
@@ -359,7 +388,22 @@ label {
   }
   #content-parcel {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(200px, auto);
+    margin: 0 auto;
+    grid-template-areas:
+      'aside aside aside aside aside'
+      'main main main main main'
+      'main main main main main'
+      'main main main main main';
+    grid-gap: 5px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    justify-content: space-evenly;
+  }
+  #content-parceldetail {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: minmax(200px, auto);
     margin: 0 auto;
     grid-template-areas:
@@ -415,7 +459,7 @@ label {
 @media screen and (max-width: 450px) {
   #content {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: minmax(200px, auto);
     margin: 0 auto;
     grid-template-areas:
@@ -430,7 +474,23 @@ label {
   }
   #content-parcel {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(200px, auto);
+    margin: 0 auto;
+    grid-template-areas:
+      'aside aside aside aside aside'
+      'main main main main main'
+      'main main main main main'
+      'main main main main main';
+    grid-gap: 5px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    justify-content: space-evenly;
+  }
+
+  #content-parceldetail {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: minmax(200px, auto);
     margin: 0 auto;
     grid-template-areas:

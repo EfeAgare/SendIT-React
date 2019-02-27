@@ -3,7 +3,7 @@ import '../../UI/css/order.css';
 
 const ProfileFooter = props => {
   return (
-    <div className="order-footer">
+    <div className="footer-order">
       <p className="foot">&copy;SendIT.com</p>
     </div>
   );

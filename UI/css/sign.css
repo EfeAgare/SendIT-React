@@ -185,7 +185,7 @@
   border-radius: 6px;
 }
 .dest-container {
-  border: solid 2px #4caf50;;
+  border: solid 2px #4caf50;
   padding: 0 5px;
   margin-top: 10px;
   border-radius: 6px;
@@ -244,7 +244,16 @@
 #forgot-pswd:hover {
   color: #42a5f5;
 }
-footer,
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+  font-family: 'Berkshire Swash', cursive;
+}
 .footer-login {
   position: absolute;
   bottom: 0;
@@ -255,9 +264,10 @@ footer,
   text-align: center;
   font-family: 'Berkshire Swash', cursive;
 }
-.footer-order{
+.footer-order {
   position: absolute;
   left: 0;
+  /* bottom: 0; */
   right: 0;
   padding: 1rem;
   background-color: #efefef;
@@ -289,9 +299,27 @@ footer,
     text-align: center;
     font-family: 'Berkshire Swash', cursive;
   }
-  /* .footer-login {
+  .footer-order {
+    position: absolute;
+    left: 0;
     bottom: unset;
-  } */
+    right: 0;
+    padding: 1rem;
+    background-color: #efefef;
+    text-align: center;
+    font-family: 'Berkshire Swash', cursive;
+  }
+  .pagination {
+    display: inline-block;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border: 1px solid #ddd;
+    cursor: pointer;
+  }
+  .footer-login {
+    bottom: unset;
+  }
 }
 
 @media screen and (max-width: 750px) {
@@ -317,9 +345,9 @@ footer,
     text-align: center;
     font-family: 'Berkshire Swash', cursive;
   }
-  /* .footer-login{
+  .footer-login {
     bottom: unset;
-  } */
+  }
 }
 
 @media screen and (max-width: 450px) {
@@ -346,7 +374,7 @@ footer,
     text-align: center;
     font-family: 'Berkshire Swash', cursive;
   }
-  /* .footer-login {
+  .footer-login {
     bottom: unset;
-  } */
+  }
 }

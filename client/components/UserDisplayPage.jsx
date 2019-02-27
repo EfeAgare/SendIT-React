@@ -6,7 +6,6 @@ import '../../UI/css/style.css';
 import '../../UI/css/order.css';
 import '../../UI/css/allparcel.css';
 import ParcelListRow from './ParcelListRow';
-
 import Header from './Header';
 class UserDisplayPage extends Component {
   constructor() {
@@ -51,7 +50,7 @@ class UserDisplayPage extends Component {
     });
     return (
       <div>
-       <Header/>
+        <Header />
         <div id="content">
           <aside>
             <div className="aside">
@@ -87,7 +86,11 @@ class UserDisplayPage extends Component {
                 {isLoading ? (
                   <div className="loader" />
                 ) : (
-                  <ParcelListRow parcels={currentParcels} />
+                  <ParcelListRow
+                    parcels={currentParcels}
+                    isLoading={isLoading}
+                    user={user}
+                  />
                 )}
                 <p className="text-center" id="page-num" />
                 {renderPageNumbers}
