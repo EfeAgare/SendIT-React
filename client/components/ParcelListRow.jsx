@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import { dateFormat, newDateFormat } from './DateFormat';
 import { cancelParcel } from '../action/cancelParcelAction';
 import { changeDestination } from '../action/parcelDestinationAction';
+import ParcelDetailPage from './ParcelDetailPage';
+import { connect } from 'react-redux';
 
 class ParcelListRow extends Component {
   constructor(props) {
@@ -15,6 +17,7 @@ class ParcelListRow extends Component {
       error: '',
       modalIsOpen: false,
       showModal: false,
+      detailOpen: false,
       deliveryAddress: ' ',
       modalState: {
         text: { message: '', color: '' }
@@ -93,6 +96,9 @@ class ParcelListRow extends Component {
   openCancelModal() {
     this.setState({ showModal: true });
   }
+  openParcelDetail() {
+    this.setState({ detailOpen: true });
+  }
 
   closeModal(event) {
     event.preventDefault();
@@ -113,7 +119,7 @@ class ParcelListRow extends Component {
   }
 
   render() {
-    const { parcels } = this.props;
+    const { parcels, loadSingleParcel, currentParcel, isLoading } = this.props;
     return (
       <ul className="responsive-table">
         <li className="table-header">
@@ -173,7 +179,10 @@ class ParcelListRow extends Component {
                     <Link to="#" onClick={this.openModal}>
                       change destination
                     </Link>
-                    <Link to="parceldetails.html?parcelid=${orderId}">
+                    <Link
+                      to={`/viewdetails/${parcel.id}`}
+                      onClick={this.detailOpen}
+                    >
                       View Details
                     </Link>
                   </div>
@@ -199,6 +208,17 @@ class ParcelListRow extends Component {
                 deliveryAddress={this.state.deliveryAddress}
               />
             )}
+            {isLoading ? (
+              <div className="loader" />
+            ) : (
+              this.state.detailOpen && (
+                <ParcelDetailPage
+                  loadSingleParcel={loadSingleParcel}
+                  currentParcel={currentParcel}
+                  parcels={this.props.parcels}
+                />
+              )
+            )}
           </li>
         ))}
       </ul>
@@ -209,4 +229,15 @@ ParcelListRow.contextTypes = {
   router: PropTypes.object.isRequired
 };
 
-export default ParcelListRow;
+const mapStateToProps = (state) => {
+  return {
+    currentParcel: state.parcel,
+    user: state.user,
+    parcels: state.parcels
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {}
+)(ParcelListRow);

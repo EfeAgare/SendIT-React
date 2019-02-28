@@ -19,6 +19,7 @@ class UserPage extends Component {
         isLoading: false
       });
     }, 1000);
+    this.setState({ isLoading: false });
   }
   render() {
     const { parcels, user } = this.props;

@@ -1,6 +1,5 @@
 html {
   height: 100%;
-  
 }
 /* body {
   min-height: 100%;
@@ -10,10 +9,11 @@ body {
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   background-color: white;
   color: #000000;
+  margin: 0;
 }
-.active {
-  background-color: #adadad;
-  color: black;
+a.active {
+  background-color: rgb(114, 114, 114);
+  color: white;
 }
 header {
   display: block;
