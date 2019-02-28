@@ -1,12 +1,20 @@
 import {
   LOAD_PARCEL_ORDER,
-  CURRENT_PARCEL_ORDER
+  CURRENT_PARCEL_ORDER,
+  LOAD_ALL_PARCEL_ORDER
 } from '../constants/action-types';
 
 export const loadParcelOrder = parcels => {
   return {
     type: LOAD_PARCEL_ORDER,
     parcels
+  };
+};
+
+export const loadAllParcelOrder = allparcels => {
+  return {
+    type: LOAD_ALL_PARCEL_ORDER,
+    allparcels
   };
 };
 
@@ -38,7 +46,7 @@ export const loadParcel = () => dispatch => {
     });
 };
 
-export const loadSingleParcel = (parcelId) => dispatch => {
+export const loadSingleParcel = parcelId => dispatch => {
   return fetch(`/api/v1/users/${localStorage.getItem('userid')}/${parcelId}`, {
     method: 'GET',
     headers: {
@@ -52,6 +60,26 @@ export const loadSingleParcel = (parcelId) => dispatch => {
       if (res.message == 'Parcel retrieved successfully') {
         dispatch(singleParcelOrder(res.data));
       }
+      return res;
+    })
+    .catch(error => {
+      throw error;
+    });
+};
+
+export const loadAllParcel = () => dispatch => {
+  return fetch(`/api/v1/parcels`, {
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json',
+      Accept: 'application/json',
+      'x-access-token': localStorage.getItem('token')
+    }
+  })
+    .then(res => res.json())
+    .then(res => {
+      dispatch(loadAllParcelOrder(res.data));
+
       return res;
     })
     .catch(error => {

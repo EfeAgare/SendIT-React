@@ -9,6 +9,7 @@ import { cancelParcel } from '../action/cancelParcelAction';
 import { changeDestination } from '../action/parcelDestinationAction';
 import ParcelDetailPage from './ParcelDetailPage';
 import { connect } from 'react-redux';
+import { admin } from './dropDown';
 
 class ParcelListRow extends Component {
   constructor(props) {
@@ -119,7 +120,7 @@ class ParcelListRow extends Component {
   }
 
   render() {
-    const { parcels, loadSingleParcel, currentParcel, isLoading } = this.props;
+    const { parcels, currentParcel, isLoading, user } = this.props;
     return (
       <ul className="responsive-table">
         <li className="table-header">
@@ -171,21 +172,25 @@ class ParcelListRow extends Component {
             <div className="col col-8" data-label="options">
               <div className="dropdown">
                 <div className="dropbtn">
-                  <div id="myDropdown" className="dropdown-content">
-                    <p>OPTIONS</p>
-                    <Link to="#" onClick={this.openCancelModal}>
-                      Cancel Parcel
-                    </Link>
-                    <Link to="#" onClick={this.openModal}>
-                      change destination
-                    </Link>
-                    <Link
-                      to={`/viewdetails/${parcel.id}`}
-                      onClick={this.detailOpen}
-                    >
-                      View Details
-                    </Link>
-                  </div>
+                  {user.detail.role === 'admin' ? (
+                    admin
+                  ) : (
+                    <div id="myDropdown" className="dropdown-content">
+                      <p>OPTIONS</p>
+                      <Link to="#" onClick={this.openCancelModal}>
+                        Cancel Parcel
+                      </Link>
+                      <Link to="#" onClick={this.openModal}>
+                        change destination
+                      </Link>
+                      <Link
+                        to={`/viewdetails/${parcel.id}`}
+                        onClick={this.detailOpen}
+                      >
+                        View Details
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -213,7 +218,6 @@ class ParcelListRow extends Component {
             ) : (
               this.state.detailOpen && (
                 <ParcelDetailPage
-                  loadSingleParcel={loadSingleParcel}
                   currentParcel={currentParcel}
                   parcels={this.props.parcels}
                 />
@@ -229,7 +233,7 @@ ParcelListRow.contextTypes = {
   router: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     currentParcel: state.parcel,
     user: state.user,

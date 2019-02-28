@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import UserDisplayPage from './UserDisplayPage';
+import AdminDisplayPage from './AdminDisplayPage';
 import ProfileFooter from './ProfileFooter';
-import { loadParcel } from '../action/loadParcelAction';
+import { loadAllParcel } from '../action/loadParcelAction';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 
-class UserPage extends Component {
+class AdminPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,14 +13,19 @@ class UserPage extends Component {
     };
   }
   componentDidMount() {
-    this.props.loadParcel();
+    this.props.loadAllParcel();
+    setTimeout(() => {
+      this.setState({
+        isLoading: false
+      });
+    }, 1000);
     this.setState({ isLoading: false });
   }
   render() {
     const { parcels, user } = this.props;
     return (
       <React.Fragment>
-        <UserDisplayPage
+        <AdminDisplayPage
           parcels={parcels}
           user={user}
           isLoading={this.state.isLoading}
@@ -36,11 +41,11 @@ const mapStateToProps = state => {
     parcels: state.parcels
   };
 };
-UserPage.propTypes = {
-  loadParcel: PropTypes.func.isRequired,
+AdminPage.propTypes = {
+  loadAllParcel: PropTypes.func.isRequired,
   parcels: PropTypes.array.isRequired
 };
 export default connect(
   mapStateToProps,
-  { loadParcel }
-)(UserPage);
+  { loadAllParcel }
+)(AdminPage);
