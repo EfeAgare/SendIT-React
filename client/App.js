@@ -11,6 +11,7 @@ import { SET_CURRENT_USER } from './constants/action-types';
 import store from './store/configureStore';
 import requireAuth from './utils/Authenticate';
 import ParcelDetailPage from './components/ParcelDetailPage';
+import AdminPage from './components/AdminPage';
 
 if (localStorage.getItem('token')) {
   // Set auth token header auth
@@ -33,6 +34,7 @@ class App extends Component {
           <Route exact path="/signup" component={SignupPage} />
           <Route exact path="/signin" component={SigninPage} />
           <Route exact path="/profile" component={requireAuth(UserPage)} />
+          <Route exact path="/admin" component={requireAuth(AdminPage)} />
           <Route exact path="/order" component={requireAuth(CreateParcel)} />
           <Route
             exact

@@ -20,9 +20,6 @@ class Header extends Component {
             <NavLink to="/" exact activeClassName="active">
               HOME
             </NavLink>
-            <NavLink to="/order" activeClassName="active">
-              ORDER PARCEL
-            </NavLink>
             <NavLink
               to="#"
               onClick={() => {
@@ -34,10 +31,22 @@ class Header extends Component {
             >
               LOGOUT
             </NavLink>
-            <NavLink to="/profile" activeClassName="active">
-              {' '}
-              PROFILE{' '}
-            </NavLink>
+            {user.detail.role === 'admin' ? (
+              <NavLink to="/admin" activeClassName="active">
+                {' '}
+                ALLPARCELS{' '}
+              </NavLink>
+            ) : (
+              <div>
+                <NavLink to="/profile" activeClassName="active">
+                  {' '}
+                  PROFILE{' '}
+                </NavLink>{' '}
+                <NavLink to="/order" activeClassName="active">
+                  ORDER PARCEL
+                </NavLink>
+              </div>
+            )}
           </div>
           <a href="javascript:void(0);" className="icon">
             <i className="fa fa-bars" />
@@ -63,10 +72,10 @@ class Header extends Component {
               ORDER PARCEL
             </NavLink>
           </div>
-        
-        <a href="javascript:void(0);" className="icon">
-          <i className="fa fa-bars" />
-        </a>
+
+          <a href="javascript:void(0);" className="icon">
+            <i className="fa fa-bars" />
+          </a>
         </div>
         <FlashMessageList />
       </div>

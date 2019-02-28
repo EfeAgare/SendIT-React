@@ -34,9 +34,13 @@ class SigninForm extends Component {
   onSubmit(event) {
     event.preventDefault();
     this.props.userSignin(this.state).then(res => {
-      res.message !== 'Login successful'
-        ? this.setState({ error: res.errors || res.message })
-        : this.props.history.push('/profile');
+      if (res.message !== 'Login successful')
+        this.setState({ error: res.errors || res.message });
+      if (res.data.role === 'admin') {
+        this.props.history.push('/admin');
+      } else {
+        this.props.history.push('/profile');
+      }
     });
   }
   openModal() {
