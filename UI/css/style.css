@@ -11,7 +11,7 @@ body {
   color: #000000;
   margin: 0;
 }
-.active {
+a.active {
   background-color: rgb(114, 114, 114);
   color: white;
 }

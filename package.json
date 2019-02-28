@@ -54,6 +54,7 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "semantic-ui-react": "^0.85.0",
+    "shortid": "^2.2.14",
     "swagger-ui-express": "^4.0.1",
     "webpack-hot-middleware": "^2.24.3"
   },

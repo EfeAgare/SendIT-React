@@ -6,6 +6,7 @@ import Header from './Header';
 import LoginFooter from './LoginFooter';
 import emailAction from '../action/emailAction';
 import userSignin from '../action/userSigninAction';
+import FlashMessageList from './flash/flashMessagesList';
 
 class SigninPage extends Component {
   render() {
@@ -13,7 +14,9 @@ class SigninPage extends Component {
     return (
       <React.Fragment>
         <Header />
+
         <SigninForm emailAction={emailAction} userSignin={userSignin} />
+        <FlashMessageList />
         <LoginFooter />
       </React.Fragment>
     );

@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import '../../UI/css/style.css';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
+import FlashMessageList from './flash/flashMessagesList';
 
 class Header extends Component {
   componentWillUpdate(nextProps) {
@@ -45,36 +46,43 @@ class Header extends Component {
       </div>
     );
     const guessLinks = (
-      <div className="header-right">
-        <div id="myLinks">
-          <NavLink to="/" exact activeClassName="active">
-            HOME
-          </NavLink>
-          <NavLink to="/signup" activeClassName="active">
-            SIGN UP
-          </NavLink>
-          <NavLink to="/signin" activeClassName="active">
-            {' '}
-            LOGIN
-          </NavLink>
-          <NavLink to="/order" activeClassName="active">
-            ORDER PARCEL
-          </NavLink>
+      <div>
+        <div className="header-right">
+          <div id="myLinks">
+            <NavLink to="/" exact activeClassName="active">
+              HOME
+            </NavLink>
+            <NavLink to="/signup" activeClassName="active">
+              SIGN UP
+            </NavLink>
+            <NavLink to="/signin" activeClassName="active">
+              {' '}
+              LOGIN
+            </NavLink>
+            <NavLink to="/order" activeClassName="active">
+              ORDER PARCEL
+            </NavLink>
+          </div>
+        
+        <a href="javascript:void(0);" className="icon">
+          <i className="fa fa-bars" />
+        </a>
         </div>
+        <FlashMessageList />
       </div>
     );
 
     return (
       <div>
-      <header>
-        <Link to="/" className="logo">
-          {' '}
-          SendIT
-        </Link>
-        {isAuthenticated.isAuthenticated ? userLinks : guessLinks}
-       
-      </header>
-      {/* <div>
+        <header>
+          <Link to="/" className="logo">
+            {' '}
+            SendIT
+          </Link>
+          {isAuthenticated.isAuthenticated ? userLinks : guessLinks}
+        </header>
+        <div />
+        {/* <div>
          <p id="userWelcomeText">
           <i className="fa fa-user-circle" />
           &nbsp;Logged in as {user.detail.name}

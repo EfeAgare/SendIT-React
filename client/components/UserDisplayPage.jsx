@@ -26,9 +26,9 @@ class UserDisplayPage extends Component {
     const { currentPage, parcelsPage } = this.state;
 
     // Logic for displaying current parcels
-    const indexOfLastTodo = currentPage * parcelsPage;
-    const indexOfFirstTodo = indexOfLastTodo - parcelsPage;
-    const currentParcels = parcels.slice(indexOfFirstTodo, indexOfLastTodo);
+    const indexOfLastParcel = currentPage * parcelsPage;
+    const indexOfFirstParcel = indexOfLastParcel - parcelsPage;
+    const currentParcels = parcels.slice(indexOfFirstParcel, indexOfLastParcel);
 
     // Logic for displaying page numbers
     const pageNumbers = [];

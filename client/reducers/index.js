@@ -3,10 +3,13 @@ import user from './userReducer';
 import parcels, {
   currentParcelReducer as currentParcel
 } from './parcelReducer';
+import flashMessages from './flashMessages'
+
 const rootReducer = combineReducers({
   user,
   parcels,
-  currentParcel
+  currentParcel,
+  flashMessages
 });
 
 export default rootReducer;
