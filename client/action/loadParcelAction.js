@@ -1,7 +1,8 @@
 import {
   LOAD_PARCEL_ORDER,
   CURRENT_PARCEL_ORDER,
-  LOAD_ALL_PARCEL_ORDER
+  LOAD_ALL_PARCEL_ORDER,
+  ADMIN_LOAD_SINGLE_PARCEL
 } from '../constants/action-types';
 
 export const loadParcelOrder = parcels => {
@@ -59,6 +60,28 @@ export const loadSingleParcel = parcelId => dispatch => {
     .then(res => {
       if (res.message == 'Parcel retrieved successfully') {
         dispatch(singleParcelOrder(res.data));
+      }
+      return res;
+    })
+    .catch(error => {
+      throw error;
+    });
+};
+export const adminLoadSingleParcel = parcelId => dispatch => {
+  return fetch(`/api/v1/parcels/${parcelId}`, {
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json',
+      Accept: 'application/json',
+      'x-access-token': localStorage.getItem('token')
+    }
+  })
+    .then(res => res.json())
+    .then(res => {
+      if (res.message == 'Parcel retrieved successfully') {
+        dispatch(
+          dispatch({ type: ADMIN_LOAD_SINGLE_PARCEL, singleparcel: res.data })
+        );
       }
       return res;
     })

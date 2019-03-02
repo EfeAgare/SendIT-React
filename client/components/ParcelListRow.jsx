@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { dateFormat, newDateFormat } from './DateFormat';
 import { cancelParcel } from '../action/cancelParcelAction';
 import { changeStatus } from '../action/changeParcelStatus';
+import { changeCurrentLocation } from '../action/changeCurrentLocation';
 import { changeDestination } from '../action/parcelDestinationAction';
 import ParcelDetailPage from './ParcelDetailPage';
 import { connect } from 'react-redux';
@@ -21,8 +22,10 @@ class ParcelListRow extends Component {
       showModal: false,
       detailOpen: false,
       statusModal: false,
+      currentLocationModal: false,
       currentModalId: 0,
       status: '',
+      currentLocation: '',
       deliveryAddress: ' ',
       modalState: {
         text: { message: '', color: '' }
@@ -36,6 +39,9 @@ class ParcelListRow extends Component {
     this.handleDestinationChange = this.handleDestinationChange.bind(this);
     this.openStatusModal = this.openStatusModal.bind(this);
     this.handleStatusChange = this.handleStatusChange.bind(this);
+    this.handleCurrentLocationChange = this.handleCurrentLocationChange.bind(
+      this
+    );
   }
   handleChange(event) {
     const { name, value } = event.target;
@@ -127,17 +133,53 @@ class ParcelListRow extends Component {
     });
   }
 
+  handleCurrentLocationChange(parcelId) {
+    const { modalState, currentLocation } = this.state;
+    this.setState({
+      modalState: {
+        ...modalState,
+        text: { message: 'Processing...', color: 'lightblue' }
+      }
+    });
+    this.props.changeCurrentLocation(currentLocation, parcelId).then(res => {
+      if (res.message === 'Parcel destination changed successfully') {
+        this.setState({
+          modalState: {
+            ...modalState,
+            text: { message: res.message, color: 'green' }
+          }
+        });
+      } else {
+        this.setState({
+          modalState: {
+            ...modalState,
+            text: { message: res.message || res.errors, color: 'tomato' }
+          }
+        });
+      }
+    });
+  }
+
+  // modals to open
+
   openModal(x) {
     this.setState({ modalIsOpen: true, currentModalId: x });
   }
   openCancelModal(x) {
     this.setState({ showModal: true, currentModalId: x });
   }
-  openParcelDetail() {
-    this.setState({ detailOpen: true });
+  // openParcelDetail(x) {
+  //   this.setState({ detailOpen: true, currentModalId: x });
+  // }
+  openAdminParcelDetail(x) {
+    this.setState({ detailOpen: true, currentModalId: x });
   }
   openStatusModal(x) {
     this.setState({ statusModal: true, currentModalId: x });
+  }
+
+  openCurrentLocationModal(x) {
+    this.setState({ currentLocationModal: true, currentModalId: x });
   }
 
   closeModal(event) {
@@ -148,20 +190,13 @@ class ParcelListRow extends Component {
     ) {
       this.setState({ modalIsOpen: false });
       // window.location.reload(true);
-    }
-    if (
-      event.target.className === 'modal' ||
-      event.target.className === 'close'
-    ) {
+
       this.setState({ showModal: false });
       // window.location.reload(true);
-    }
-    if (
-      event.target.className === 'modal' ||
-      event.target.className === 'close'
-    ) {
+
       this.setState({ statusModal: false });
       // window.location.reload(true);
+      this.setState({ currentLocationModal: false });
     }
   }
 
@@ -219,25 +254,36 @@ class ParcelListRow extends Component {
             <div className="col col-8" data-label="options">
               <div className="dropdown">
                 <div className="dropbtn">
-                {/* Check if user is an admin */}
+                  {/* Check if user is an admin */}
                   {user.detail.role === 'admin' ? (
-                      <AdminDropDown
-                        openStatusModal={this.openStatusModal.bind(
-                          this,
-                          parcel.id
-                        )}
-                        currentModalId={parcel.id}
-                        detailOpen={this.detailOpen}
-                        closeModal={this.closeModal}
-                        showDetail={this.state.statusModal}
-                        parcels={parcels}
-                        handleStatusChange={this.handleStatusChange}
-                        handleChange={this.handleChange}
-                        textMessage={this.state.modalState.text}
-                        status={this.state.status}
-                      />
-                    )
-                   : (
+                    <AdminDropDown
+                      openStatusModal={this.openStatusModal.bind(
+                        this,
+                        parcel.id
+                      )}
+                      openCurrentLocationModal={this.openCurrentLocationModal.bind(
+                        this,
+                        parcel.id
+                      )}
+                      currentModalId={parcel.id}
+                      openAdminParcelDetail={this.openAdminParcelDetail.bind(
+                        this,
+                        parcel.id
+                      )}
+                      currentLocation={this.state.currentLocation}
+                      closeModal={this.closeModal}
+                      statusModal={this.state.statusModal}
+                      parcels={parcels}
+                      handleStatusChange={this.handleStatusChange}
+                      handleCurrentLocationChange={
+                        this.handleCurrentLocationChange
+                      }
+                      handleChange={this.handleChange}
+                      currentLocationModal={this.state.currentLocationModal}
+                      textMessage={this.state.modalState.text}
+                      status={this.state.status}
+                    />
+                  ) : (
                     <div id="myDropdown" className="dropdown-content">
                       <p>OPTIONS</p>
                       {/* this.openCancelModal.bind(this, parcel.id) is to bind to the particular parcel order */}
@@ -249,14 +295,13 @@ class ParcelListRow extends Component {
                       </Link>
                       <Link
                         to="#"
-                        
                         onClick={this.openModal.bind(this, parcel.id)}
                       >
                         change destination
                       </Link>
                       <Link
                         to={`/viewdetails/${parcel.id}`}
-                        onClick={this.detailOpen}
+                        onClick={this.openDetail}
                       >
                         View Details
                       </Link>
@@ -315,5 +360,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { changeDestination, cancelParcel, changeStatus }
+  { changeDestination, cancelParcel, changeStatus, changeCurrentLocation }
 )(ParcelListRow);

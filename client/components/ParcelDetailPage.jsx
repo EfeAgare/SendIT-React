@@ -2,7 +2,10 @@ import '../../UI/css/allparcel.css';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { loadSingleParcel } from '../action/loadParcelAction';
+import {
+  loadSingleParcel,
+  adminLoadSingleParcel
+} from '../action/loadParcelAction';
 import Header from './Header';
 import ProfileFooter from './ProfileFooter';
 import { dateFormat } from './DateFormat';
@@ -17,8 +20,13 @@ class ParcelDetailPage extends Component {
   componentDidMount() {
     const {
       loadSingleParcel,
+      adminLoadSingleParcel,
+      user,
       match: { params }
     } = this.props;
+    if (user.detail.role === 'admin') {
+      adminLoadSingleParcel(params.parcelId);
+    }
     loadSingleParcel(params.parcelId);
   }
   render() {
@@ -154,5 +162,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loadSingleParcel }
+  { loadSingleParcel, adminLoadSingleParcel }
 )(ParcelDetailPage);
