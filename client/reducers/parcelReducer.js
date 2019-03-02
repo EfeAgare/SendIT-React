@@ -2,7 +2,10 @@ import {
   LOAD_PARCEL_ORDER,
   CREATE_PARCEL,
   CURRENT_PARCEL_ORDER,
-  LOAD_ALL_PARCEL_ORDER
+  LOAD_ALL_PARCEL_ORDER,
+  UPDATE_DESTINATION,
+  CANCEL_PARCEL_ORDER,
+  CHANGE_PARCEL_STATUS
 } from '../constants/action-types';
 
 const parcelReducer = (state = [], action) => {
@@ -15,6 +18,29 @@ const parcelReducer = (state = [], action) => {
 
     case LOAD_ALL_PARCEL_ORDER:
       return action.allparcels;
+
+    case UPDATE_DESTINATION: {
+      const index = state.indexOf(
+        state.find(parcel => parcel.id === action.update.id)
+      );
+      state[index] = action.update;
+      return state;
+    }
+    case CANCEL_PARCEL_ORDER: {
+      const index = state.indexOf(
+        state.find(parcel => parcel.id === action.cancel.id)
+      );
+      state[index] = action.cancel;
+      return state;
+    }
+
+    case CHANGE_PARCEL_STATUS: {
+      const index = state.indexOf(
+        state.find(parcel => parcel.id === action.status.id)
+      );
+      state[index] = action.status;
+      return state;
+    }
 
     default:
       return state;

@@ -37,7 +37,7 @@ class Header extends Component {
                 ALLPARCELS{' '}
               </NavLink>
             ) : (
-              <div>
+              <React.Fragment>
                 <NavLink to="/profile" activeClassName="active">
                   {' '}
                   PROFILE{' '}
@@ -45,7 +45,7 @@ class Header extends Component {
                 <NavLink to="/order" activeClassName="active">
                   ORDER PARCEL
                 </NavLink>
-              </div>
+              </React.Fragment>
             )}
           </div>
           <a href="javascript:void(0);" className="icon">

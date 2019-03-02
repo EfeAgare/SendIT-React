@@ -1,6 +1,7 @@
-export const changeDestination = (deliveryAddress, parcelId) => {
+import { UPDATE_DESTINATION } from '../constants/action-types';
+export const changeDestination = (deliveryAddress, parcelId) => dispatch => {
   return fetch(`/api/v1/parcels/${parcelId}/destination`, {
-    method: 'PUT',
+    method: 'PATCH',
     headers: {
       'content-type': 'application/json',
       'x-access-token': localStorage.getItem('token')
@@ -9,6 +10,8 @@ export const changeDestination = (deliveryAddress, parcelId) => {
   })
     .then(res => res.json())
     .then(res => {
+      if (res.message === 'Parcel destination changed successfully')
+      dispatch({ type: UPDATE_DESTINATION, update: res.data });
       return res;
     })
     .catch(error => {

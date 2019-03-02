@@ -14,7 +14,6 @@ class SigninPage extends Component {
     return (
       <React.Fragment>
         <Header />
-
         <SigninForm emailAction={emailAction} userSignin={userSignin} />
         <FlashMessageList />
         <LoginFooter />

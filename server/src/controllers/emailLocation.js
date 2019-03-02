@@ -32,10 +32,7 @@ const emailLocation =(email) =>{
         login to your account to see current Location</p>',
     };
     transport.sendMail(mailOptions, (error) => {
-        if (error) {
-            return res.status(500).json({ message: 'Email failed to send', error });
-          }
-          res.status(200).json({ message: 'Email sent successfully' });
+        return error;
         });
 }
 export default emailLocation;
