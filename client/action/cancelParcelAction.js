@@ -1,4 +1,5 @@
-export const cancelParcel = (parcelId) =>  {
+import { CANCEL_PARCEL_ORDER } from '../constants/action-types';
+export const cancelParcel = parcelId => dispatch => {
   return fetch(`/api/v1//parcels/${parcelId}/cancel`, {
     method: 'PUT',
     headers: {
@@ -9,6 +10,8 @@ export const cancelParcel = (parcelId) =>  {
   })
     .then(res => res.json())
     .then(res => {
+      if (res.message === 'Parcel cancelled successfully')
+      dispatch({ type: CANCEL_PARCEL_ORDER, cancel: res.data });
       return res;
     })
     .catch(error => {

@@ -6,10 +6,11 @@ import { ChangeParcelDestination } from './ChangeParcelDestination';
 import { Link } from 'react-router-dom';
 import { dateFormat, newDateFormat } from './DateFormat';
 import { cancelParcel } from '../action/cancelParcelAction';
+import { changeStatus } from '../action/changeParcelStatus';
 import { changeDestination } from '../action/parcelDestinationAction';
 import ParcelDetailPage from './ParcelDetailPage';
 import { connect } from 'react-redux';
-import { admin } from './dropDown';
+import { AdminDropDown } from './AdminDropDown';
 
 class ParcelListRow extends Component {
   constructor(props) {
@@ -19,17 +20,22 @@ class ParcelListRow extends Component {
       modalIsOpen: false,
       showModal: false,
       detailOpen: false,
+      statusModal: false,
+      currentModalId: 0,
+      status: '',
       deliveryAddress: ' ',
       modalState: {
         text: { message: '', color: '' }
       }
     };
     this.handleChange = this.handleChange.bind(this);
-    this.openModal = this.openModal.bind(this);
+    // this.openModal = this.openModal.bind(this);
     this.openCancelModal = this.openCancelModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.handleCancelParcel = this.handleCancelParcel.bind(this);
     this.handleDestinationChange = this.handleDestinationChange.bind(this);
+    this.openStatusModal = this.openStatusModal.bind(this);
+    this.handleStatusChange = this.handleStatusChange.bind(this);
   }
   handleChange(event) {
     const { name, value } = event.target;
@@ -45,8 +51,38 @@ class ParcelListRow extends Component {
         text: { message: 'Processing...', color: 'lightblue' }
       }
     });
-    changeDestination(deliveryAddress, parcelId).then(res => {
+    this.props.changeDestination(deliveryAddress, parcelId).then(res => {
       if (res.message === 'Parcel destination changed successfully') {
+        this.setState({
+          modalState: {
+            ...modalState,
+            text: { message: res.message, color: 'green' }
+          }
+        });
+      } else {
+        this.setState({
+          modalState: {
+            ...modalState,
+            text: { message: res.message || res.errors, color: 'tomato' }
+          }
+        });
+      }
+    });
+  }
+
+  handleStatusChange(parcelId) {
+    const { modalState, status } = this.state;
+    this.setState({
+      modalState: {
+        ...modalState,
+        text: { message: 'Processing...', color: 'lightblue' }
+      }
+    });
+    this.props.changeStatus(status, parcelId).then(res => {
+      if (
+        res.message ===
+        'Parcel Status Updated successfully and Email sent successfully'
+      ) {
         this.setState({
           modalState: {
             ...modalState,
@@ -72,7 +108,7 @@ class ParcelListRow extends Component {
         text: { message: 'Processing...', color: 'lightblue' }
       }
     });
-    cancelParcel(parcelId).then(res => {
+    this.props.cancelParcel(parcelId).then(res => {
       if (res.message === 'Parcel cancelled successfully') {
         this.setState({
           modalState: {
@@ -91,14 +127,17 @@ class ParcelListRow extends Component {
     });
   }
 
-  openModal() {
-    this.setState({ modalIsOpen: true });
+  openModal(x) {
+    this.setState({ modalIsOpen: true, currentModalId: x });
   }
-  openCancelModal() {
-    this.setState({ showModal: true });
+  openCancelModal(x) {
+    this.setState({ showModal: true, currentModalId: x });
   }
   openParcelDetail() {
     this.setState({ detailOpen: true });
+  }
+  openStatusModal(x) {
+    this.setState({ statusModal: true, currentModalId: x });
   }
 
   closeModal(event) {
@@ -108,19 +147,27 @@ class ParcelListRow extends Component {
       event.target.className === 'close'
     ) {
       this.setState({ modalIsOpen: false });
-      window.location.reload(true);
+      // window.location.reload(true);
     }
     if (
       event.target.className === 'modal' ||
       event.target.className === 'close'
     ) {
       this.setState({ showModal: false });
-      window.location.reload(true);
+      // window.location.reload(true);
+    }
+    if (
+      event.target.className === 'modal' ||
+      event.target.className === 'close'
+    ) {
+      this.setState({ statusModal: false });
+      // window.location.reload(true);
     }
   }
 
   render() {
     const { parcels, currentParcel, isLoading, user } = this.props;
+    const { currentModalId } = this.state;
     return (
       <ul className="responsive-table">
         <li className="table-header">
@@ -172,15 +219,39 @@ class ParcelListRow extends Component {
             <div className="col col-8" data-label="options">
               <div className="dropdown">
                 <div className="dropbtn">
+                {/* Check if user is an admin */}
                   {user.detail.role === 'admin' ? (
-                    admin
-                  ) : (
+                      <AdminDropDown
+                        openStatusModal={this.openStatusModal.bind(
+                          this,
+                          parcel.id
+                        )}
+                        currentModalId={parcel.id}
+                        detailOpen={this.detailOpen}
+                        closeModal={this.closeModal}
+                        showDetail={this.state.statusModal}
+                        parcels={parcels}
+                        handleStatusChange={this.handleStatusChange}
+                        handleChange={this.handleChange}
+                        textMessage={this.state.modalState.text}
+                        status={this.state.status}
+                      />
+                    )
+                   : (
                     <div id="myDropdown" className="dropdown-content">
                       <p>OPTIONS</p>
-                      <Link to="#" onClick={this.openCancelModal}>
+                      {/* this.openCancelModal.bind(this, parcel.id) is to bind to the particular parcel order */}
+                      <Link
+                        to="#"
+                        onClick={this.openCancelModal.bind(this, parcel.id)}
+                      >
                         Cancel Parcel
                       </Link>
-                      <Link to="#" onClick={this.openModal}>
+                      <Link
+                        to="#"
+                        
+                        onClick={this.openModal.bind(this, parcel.id)}
+                      >
                         change destination
                       </Link>
                       <Link
@@ -194,20 +265,21 @@ class ParcelListRow extends Component {
                 </div>
               </div>
             </div>
-            {this.state.showModal && (
+            {/* {this.state.showModal && currentModalId == parcel.id  is to only display that particular order*/}
+            {this.state.showModal && currentModalId == parcel.id && (
               <CancelParcelOrder
                 parcelId={parcel.id}
                 closeModal={this.closeModal}
                 handleChange={this.handleChange}
                 textMessage={this.state.modalState.text}
-                cancelParcel={this.handleCancelParcel}
+                handleCancelParcel={this.handleCancelParcel}
               />
             )}
-            {this.state.modalIsOpen && (
+            {this.state.modalIsOpen && currentModalId == parcel.id && (
               <ChangeParcelDestination
                 closeModal={this.closeModal}
                 parcelId={parcel.id}
-                changeDestination={this.handleDestinationChange}
+                handleDestinationChange={this.handleDestinationChange}
                 handleChange={this.handleChange}
                 textMessage={this.state.modalState.text}
                 deliveryAddress={this.state.deliveryAddress}
@@ -236,12 +308,12 @@ ParcelListRow.contextTypes = {
 const mapStateToProps = state => {
   return {
     currentParcel: state.parcel,
-    user: state.user,
+    // user: state.user,
     parcels: state.parcels
   };
 };
 
 export default connect(
   mapStateToProps,
-  {}
+  { changeDestination, cancelParcel, changeStatus }
 )(ParcelListRow);

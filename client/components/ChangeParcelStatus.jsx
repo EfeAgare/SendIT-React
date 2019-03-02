@@ -1,21 +1,20 @@
 import React from 'react';
 import '../../UI/css/allparcel.css';
 
-export const ChangeParcelDestination = ({
+export const ChangeParcelStatus = ({
   closeModal,
   parcelId,
-  handleDestinationChange,
+  handleStatusChange,
   handleChange,
   textMessage,
-  deliveryAddress
-}) => {
-  return(
+  status
+}) => (
   <div onClick={closeModal} className="modal">
     <div className="modal-content clearfix">
       <div onClick={closeModal} className="close">
         &times;
       </div>
-      <h4>Change Parcel Destination</h4>
+      <h4>Change Status</h4> 
       <div className="dest-container">
         <form>
           &nbsp;
@@ -24,16 +23,16 @@ export const ChangeParcelDestination = ({
           <input
             type="text"
             id="dest-input"
-            placeholder="deliveryAddress"
-            name="deliveryAddress"
-            value={deliveryAddress}
+            placeholder="Change Status"
+            name="status"
+            value={status}
             onChange={handleChange}
             autoFocus
           />
           <button
             id="dest-btn"
             type="submit"
-            onClick={() => handleDestinationChange(parcelId)}
+            onClick={() => handleStatusChange(parcelId)}
           >
             Submit
           </button>
@@ -54,5 +53,4 @@ export const ChangeParcelDestination = ({
       )}
     </div>
   </div>
-)}
-;
+);

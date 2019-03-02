@@ -3,7 +3,7 @@ import '../../UI/css/allparcel.css';
 
 export const CancelParcelOrder = ({
   closeModal,
-  cancelParcel,
+  handleCancelParcel,
   textMessage,
   parcelId
 }) => (
@@ -29,7 +29,7 @@ export const CancelParcelOrder = ({
       )}
       <button
         id="modal-btn"
-        onClick={() => cancelParcel(parcelId)}
+        onClick={() => handleCancelParcel(parcelId)}
         type="submit"
       >
         Submit

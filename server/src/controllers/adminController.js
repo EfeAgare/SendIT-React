@@ -125,7 +125,10 @@ class AdminController {
                                     client.connect();
                                     client.query(getUserEmail, [getUserId])
                                     .then((result2) =>{
-                                    emailLocation(result2.rows[0].email)
+                                   const error= emailLocation(result2.rows[0].email)
+                                   if (error) {
+                                    return res.status(500).json({ message: 'Email failed to send', error });
+                                  }
                                      res.status(200).json({
                                             success: 'true',
                                             message: 'Parcel Location Updated successfully  and Email sent successfully',
@@ -182,10 +185,13 @@ class AdminController {
                                 client.connect();
                                 client.query(getUserEmail, [getUserId])
                                 .then((result2) =>{
-                                emailStatus(result2.rows[0].email)
+                               const error= emailStatus(result2.rows[0].email)
+                               if (error) {
+                                return res.status(500).json({ message: 'Email failed to send', error });
+                              }
                                  res.status(200).json({
                                         success: 'true',
-                                        message: 'Parcel Location Updated successfully and Email sent successfully',
+                                        message: 'Parcel Status Updated successfully and Email sent successfully',
                                         data: parcelResponse
                                     });
                              })
