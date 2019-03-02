@@ -54,12 +54,12 @@ describe('/GET', () => {
   });
 });
 
-describe('/PUT/ :parcelId/status', () => {
+describe('/PATCH/ :parcelId/status', () => {
   it('Admin Should change the status of a parcel', (done) => {
     chai.request(app)
-      .put('/api/v1/parcels/2/status')
+      .patch('/api/v1/parcels/2/status')
       .set('x-access-token',token)
-      .send({status:'tansit'})
+      .send({status:'transit'})
       .end((err, res) => {
         assert.equal(res.status, 200);
         assert.typeOf(res.body, 'object');
@@ -69,7 +69,7 @@ describe('/PUT/ :parcelId/status', () => {
   
   it('Admin cannnot change the status of a parcel if delivered', (done) => {
     chai.request(app)
-      .put('/api/v1/parcels/1/status')
+      .patch('/api/v1/parcels/1/status')
       .set('x-access-token',token)
       .send({status:'delivered'})
       .end((err, res) => {
@@ -80,7 +80,7 @@ describe('/PUT/ :parcelId/status', () => {
   });
   it('Admin cannnot change the status of a parcel if cancelled', (done) => {
     chai.request(app)
-      .put('/api/v1/parcels/1/status')
+      .patch('/api/v1/parcels/1/status')
       .set('x-access-token',token)
       .send({status:'cancelled'})
       .end((err, res) => {
@@ -92,10 +92,10 @@ describe('/PUT/ :parcelId/status', () => {
 });
 
 
-describe('/PUT/ parcels/:parcelId/presentLocation' , () => {
+describe('/PATCH/ parcels/:parcelId/presentLocation' , () => {
   it('Admin Should change the present Location of parcels', (done) => {
     chai.request(app)
-      .put('/api/v1/parcels/2/presentLocation')
+      .patch('/api/v1/parcels/2/presentLocation')
       .set('x-access-token',token)
       .send({currentLocation:'Enugu'})
        .end((err, res) => {

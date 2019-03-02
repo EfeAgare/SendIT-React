@@ -324,7 +324,7 @@ describe('/GET/users/:userId/:parcelId', () => {
 describe('/PUT', () => {
   it('Should change the destination of a parcels', (done) => {
     chai.request(app)
-      .put('/api/v1/parcels/1/destination')
+      .patch('/api/v1/parcels/1/destination')
       .set('x-access-token',token)
       .send({deliveryAddress:'Kano'})
        .end((err, res) => {
@@ -340,7 +340,7 @@ describe('/PUT', () => {
 describe('/PUT', () => {
   it('Should cancel a parcel delivery order', (done) => {
     chai.request(app)
-      .put('/api/v1/parcels/1/cancel')
+      .patch('/api/v1/parcels/1/cancel')
       .set('x-access-token',token)
        .end((err, res) => {
         assert.equal(res.status, 200);
