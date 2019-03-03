@@ -12,6 +12,8 @@ import store from './store/configureStore';
 import requireAuth from './utils/Authenticate';
 import ParcelDetailPage from './components/ParcelDetailPage';
 import AdminPage from './components/AdminPage';
+import { ToastContainer } from 'react-toastify';
+import "!style-loader!css-loader!react-toastify/dist/ReactToastify.css"
 
 if (localStorage.getItem('token')) {
   // Set auth token header auth
@@ -29,6 +31,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
+          <ToastContainer autoClose={7000} hideProgressBar />
           <Route exact path="/" component={Home} />
           <Route exact path="/logout" component={Home} />
           <Route exact path="/signup" component={SignupPage} />

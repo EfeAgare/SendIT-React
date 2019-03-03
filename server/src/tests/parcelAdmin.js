@@ -92,10 +92,10 @@ describe('/PATCH/ :parcelId/status', () => {
 });
 
 
-describe('/PATCH/ parcels/:parcelId/presentLocation' , () => {
-  it('Admin Should change the present Location of parcels', (done) => {
+describe('/PATCH/ parcels/:parcelId/currentLocation' , () => {
+  it('Admin Should change the current Location of parcels', (done) => {
     chai.request(app)
-      .patch('/api/v1/parcels/2/presentLocation')
+      .patch('/api/v1/parcels/2/currentLocation')
       .set('x-access-token',token)
       .send({currentLocation:'Enugu'})
        .end((err, res) => {

@@ -168,9 +168,9 @@ class ParcelListRow extends Component {
   openCancelModal(x) {
     this.setState({ showModal: true, currentModalId: x });
   }
-  // openParcelDetail(x) {
-  //   this.setState({ detailOpen: true, currentModalId: x });
-  // }
+  openParcelDetail(x) {
+    this.setState({ detailOpen: true, currentModalId: x });
+  }
   openAdminParcelDetail(x) {
     this.setState({ detailOpen: true, currentModalId: x });
   }
@@ -181,6 +181,7 @@ class ParcelListRow extends Component {
   openCurrentLocationModal(x) {
     this.setState({ currentLocationModal: true, currentModalId: x });
   }
+  
 
   closeModal(event) {
     event.preventDefault();
@@ -301,7 +302,7 @@ class ParcelListRow extends Component {
                       </Link>
                       <Link
                         to={`/viewdetails/${parcel.id}`}
-                        onClick={this.openDetail}
+                        onClick={this.openParcelDetail}
                       >
                         View Details
                       </Link>
