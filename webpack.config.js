@@ -1,10 +1,9 @@
-
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
-  entry: ['@babel/polyfill', './client/index.js'],
+  entry: ['./client/index.js'],
   output: {
     path: path.resolve(__dirname, 'dist/'),
 

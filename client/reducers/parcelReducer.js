@@ -5,7 +5,9 @@ import {
   LOAD_ALL_PARCEL_ORDER,
   UPDATE_DESTINATION,
   CANCEL_PARCEL_ORDER,
-  CHANGE_PARCEL_STATUS
+  CHANGE_PARCEL_STATUS,
+  CHANGE_PARCEL_CURRENTLOCATION,
+  ADMIN_LOAD_SINGLE_PARCEL
 } from '../constants/action-types';
 
 const parcelReducer = (state = [], action) => {
@@ -42,6 +44,14 @@ const parcelReducer = (state = [], action) => {
       return state;
     }
 
+    case CHANGE_PARCEL_CURRENTLOCATION: {
+      const index = state.indexOf(
+        state.find(parcel => parcel.id === action.location.id)
+      );
+      state[index] = action.location;
+      return state;
+    }
+
     default:
       return state;
   }
@@ -53,16 +63,9 @@ export const currentParcelReducer = (state = {}, action) => {
   switch (action.type) {
     case CURRENT_PARCEL_ORDER:
       return action.parcel;
+    case ADMIN_LOAD_SINGLE_PARCEL:
+      return action.singleparcel;
     default:
       return state;
   }
 };
-
-// export const currentParcelReducer = (state = {}, action) => {
-//   switch (action.type) {
-//     case CURRENT_PARCEL_ORDER:
-//       return action.parcel;
-//     default:
-//       return state;
-//   }
-// };

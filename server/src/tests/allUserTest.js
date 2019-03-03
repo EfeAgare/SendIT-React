@@ -321,7 +321,7 @@ describe('/GET/users/:userId/:parcelId', () => {
 });
 
 
-describe('/PUT', () => {
+describe('/PATCH', () => {
   it('Should change the destination of a parcels', (done) => {
     chai.request(app)
       .patch('/api/v1/parcels/1/destination')
@@ -337,7 +337,7 @@ describe('/PUT', () => {
 
 
 
-describe('/PUT', () => {
+describe('/PATCH', () => {
   it('Should cancel a parcel delivery order', (done) => {
     chai.request(app)
       .patch('/api/v1/parcels/1/cancel')
