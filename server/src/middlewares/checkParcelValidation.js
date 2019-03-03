@@ -36,7 +36,7 @@ class CheckValidation {
             return res.status(400).json({errors: errors[0].msg});}next();
     }
     static currentLocation (req, res, next) {
-        req.check('currentLocation', ' deliveryAddress cannot be  empty').trim()
+        req.check('currentLocation', 'currentLocation cannot be  empty').trim()
         .not().isEmpty()
         const errors = req.validationErrors();
         if (errors) {

@@ -24,7 +24,7 @@ adminRoute
   );
 
 adminRoute
-  .route('/parcels/:parcelId/presentLocation')
+  .route('/parcels/:parcelId/currentLocation')
   .patch(
     Auth.verifyToken,
     idValidation.parcelId,

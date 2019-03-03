@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import '../../UI/css/sign.css';
+import { toast } from "react-toastify";
 import TextFieldGroup from './common/TextFieldGroup';
 import { EmailModalForgottenPassword } from './EmailModalForgottenPassword';
 
@@ -37,8 +38,10 @@ class SigninForm extends Component {
       if (res.message !== 'Login successful')
         this.setState({ error: res.errors || res.message });
       if (res.data.role === 'admin') {
+        toast.success("Sign in successfully");
         this.props.history.push('/admin');
       } else {
+        toast.success("Sign in successfully");
         this.props.history.push('/profile');
       }
     });
