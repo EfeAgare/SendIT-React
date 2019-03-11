@@ -1,33 +1,37 @@
-version: 2
+version: 2.0
 jobs:
   build:
-   environment:
+    environment:
       CC_TEST_REPORTER_ID: a8b0cc4505e473c4cb29f7ef0e287c41d431c5805ba1f5183b2c9f29afdab118
-      docker:
-      - image: circleci/node:10
+    docker:
+      - image: circleci/node:4.8.2
     working_directory: ~/repo
-
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
-
-      - run: npm install
+           - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache: # special step to restore the dependency cache
+          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm-wee
+          command: npm install
+      - save_cache: # special step to save the dependency cache
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
       - run:
           name: Setup Code Climate test-reporter
           command: |
+          # download test reporter as a static binary
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
       - run:
-          name: Run Test
+          name: Run tests
           command: |
+          # notify Code Climate of a pending test report using `before-build`
             ./cc-test-reporter before-build
             npm run react-test
-            ./cc-test-reporter after-build --exit-code $?
+          # upload test report to Code Climate using `after-build`
+            ./cc-test-reporter after-build --coverage-input-type clover --exit-code $?
