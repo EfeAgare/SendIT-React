@@ -4,8 +4,11 @@ node_js:
 env:
   global:
     - CC_TEST_REPORTER_ID=a8b0cc4505e473c4cb29f7ef0e287c41d431c5805ba1f5183b2c9f29afdab118
+<<<<<<< HEAD
   matrix:
   - REACT=16.7
+=======
+>>>>>>> fix: fix circleci test
 
 install: 
   - npm install
