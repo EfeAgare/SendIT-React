@@ -41,7 +41,6 @@ describe('Test Header Component', () => {
     expect(mapStateToProps(initialState).isAuthenticated).toBe();
     // expect(wrapper.find('Backdrop').length).toBe(1);
     expect(wrapper.find('div').length).toEqual(1);
-    expect(wrapper.find('SideDrawer').length).toEqual(1);
     wrapper.setContext({ context: context.router.history });
 
     wrapper.instance().drawerToggleClickHandler(mockFn);
