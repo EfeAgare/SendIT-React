@@ -1,23 +1,33 @@
-version: 2.0
+version: 2
 jobs:
   build:
-    environment:
+   environment:
       CC_TEST_REPORTER_ID: a8b0cc4505e473c4cb29f7ef0e287c41d431c5805ba1f5183b2c9f29afdab118
-    docker:
+      docker:
       - image: circleci/node:10
     working_directory: ~/repo
+
     steps:
       - checkout
-      - run:  npm install
-          name: Setup dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+
+      - run: npm install
       - run:
           name: Setup Code Climate test-reporter
           command: |
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
       - run:
-          name: Run tests
+          name: Run Test
           command: |
             ./cc-test-reporter before-build
             npm run react-test
-            ./cc-test-reporter after-build --coverage-input-type clover --exit-code $?
+            ./cc-test-reporter after-build --exit-code $?
