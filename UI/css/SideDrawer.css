@@ -1,0 +1,39 @@
+.side-drawer {
+  background: white;
+  box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  left: 59.5%;
+  width: 40%;
+  margin: 0 0 20%;
+  max-width: 400px;
+  z-index: 200;
+  transform: translateY(-1000%);
+  transition: transform 0.3s ease-out;
+}
+
+.side-drawer.open {
+  transform: translateY(0);
+}
+
+.side-drawer ul {
+  height: 30%;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.side-drawer li {
+  margin: 0.5rem 0;
+}
+
+.side-drawer a {
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+@media (min-width: 769px) {
+    .side-drawer {
+        display: none;
+    }
+}

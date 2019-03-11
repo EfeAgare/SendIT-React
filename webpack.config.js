@@ -13,7 +13,7 @@ const config = {
     The publicPath property is a special property that helps us with our dev-server. It specifies the public URL of the the directory — at least as far as webpack-dev-server will know or care
      */
 
-    publicPath: '/dist/',
+    publicPath: '/',
     filename: 'bundle.js'
   },
   mode: 'development',
@@ -48,7 +48,7 @@ const config = {
       secure: false,
       changeOrigin: true
     },
-    publicPath: 'http://127.0.0.1:3000/dist/',
+    publicPath: 'http://127.0.0.1:3000/',
     hotOnly: true,
     historyApiFallback: true
   },

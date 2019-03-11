@@ -31,7 +31,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <ToastContainer autoClose={7000} hideProgressBar />
+          <ToastContainer autoClose={2000} hideProgressBar />
           <Route exact path="/" component={Home} />
           <Route exact path="/logout" component={Home} />
           <Route exact path="/signup" component={SignupPage} />

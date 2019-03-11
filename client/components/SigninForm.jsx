@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import TextFieldGroup from './common/TextFieldGroup';
 import { EmailModalForgottenPassword } from './EmailModalForgottenPassword';
 
-class SigninForm extends Component {
+export class SigninForm extends Component {
   constructor(props) {
     super(props);
     this.state = {

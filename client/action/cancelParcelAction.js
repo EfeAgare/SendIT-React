@@ -1,7 +1,7 @@
 import { CANCEL_PARCEL_ORDER } from '../constants/action-types';
 export const cancelParcel = parcelId => dispatch => {
   return fetch(`/api/v1//parcels/${parcelId}/cancel`, {
-    method: 'PUT',
+    method: 'PATCH',
     headers: {
       'content-type': 'application/json',
       Accept: 'application/json',

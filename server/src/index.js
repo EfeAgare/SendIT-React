@@ -51,7 +51,7 @@ app.use(express.static(path.resolve(__dirname, '../../dist')));
 
 // handling react router, for request to react app
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../client/public/index.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 app.use((req, res, next) => {
   const error = new Error("We can't find the page you are looking for");

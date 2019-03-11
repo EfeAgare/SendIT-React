@@ -1,7 +1,7 @@
-import React from 'react';
 import '../../UI/css/sign.css';
+import React from 'react';
 
-const Footer = props => {
+const Footer = () => {
   return (
     <footer>
       <p className="foot">&copy;SendIT.com</p>

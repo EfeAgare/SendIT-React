@@ -10,7 +10,7 @@ import Header from './Header';
 import ProfileFooter from './ProfileFooter';
 import { dateFormat } from './DateFormat';
 
-class ParcelDetailPage extends Component {
+export class ParcelDetailPage extends Component {
   constructor(props) {
     super(props);
     this.state = {

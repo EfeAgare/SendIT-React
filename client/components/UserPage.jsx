@@ -5,7 +5,7 @@ import { loadParcel } from '../action/loadParcelAction';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 
-class UserPage extends Component {
+export class UserPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
