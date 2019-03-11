@@ -5,7 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = {
   entry: ['./client/index.js'],
   output: {
-    path: path.resolve(__dirname, 'dist/'),
+    path: path.resolve(__dirname, 'server/dist'),
+    path: path.resolve(__dirname, 'dist'),
 
     /**
      * publicPath: property specifies what directory the bundle should go in,
@@ -22,14 +23,14 @@ const config = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        include: path.join(__dirname, 'client'),
+        include: path.resolve(__dirname, 'client'),
         exclude: /(node_modules)/,
         loader: 'babel-loader',
         options: { presets: ['@babel/env'] }
       },
       {
         test: /\.css$/,
-        include: path.join(__dirname, 'UI'),
+        include: path.resolve(__dirname, 'UI'),
         use: ['style-loader', 'css-loader']
       },
       {
@@ -44,20 +45,7 @@ const config = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
-      template: 'client/public/index.html',
-      minify: {
-        // see https://github.com/kangax/html-minifier#options-quick-reference
-        removeComments: true,
-        collapseWhitespace: true,
-        removeRedundantAttributes: true,
-        useShortDoctype: true,
-        removeEmptyAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        keepClosingSlash: true,
-        minifyJS: true,
-        minifyCSS: true,
-        minifyURLs: true
-      }
+      template: 'client/public/index.html'
     })
   ]
 };
