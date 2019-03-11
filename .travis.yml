@@ -9,6 +9,8 @@ env:
 
 install: 
   - npm install
+node_js:
+  - "11.10.1"
 
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
