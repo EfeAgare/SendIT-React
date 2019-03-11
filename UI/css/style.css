@@ -19,14 +19,13 @@ header {
   display: block;
   overflow: hidden;
   background-color: #efefef;
+  height: 8vh;
 }
 header a {
   float: left;
   color: black;
   text-align: center;
-  padding: 12px;
-  margin: 10px;
-  margin-left: 20px;
+  padding: 25px; 
   text-decoration: none;
   font-size: 15px;
   line-height: 20px;
@@ -37,15 +36,17 @@ header a.logo {
   font-family: 'Berkshire Swash', cursive;
   font-size: 35px;
   font-weight: bold;
+
 }
 
 header a:hover {
-  color: black;
+  color: #000000
 }
 
 header.active {
-  background-color: #f1f1f1;
+  background-color: #4b4b4b;
   color: black;
+  height: 8vh;
 }
 .icon {
   display: none;
@@ -286,9 +287,9 @@ section::after {
     width: 100%;
     margin: 5%;
   }
-  header a.logo {
+  /* header a.logo {
     margin-left: 30%;
-  }
+  } */
   .section-one p {
     font-family: 'Overlock', cursive;
     font-size: 30px;

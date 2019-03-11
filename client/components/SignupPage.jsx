@@ -6,7 +6,7 @@ import Header from './Header';
 import Footer from './Footer';
 import userSignup from '../action/userSignupAction';
 
-class SignupPage extends Component {
+export class SignupPage extends Component {
   render() {
     const { userSignup } = this.props;
     return (
@@ -18,7 +18,7 @@ class SignupPage extends Component {
     );
   }
 }
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
   return {
     user: state.user,
     parcels: state.parcels

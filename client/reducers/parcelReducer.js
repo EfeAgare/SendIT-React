@@ -13,7 +13,7 @@ import {
 const parcelReducer = (state = [], action) => {
   switch (action.type) {
     case CREATE_PARCEL:
-      return [...state, Object.assign({}, action.parcel)];
+      return [...state, action.parcel];
 
     case LOAD_PARCEL_ORDER:
       return action.parcels;
@@ -28,13 +28,17 @@ const parcelReducer = (state = [], action) => {
       state[index] = action.update;
       return state;
     }
-    case CANCEL_PARCEL_ORDER: {
-      const index = state.indexOf(
-        state.find(parcel => parcel.id === action.cancel.id)
-      );
-      state[index] = action.cancel;
-      return state;
-    }
+    // case CANCEL_PARCEL_ORDER: {
+    //   const index = state.indexOf(
+    //     state.find(parcel => parcel.id === action.cancel.id)
+    //   );
+    //   state[index] = action.cancel;
+    //   return state;
+    // }
+    case CANCEL_PARCEL_ORDER: 
+    return state.map(parcel =>
+      parcel.id === action.cancel.id ? action.cancel : parcel
+    );
 
     case CHANGE_PARCEL_STATUS: {
       const index = state.indexOf(

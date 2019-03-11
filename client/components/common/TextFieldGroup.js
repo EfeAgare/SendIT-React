@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TextFieldGroup = ({ field, value, type, onChange }) => {
+export const TextFieldGroup = ({ field, value, type, onChange }) => {
   return (
     <div className="input-row">
       <input
@@ -23,6 +23,6 @@ TextFieldGroup.propTypes = {
   onChange: PropTypes.func.isRequired
 };
 TextFieldGroup.defaultProps = {
-  type: 'text '
+  type: 'text'
 };
 export default TextFieldGroup;

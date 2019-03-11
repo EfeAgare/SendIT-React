@@ -7,7 +7,7 @@ import '../../UI/css/order.css';
 import '../../UI/css/allparcel.css';
 import ParcelListRow from './ParcelListRow';
 import Header from './Header';
-class UserDisplayPage extends Component {
+export class UserDisplayPage extends Component {
   constructor() {
     super();
     this.state = {
@@ -72,8 +72,7 @@ class UserDisplayPage extends Component {
               <p className="my" />
               <p className="myname" />
               {user.detail.name}
-              <a href="profile.html" className="number-order">
-                Number of Parcels Order
+              <a href="profile.html" className="number-order">Number of Parcels Order
                 <div id="number-order-parcel" className="number-order" />
                 {parcels.length}
               </a>
@@ -81,7 +80,7 @@ class UserDisplayPage extends Component {
           </aside>
           <main>
             <div className="wrapper">
-              <h1> Parcel Delivery Order</h1>
+              <h1>Parcel Delivery Order</h1>
               <div className="container">
                 {isLoading ? (
                   <div className="loader" />

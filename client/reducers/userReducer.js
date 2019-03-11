@@ -10,11 +10,13 @@ const userReducer = (state = initialState, action) => {
     case SET_CURRENT_USER:
       return {
         isAuthenticated: !isEmpty(action.user),
-        detail: Object.assign({}, action.user)
+        // detail: Object.assign({}, action.user)
+        detail: {...state, ...action.user }
       };
-    default:
+      default:
       return state;
-  }
-};
-
-export default userReducer;
+    }
+  };
+  
+  export default userReducer;
+  

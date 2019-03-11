@@ -13,7 +13,7 @@ import ParcelDetailPage from './ParcelDetailPage';
 import { connect } from 'react-redux';
 import { AdminDropDown } from './AdminDropDown';
 
-class ParcelListRow extends Component {
+export class ParcelListRow extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -142,7 +142,10 @@ class ParcelListRow extends Component {
       }
     });
     this.props.changeCurrentLocation(currentLocation, parcelId).then(res => {
-      if (res.message === 'Parcel destination changed successfully') {
+      if (
+        res.message ===
+        'Parcel Location Updated successfully  and Email sent successfully'
+      ) {
         this.setState({
           modalState: {
             ...modalState,
@@ -181,7 +184,6 @@ class ParcelListRow extends Component {
   openCurrentLocationModal(x) {
     this.setState({ currentLocationModal: true, currentModalId: x });
   }
-  
 
   closeModal(event) {
     event.preventDefault();
@@ -189,15 +191,14 @@ class ParcelListRow extends Component {
       event.target.className === 'modal' ||
       event.target.className === 'close'
     ) {
-      this.setState({ modalIsOpen: false });
-      // window.location.reload(true);
-
-      this.setState({ showModal: false });
-      // window.location.reload(true);
-
-      this.setState({ statusModal: false });
-      // window.location.reload(true);
-      this.setState({ currentLocationModal: false });
+      this.setState({
+        modalIsOpen: false,
+        showModal: false,
+        statusModal: false,
+        currentLocationModal: false,
+        detailOpen: false,
+        detailOpen: false
+      });
     }
   }
 
