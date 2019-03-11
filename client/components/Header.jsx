@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../../UI/css/style.css';
 import { connect } from 'react-redux';
 import Toolbar from './Toolbar/Toolbar';
-import SideDrawer from './sideDrawer/SideDrawer';
+import SideDrawer from './SideDrawer/SideDrawer';
 import Backdrop from './Backdrop/Backdrop';
 
 export class Header extends Component {
