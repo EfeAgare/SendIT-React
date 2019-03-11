@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "set NODE_ENV=test&&npm run migrate&& npm run seed && nyc mocha ./server/src/tests/ --compilers js:@babel/register --require @babel/polyfill --timeout 30000 --exit",
-    "react-test": "jest --watchAll --coverage",
+    "react-test": "jest --coverage",
     "devstart": "nodemon server/src/index.js --exec babel-node",
     "build": "babel ./server/src -d ./server/dist && webpack --config webpack.config.prod.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls && nyc report --reporter=lcov",
