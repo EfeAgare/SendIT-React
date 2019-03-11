@@ -5,7 +5,7 @@ import '../../UI/css/sign.css';
 import TextFieldGroup from './common/TextFieldGroup';
 
 
-class SignupForm extends Component {
+export class SignupForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
