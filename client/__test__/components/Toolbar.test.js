@@ -4,11 +4,6 @@ import configureMockStore from 'redux-mock-store';
 
 import { user } from '../ __mocks__/mockData';
 import ToolBar from '../../components/Toolbar/Toolbar';
-import {
-
-  parcelOrder,
-  spyhandleDestinationChange
-} from '../ __mocks__/mockData';
 
 const context = { router: {} };
 const historyMock = { push: jest.fn() };
@@ -41,7 +36,7 @@ describe('Test Header Component', () => {
   it('Should render properly', () => {
     // const wrapper = homePage();
     expect(wrapper.exists()).toBe(true);
-  
+
     expect(wrapper.find('Link').length).toEqual(1);
     expect(wrapper.find('header').length).toEqual(1);
     expect(wrapper.find('div').length).toEqual(5);
@@ -52,12 +47,11 @@ describe('Test Header Component', () => {
     wrapper
       .find('NavLink')
       .at(1)
-      .simulate('click', () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('userid');
-        window.location.reload(true);
-        context.router.history
-      });
+      .simulate('click', () => {});
+    // const VALUE = 'userid';
+    // expect(localStorage.removeItem).toHaveBeenLastCalledWith(VALUE);
+    // expect(Object.keys(localStorage.__STORE__).length).toBe(0);
+
     wrapper.setContext({ context: context.router.history });
   });
 });

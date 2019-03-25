@@ -18,7 +18,8 @@
   },
   "jest": {
     "setupFilesAfterEnv": [
-      "./client/setupTests.js"
+      "./client/setupTests.js",
+      "jest-localstorage-mock"
     ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
@@ -95,6 +96,7 @@
     "ignore-styles": "^5.0.1",
     "jest": "^24.1.0",
     "jest-fetch-mock": "^2.1.1",
+    "jest-localstorage-mock": "^2.4.0",
     "mini-css-extract-plugin": "^0.5.0",
     "mocha": "^5.2.0",
     "mocha-lcov-reporter": "^1.3.0",

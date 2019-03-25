@@ -3,7 +3,6 @@ import '../../../UI/css/Toolbar.css';
 import { Link, NavLink } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import React, { Component } from 'react';
-import { utils } from '../../utils/userUtils';
 
 class ToolBar extends Component {
   render() {
@@ -29,8 +28,9 @@ class ToolBar extends Component {
                 <NavLink
                   to="#"
                   onClick={() => {
-                    utils;
-                    window.location.reload(true);
+                    localStorage.removeItem('token'),
+                      localStorage.removeItem('userid'),
+                      window.location.reload(true);
                     this.context.router.history.push('/');
                   }}
                 >

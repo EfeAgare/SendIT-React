@@ -1,13 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ParcelListRow} from '../../components/ParcelListRow';
-import { ChangeParcelPresentLocation } from '../../components/ChangeParcelPresentLocation';
 import {
   user,
   event,
   parcelOrder,
   spyhandleCurrentLocationChange,
-  spyFailCurrentLocationChange,
   spyhandleCancelParcel,
   spyhandleStatusChange,
   spyhandleDestinationChange

@@ -1,6 +1,3 @@
-import thunk from 'redux-thunk';
-import fetchMock from 'fetch-mock';
-import configureMockStore from 'redux-mock-store';
 import { CURRENT_PARCEL_ORDER,LOAD_ALL_PARCEL_ORDER,LOAD_PARCEL_ORDER } from '../../constants/action-types';
 import { loadParcelOrder,loadAllParcelOrder, singleParcelOrder } from '../../action/loadParcelAction';
 import { parcelOrder } from '../ __mocks__/mockData';

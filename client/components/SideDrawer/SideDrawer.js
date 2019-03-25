@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import '../../../UI/css/style.css';
 import '../../../UI/css/SideDrawer.css';
 import { NavLink } from 'react-router-dom';
-import { utils } from '../../utils/userUtils';
 
 class SideDrawer extends Component {
   render() {
@@ -32,9 +31,10 @@ class SideDrawer extends Component {
         <NavLink
           to="#"
           onClick={() => {
-            utils;
-                    window.location.reload(true);
-                    this.context.router.history.push('/');
+            localStorage.removeItem('token'),
+              localStorage.removeItem('userid'),
+              window.location.reload(true);
+            this.context.router.history.push('/');
           }}
         >
           LOGOUT
@@ -69,15 +69,15 @@ class SideDrawer extends Component {
     }
     return (
       <nav className={drawerClasses}>
-      <div className="header-right">
-        <ul>
-          <li>
-            <NavLink to="/" exact activeClassName="active">
-              HOME
-            </NavLink>
-          </li>
-          {isAuthenticated.isAuthenticated ? userDropDown : guestDropDown}
-        </ul>
+        <div className="header-right">
+          <ul>
+            <li>
+              <NavLink to="/" exact activeClassName="active">
+                HOME
+              </NavLink>
+            </li>
+            {isAuthenticated.isAuthenticated ? userDropDown : guestDropDown}
+          </ul>
         </div>
       </nav>
     );
@@ -85,4 +85,3 @@ class SideDrawer extends Component {
 }
 
 export default SideDrawer;
-

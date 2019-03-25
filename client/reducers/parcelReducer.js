@@ -22,11 +22,14 @@ const parcelReducer = (state = [], action) => {
       return action.allparcels;
 
     case UPDATE_DESTINATION: {
-      const index = state.indexOf(
-        state.find(parcel => parcel.id === action.update.id)
+      return state.map(parcel =>
+        parcel.id === action.update.id ? action.update : parcel
       );
-      state[index] = action.update;
-      return state;
+      // const index = state.indexOf(
+      //   state.find(parcel => parcel.id === action.update.id)
+      // );
+      // state[index] = action.update;
+      // return state;
     }
     // case CANCEL_PARCEL_ORDER: {
     //   const index = state.indexOf(
