@@ -13,7 +13,8 @@ import requireAuth from './utils/Authenticate';
 import ParcelDetailPage from './components/ParcelDetailPage';
 import AdminPage from './components/AdminPage';
 import { ToastContainer } from 'react-toastify';
-import "!style-loader!css-loader!react-toastify/dist/ReactToastify.css"
+import '!style-loader!css-loader!react-toastify/dist/ReactToastify.css';
+import { signOutUser } from './action/userSigninAction';
 
 if (localStorage.getItem('token')) {
   // Set auth token header auth
@@ -25,6 +26,8 @@ if (localStorage.getItem('token')) {
     type: SET_CURRENT_USER,
     user
   });
+} else {
+  store.dispatch(signOutUser());
 }
 class App extends Component {
   render() {

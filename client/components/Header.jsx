@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Toolbar from './Toolbar/Toolbar';
 import SideDrawer from './SideDrawer/SideDrawer';
 import Backdrop from './Backdrop/Backdrop';
+import { signOutUser } from '../action/userSigninAction';
 
 export class Header extends Component {
   componentWillUpdate(nextProps) {
@@ -36,11 +37,13 @@ export class Header extends Component {
           drawerClickHandler={this.drawerToggleClickHandler}
           user={user}
           isAuthenticated={isAuthenticated}
+          signOutUser={this.props.signOutUser}
         />
         <SideDrawer
           show={this.state.sideDrawerOpen}
           isAuthenticated={isAuthenticated}
           user={user}
+          signOutUser={this.props.signOutUser}
         />
         {backdrop}
       </div>
@@ -48,12 +51,13 @@ export class Header extends Component {
   }
 }
 
-
-
 export const mapStateToProps = state => {
   return {
     isAuthenticated: state.user,
     user: state.user
   };
 };
-export default connect(mapStateToProps)(Header);
+export default connect(
+  mapStateToProps,
+  { signOutUser }
+)(Header);

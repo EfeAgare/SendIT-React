@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER } from '../constants/action-types';
+import { SET_CURRENT_USER, SIGN_OUT_USER } from '../constants/action-types';
 
 export const userLogin = user => {
   return {
@@ -25,4 +25,9 @@ export default userSignin => dispatch => {
     .catch(error => {
       throw error;
     });
+};
+
+export const signOutUser = () => dispatch => {
+  window.localStorage.clear();
+  dispatch({ type: SIGN_OUT_USER });
 };

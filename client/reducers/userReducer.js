@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER } from '../constants/action-types';
+import { SET_CURRENT_USER,SIGN_OUT_USER } from '../constants/action-types';
 import isEmpty from 'lodash/isEmpty'
 
 const initialState = {
@@ -10,9 +10,10 @@ const userReducer = (state = initialState, action) => {
     case SET_CURRENT_USER:
       return {
         isAuthenticated: !isEmpty(action.user),
-        // detail: Object.assign({}, action.user)
         detail: {...state, ...action.user }
       };
+      case SIGN_OUT_USER:
+      return initialState;
       default:
       return state;
     }

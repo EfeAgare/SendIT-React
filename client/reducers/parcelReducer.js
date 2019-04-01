@@ -13,7 +13,7 @@ import {
 const parcelReducer = (state = [], action) => {
   switch (action.type) {
     case CREATE_PARCEL:
-      return [...state, action.parcel];
+      return [...state, action.parcels];
 
     case LOAD_PARCEL_ORDER:
       return action.parcels;

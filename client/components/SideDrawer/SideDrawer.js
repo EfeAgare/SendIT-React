@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import '../../../UI/css/style.css';
 import '../../../UI/css/SideDrawer.css';
 import { NavLink } from 'react-router-dom';
+import { signOutUser } from '../../action/userSigninAction';
 
 class SideDrawer extends Component {
   render() {
-    const { show, user, isAuthenticated } = this.props;
+    const { show, user, isAuthenticated, signOutUser } = this.props;
     const guestDropDown = (
       <React.Fragment>
         <li>
@@ -31,9 +32,7 @@ class SideDrawer extends Component {
         <NavLink
           to="#"
           onClick={() => {
-            localStorage.removeItem('token'),
-              localStorage.removeItem('userid'),
-              window.location.reload(true);
+            signOutUser();
             this.context.router.history.push('/');
           }}
         >

@@ -6,7 +6,12 @@ import React, { Component } from 'react';
 
 class ToolBar extends Component {
   render() {
-    const { drawerClickHandler, user, isAuthenticated } = this.props;
+    const {
+      drawerClickHandler,
+      user,
+      isAuthenticated,
+      signOutUser
+    } = this.props;
     const userToolBar = (
       <header className="toolbar">
         <nav className="toolbar__navigation">
@@ -28,9 +33,7 @@ class ToolBar extends Component {
                 <NavLink
                   to="#"
                   onClick={() => {
-                    localStorage.removeItem('token'),
-                      localStorage.removeItem('userid'),
-                      window.location.reload(true);
+                    signOutUser();
                     this.context.router.history.push('/');
                   }}
                 >
