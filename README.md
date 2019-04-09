@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/EfeAgare/SendIT.svg?branch=develop)](https://travis-ci.com/EfeAgare/SendIT)
+[![Build Status](https://travis-ci.com/EfeAgare/SendIT-React.svg?branch=develop)](https://travis-ci.com/EfeAgare/SendIT-React)
 [![Coverage Status](https://coveralls.io/repos/github/EfeAgare/SendIT/badge.svg?branch=develop)](https://coveralls.io/github/EfeAgare/SendIT?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/8cfea949850e7e1e820d/maintainability)](https://codeclimate.com/github/EfeAgare/SendIT/maintainability)[Front-End  React]
 [![CircleCI](https://circleci.com/gh/EfeAgare/SendIT-React/tree/develop.svg?style=svg)](https://circleci.com/gh/EfeAgare/SendIT-React/tree/develop)
