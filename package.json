@@ -39,7 +39,7 @@
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/polyfill": "^7.2.5",
-    "bcrypt": "^3.0.2",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
